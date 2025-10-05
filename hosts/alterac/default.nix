@@ -45,6 +45,7 @@
     bat
     fzf
     tlrc
+    just
     gh
 
     brave
