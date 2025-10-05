@@ -15,10 +15,10 @@
     autohide = true;
     show-recents = false;
     persistent-apps = [
-      "${pkgs.brave}/Applications/Brave Browser.app"
+      "/Applications/Brave Browser.app"
       "/System/Applications/Mail.app"
       "/Applications/TickTick.app"
-      "${pkgs.wezterm}/Applications/WezTerm.app"
+      "/Applications/kitty.app"
     ];
     wvous-tl-corner = 1;
     wvous-bl-corner = 1;

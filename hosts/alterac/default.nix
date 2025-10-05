@@ -47,11 +47,6 @@
     tlrc
     just
     gh
-
-    brave
-    telegram-desktop
-    localsend
-    wezterm
   ];
 
   fonts.packages = with pkgs; [

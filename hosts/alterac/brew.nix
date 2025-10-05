@@ -15,12 +15,17 @@
     ];
 
     casks = [
+      "brave-browser"
+      "telegram-desktop"
+      "localsend"
       "iina"
       "zen"
       "spotify"
+      "pearcleaner"
       "notunes"
       "obsidian"
       "visual-studio-code"
+      "kitty"
     ];
     greedyCasks = true;
 
