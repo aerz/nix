@@ -28,9 +28,10 @@
 
   system.defaults.finder = {
       ShowPathbar = true;
-      FXPreferredViewStyle = "clmw";
+      FXPreferredViewStyle = "Nlsv";
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;
+      NewWindowTarget = "Home";
   };
 
   system = {
@@ -49,6 +50,9 @@
     "digital.twisted.noTunes" = {
       "replacement" = "/Applications/Spotify.app";
       "hideIcon" = 1;
+    };
+    "com.apple.TextEdit" = {
+      "RichText" = 0;
     };
   };
 }
