@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 {
-  home = {
-    username = "aerz";
-    stateVersion = "25.05";
-  };
+  home.username = "aerz";
+  home.stateVersion = "25.05";
 
   imports = [
     ./kitty.nix
