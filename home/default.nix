@@ -1,5 +1,5 @@
- { ... }:
- {
+{ config, pkgs, ... }:
+{
   home = {
     username = "aerz";
     stateVersion = "25.05";
@@ -23,18 +23,18 @@
     userEmail = "agustincc@tutanota.com";
 
     aliases = {
-      c       = "commit";
-      ca      = "commit -a --amend";
-      co      = "checkout";
-      d       = "diff";
-      ignore  = "update-index --assume-unchanged";
-      lc      = "log --oneline --graph";
-      lf      = "log --graph --all --topo-order --decorate --oneline --boundary";
-      ls      = "log --pretty=fuller --abbrev-commit --stat";
-      lsc     = "log -p --pretty=fuller --abbrev-commit";
-      st      = "status --short -uno";
-      track   = "update-index --no-assume-unchanged";
-      up      = "pull --rebase";
+      c = "commit";
+      ca = "commit -a --amend";
+      co = "checkout";
+      d = "diff";
+      ignore = "update-index --assume-unchanged";
+      lc = "log --oneline --graph";
+      lf = "log --graph --all --topo-order --decorate --oneline --boundary";
+      ls = "log --pretty=fuller --abbrev-commit --stat";
+      lsc = "log -p --pretty=fuller --abbrev-commit";
+      st = "status --short -uno";
+      track = "update-index --no-assume-unchanged";
+      up = "pull --rebase";
     };
 
     lfs.enable = true;
@@ -46,4 +46,4 @@
       init.defaultBranch = "main";
     };
   };
- }
+}

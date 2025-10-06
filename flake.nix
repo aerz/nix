@@ -17,13 +17,20 @@
     homebrew-cask.flake = false;
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, ... }:
-  {
-    darwinConfigurations."alterac" = nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit inputs self; };
-      modules = [
-        ./hosts/alterac
-      ];
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      nix-homebrew,
+      ...
+    }:
+    {
+      darwinConfigurations."alterac" = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs self; };
+        modules = [
+          ./hosts/alterac
+        ];
+      };
     };
-  };
 }

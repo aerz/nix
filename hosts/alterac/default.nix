@@ -47,6 +47,7 @@
     tlrc
     just
     gh
+    nixfmt-rfc-style
   ];
 
   fonts.packages = with pkgs; [

@@ -27,11 +27,11 @@
   };
 
   system.defaults.finder = {
-      ShowPathbar = true;
-      FXPreferredViewStyle = "Nlsv";
-      AppleShowAllExtensions = true;
-      AppleShowAllFiles = true;
-      NewWindowTarget = "Home";
+    ShowPathbar = true;
+    FXPreferredViewStyle = "Nlsv";
+    AppleShowAllExtensions = true;
+    AppleShowAllFiles = true;
+    NewWindowTarget = "Home";
   };
 
   system = {
