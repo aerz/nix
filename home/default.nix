@@ -5,6 +5,10 @@
     stateVersion = "25.05";
   };
 
+  imports = [
+    ./kitty.nix
+  ];
+
   programs.zsh = {
     enable = true;
 
