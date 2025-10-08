@@ -5,6 +5,7 @@
 
   imports = [
     ./kitty.nix
+    ./vscode.nix
   ];
 
   programs.zsh = {
@@ -37,7 +38,10 @@
 
     lfs.enable = true;
 
-    ignores = [ "**/.DS_STORE" ];
+    ignores = [
+      "**/.DS_STORE"
+      ".vscode"
+    ];
 
     extraConfig = {
       core.autocrlf = "input";
