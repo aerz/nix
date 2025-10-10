@@ -33,6 +33,8 @@ let
     "editor.minimap.enabled" = false;
     "editor.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
 
+    "extensions.showRecommendationsOnlyOnDemand" = true;
+
     "diffEditor.ignoreTrimWhitespace" = false;
 
     "telemetry.telemetryLevel" = "off";
