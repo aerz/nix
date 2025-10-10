@@ -46,22 +46,26 @@ in
   programs.vscode = {
     enable = true;
 
-    extensions = default_extensions;
-    userSettings = default_user_settings;
+    profiles = {
+      default = {
+        extensions = default_extensions;
+        userSettings = default_user_settings;
+      };
 
-    profiles.nix = {
-      extensions =
-        with pkgs.vscode-extensions;
-        [
-          nefrob.vscode-just-syntax
-          jnoortheen.nix-ide
-          vscodevim.vim
-        ]
-        ++ default_extensions;
+      nix = {
+        extensions =
+          with pkgs.vscode-extensions;
+          [
+            nefrob.vscode-just-syntax
+            jnoortheen.nix-ide
+            vscodevim.vim
+          ]
+          ++ default_extensions;
 
-      userSettings = lib.mergeAttrs {
-        "[nix]"."editor.tabSize" = 2;
-      } default_user_settings;
+        userSettings = lib.mergeAttrs {
+          "[nix]"."editor.tabSize" = 2;
+        } default_user_settings;
+      };
     };
   };
 }
