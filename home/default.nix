@@ -6,15 +6,8 @@
   imports = [
     ./kitty.nix
     ./vscode.nix
+    ./zsh
   ];
-
-  programs.zsh = {
-    enable = true;
-
-    shellAliases = {
-      la = "ls -la";
-    };
-  };
 
   programs.git = {
     enable = true;

@@ -1,0 +1,4 @@
+% zoxide, cd, z
+
+# List all dirs in db with scores
+zoxide query -l -s
