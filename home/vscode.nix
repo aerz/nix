@@ -43,6 +43,15 @@ let
   default_extensions = with pkgs.vscode-extensions; [
     github.github-vscode-theme
   ];
+
+  yanivmo.navi-cheatsheet-language = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "navi-cheatsheet-language";
+      publisher = "yanivmo";
+      version = "1.0.1";
+      hash = "sha256-xnFnX3sa5kblw+kIoJ5CkrZUHDKaxxjzdn361eY0dKE=";
+    };
+  };
 in
 {
   programs.vscode = {
@@ -61,6 +70,8 @@ in
             nefrob.vscode-just-syntax
             jnoortheen.nix-ide
             vscodevim.vim
+            tamasfe.even-better-toml
+            yanivmo.navi-cheatsheet-language
           ]
           ++ default_extensions;
 
