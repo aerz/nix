@@ -17,6 +17,8 @@
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
+    homebrew-tw93.url = "github:tw93/homebrew-tap";
+    homebrew-tw93.flake = false;
   };
 
   outputs =

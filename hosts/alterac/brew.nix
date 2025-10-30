@@ -12,6 +12,7 @@
     brews = [
       "git"
       "mas"
+      "tw93/tap/mole"
     ];
 
     casks = [
