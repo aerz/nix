@@ -5,7 +5,7 @@
     enableZshIntegration = true;
 
     defaultCommand = "fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td -tf";
-    # alt+t
+    # ctrl+t
     fileWidgetCommand = defaultCommand;
     fileWidgetOptions = [
       "--bind=ctrl-/:toggle-preview"
