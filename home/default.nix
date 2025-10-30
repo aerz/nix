@@ -7,6 +7,7 @@
     ./kitty.nix
     ./vscode.nix
     ./zsh
+    ./fzf.nix
     ./git.nix
   ];
 
