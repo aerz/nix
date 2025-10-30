@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ./keybindings.nix
+  ];
+
   home.file.".hushlogin".text = "";
 
   programs.zsh = {
@@ -53,7 +57,6 @@
     ];
 
     dotDir = "${config.xdg.configHome}/zsh";
-    defaultKeymap = "emacs";
 
     envExtra = ''
       export BAT_THEME="base16"
