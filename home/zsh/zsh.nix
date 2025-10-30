@@ -61,6 +61,9 @@
       export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
       export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
       export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+      # scripts
+      ${builtins.readFile ./scripts/functions.zsh}
     '';
 
     completionInit = ''
