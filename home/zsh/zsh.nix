@@ -5,6 +5,9 @@
   ...
 }:
 {
+  # TODO: fix default fzf theme is not applied to fzf-tab
+  # TODO: fix fzf-tab loads after fzf widget
+  # TODO: fix zsh load times by using raw setup; current is slow
   programs.zsh = {
     enable = true;
     enableCompletion = true;
