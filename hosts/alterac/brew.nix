@@ -26,6 +26,7 @@
       "notunes"
       "obsidian"
       "visual-studio-code"
+      "keka"
       "kitty"
       "numi"
       "shottr"
