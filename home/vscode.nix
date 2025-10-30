@@ -34,6 +34,8 @@ let
     "editor.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
 
     "extensions.showRecommendationsOnlyOnDemand" = true;
+    "extensions.ignoreRecommendations" = true;
+    "extensions.autoUpdate" = false;
 
     "diffEditor.ignoreTrimWhitespace" = false;
 
