@@ -24,6 +24,9 @@ let
     "files.trimFinalNewlines" = true;
     "files.insertFinalNewline" = true;
 
+    "explorer.confirmDelete" = false;
+    "explorer.confirmDragAndDrop" = false;
+
     "editor.fontLigatures" = true;
     "editor.formatOnSave" = true;
     "editor.rulers" = [
