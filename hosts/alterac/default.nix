@@ -37,6 +37,10 @@
     };
   };
   users.users.aerz.home = "/Users/aerz";
+  # NOTE: manual intervention here to update /etc/shells
+  # https://github.com/nix-darwin/nix-darwin/issues/1237
+  users.users.aerz.shell = pkgs.fish;
+  programs.fish.enable = true;
 
   nix-homebrew = {
     enable = true;

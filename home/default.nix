@@ -8,6 +8,7 @@
     ./vscode.nix
     ./fzf.nix
     ./git.nix
+    ./fish.nix
     ./zsh
   ];
 

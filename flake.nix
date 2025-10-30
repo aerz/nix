@@ -14,7 +14,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # python 3.14 migration issues, homebrew-core pinned temporary
+    # NOTE: python 3.14 migration issues, homebrew-core pinned temporary
     # https://github.com/Homebrew/homebrew-core/issues/248654
     homebrew-core.url = "github:homebrew/homebrew-core/0eced82c88d205378ca7963ab9db9e8a76c861ef";
     homebrew-core.flake = false;
