@@ -45,13 +45,24 @@
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    neovim
+    # core utils
     bat
-    fzf
+    eza
+    fd
+    ripgrep
+    # extra utils
+    jq
     tlrc
+    hyperfine
+    # dev
+    neovim
     just
     gh
+    # nix
     nixfmt-rfc-style
+    nix-du
+    nurl
+    nix-prefetch-git
   ];
 
   fonts.packages = with pkgs; [
