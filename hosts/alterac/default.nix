@@ -54,7 +54,6 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # core utils
-    bat
     eza
     fd
     ripgrep

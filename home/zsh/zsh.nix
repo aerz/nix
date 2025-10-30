@@ -52,10 +52,6 @@
 
     dotDir = "${config.xdg.configHome}/zsh";
 
-    envExtra = ''
-      export BAT_THEME="base16"
-    '';
-
     initContent = ''
       # delete chars Bash-style (alt+bs)
       autoload -U select-word-style

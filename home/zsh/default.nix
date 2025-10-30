@@ -13,6 +13,14 @@
 
   home.file.".hushlogin".text = "";
 
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [ prettybat ];
+    config = {
+      theme = "base16";
+    };
+  };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
