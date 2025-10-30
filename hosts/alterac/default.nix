@@ -6,6 +6,7 @@
     ./brew.nix
     ./settings.nix
     inputs.home-manager.darwinModules.home-manager
+    inputs.nix-index-database.darwinModules.nix-index
     inputs.nix-homebrew.darwinModules.nix-homebrew
     ({ config, ... }: {
       homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
@@ -17,6 +18,8 @@
     optimise.automatic = true;
     settings.experimental-features = "nix-command flakes";
   };
+
+  programs.nix-index-database.comma.enable = true;
 
   home-manager = {
     useGlobalPkgs = true;
