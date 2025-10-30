@@ -9,7 +9,10 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
+    autosuggestion = {
+      enable = true;
+      strategy = [ ];
+    };
 
     plugins = [
       {
@@ -57,11 +60,6 @@
       autoload -U select-word-style
       select-word-style bash
 
-      # zsh-autosuggestions
-      export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-      export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-      export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
       # scripts
       ${builtins.readFile ./scripts/functions.zsh}
     '';
@@ -85,6 +83,11 @@
       bindkey '^[[B' history-substring-search-down
 
       export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE="1"
+
+      # zsh-autosuggestions
+      export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+      export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+      export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
       # completion styling
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
