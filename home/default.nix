@@ -6,9 +6,9 @@
   imports = [
     ./kitty.nix
     ./vscode.nix
-    ./zsh
     ./fzf.nix
     ./git.nix
+    ./zsh
   ];
 
   xdg.enable = true;
