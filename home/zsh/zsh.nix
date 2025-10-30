@@ -54,7 +54,6 @@
 
     envExtra = ''
       export BAT_THEME="base16"
-      export FZF_DEFAULT_OPTS="--color=fg:-1,fg+:#dde4e0,bg:-1,bg+:#282a2e --color=hl:#81a2be,hl+:#6aaee9,info:#f0c674,marker:#b5bd68 --color=prompt:#b294bb,spinner:#81a2be,pointer:#cc6666,header:#8abeb7 --color=border:#373b41,label:#aeaeae,query:#dde4e0 --prompt='. '"
     '';
 
     initContent = ''
@@ -69,14 +68,7 @@
     '';
 
     completionInit = ''
-      # fzf use fd instead find
-      # https://github.com/zimfw/fzf/blob/50964d38e4bf0d14b2055aebcac419da0d95f47c/init.zsh#L22
-      export FZF_DEFAULT_COMMAND="command fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td -tf"
-      export FZF_CTRL_T_COMMAND=''${FZF_DEFAULT_COMMAND}
-      export FZF_CTRL_T_OPTS="--bind ctrl-/:toggle-preview --preview 'command bat -n --color=always --line-range :500 {}'"
-      export FZF_ALT_C_COMMAND="command fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td"
-      export FZF_ALT_C_OPTS="--bind ctrl-/:toggle-preview --preview 'command eza --tree --level=3 --group-directories-first --color=always -F {}'"
-
+      # fzf
       _fzf_compgen_path() {
         command fd -H --no-ignore-vcs -E .git -td -tf . "''${1}"
       }
