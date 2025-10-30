@@ -26,6 +26,8 @@
       "obsidian"
       "visual-studio-code"
       "kitty"
+      "numi"
+      "shottr"
     ];
     greedyCasks = true;
 
