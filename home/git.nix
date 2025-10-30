@@ -25,6 +25,10 @@
         st = "status --short -uno";
         track = "update-index --no-assume-unchanged";
         up = "pull --rebase";
+        undo = "reset --soft @~";
+        undo-hard = "!f() { \
+          git reset --hard $(git rev-parse --abbrev-ref HEAD)@{\${1-1}}; \
+        }; f";
       };
 
       core.autocrlf = "input";
