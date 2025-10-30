@@ -7,7 +7,11 @@
     ./kitty.nix
     ./vscode.nix
     ./fzf.nix
+    ./bat.nix
+    ./zoxide.nix
+    ./navi
     ./git.nix
+    ./prompts/oh-my-posh
     ./fish.nix
     ./zsh
   ];
