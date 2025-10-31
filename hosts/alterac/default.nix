@@ -59,16 +59,29 @@
   environment.systemPackages = with pkgs; [
     # core utils
     eza
+    lla
     fd
     ripgrep
     # extra utils
+    btop
+    dua
+    duf
+    dust
+    dig
+    procs
     jq
     tlrc
     hyperfine
+    rclone
+    yt-dlp
     # dev
+    broot
+    delta
     neovim
     just
     gh
+    lazygit
+    zellij
     # nix
     nixfmt-rfc-style
     nix-du
