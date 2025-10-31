@@ -27,9 +27,11 @@
       "obsidian"
       "visual-studio-code"
       "keka"
+      "keepassxc"
       "kitty"
       "numi"
       "shottr"
+      "syncthing-app"
     ];
     greedyCasks = true;
 
