@@ -136,6 +136,7 @@ in
   programs.kitty = {
     enable = true;
     shellIntegration.enableZshIntegration = true;
+    shellIntegration.enableFishIntegration = true;
     font.name = "JetBrainsMono Nerd Font Mono";
     font.size = 15;
     keybindings = kitty_bindings;

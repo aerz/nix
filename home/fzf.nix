@@ -3,6 +3,7 @@
   programs.fzf = rec {
     enable = true;
     enableZshIntegration = true;
+    enableFishIntegration = true;
 
     defaultCommand = "fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td -tf";
     # ctrl+t
