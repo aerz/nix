@@ -36,6 +36,7 @@ let
     # misc
     notify_on_cmd_finish = "unfocused";
     enable_audio_bell = "no";
+    update_check_interval = 0;
   };
 
   kitty_extra_config = builtins.concatStringsSep "\n" [
