@@ -28,6 +28,7 @@
       "visual-studio-code"
       "keka"
       "keepassxc"
+      "keyboardcleantool"
       "kitty"
       "numi"
       "shottr"
