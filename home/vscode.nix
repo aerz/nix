@@ -10,7 +10,10 @@ let
     "workbench.navigationControl.enabled" = false;
     "workbench.preferredLightColorTheme" = "GitHub Light";
     "workbench.preferredDarkColorTheme" = "GitHub Dark Default";
-    "workbench.iconTheme" = "vscode-jetbrains-icon-theme-2023-auto";
+    "workbench.iconTheme" = "symbols";
+    "symbols.files.associations" = {
+      "justfile" = "robot";
+    };
     "workbench.startupEditor" = "none";
     "workbench.activityBar.location" = "hidden";
     "workbench.editor.showTabs" = "none";
@@ -18,9 +21,13 @@ let
     "workbench.editor.empty.hint" = "hidden";
 
     "git.confirmSync" = false;
+    "git.autofetch" = false;
 
     "window.zoomLevel" = 1;
     "window.autoDetectColorScheme" = true;
+    "chat.commandCenter.enabled" = false;
+
+    "diffEditor.ignoreTrimWhitespace" = false;
 
     "files.trimTrailingWhitespace" = true;
     "files.trimFinalNewlines" = true;
@@ -40,13 +47,12 @@ let
     "editor.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
     "editor.minimap.enabled" = false;
     "editor.lineNumbers" = "relative";
+    "editor.linkedEditing" = true;
     "editor.cursorBlinking" = "smooth";
 
     "extensions.showRecommendationsOnlyOnDemand" = true;
     "extensions.ignoreRecommendations" = true;
     "extensions.autoUpdate" = false;
-
-    "diffEditor.ignoreTrimWhitespace" = false;
 
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
@@ -58,6 +64,14 @@ let
       publisher = "chadalen";
       version = "2.36.0";
       hash = "sha256-p5hqytkF5Hg2d9N+XwZ5DfG2GEfoSPYXX0FCeUUR2Yc=";
+    };
+  };
+  miguelsolorio.symbols = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "symbols";
+      publisher = "miguelsolorio";
+      version = "0.0.24";
+      hash = "sha256-yEE6G2e/a2/DcKq1+Vtv0YIAtWZG5LyXfZ6cbheRV1g=";
     };
   };
   yanivmo.navi-cheatsheet-language = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
@@ -81,6 +95,7 @@ let
     github.github-vscode-theme
     alefragnani.project-manager
     chadalen.vscode-jetbrains-icon-theme
+    miguelsolorio.symbols
   ];
 in
 {
@@ -121,10 +136,13 @@ in
             esbenp.prettier-vscode
             ms-vscode.live-server
             usernamehw.errorlens
+            yoavbls.pretty-ts-errors
           ]
           ++ default_extensions;
 
         userSettings = lib.mergeAttrs {
+          "emmet.triggerExpansionOnTab" = true;
+          "emmet.includeLanguages"."javascript" = "javascriptreact";
           "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
           "typescript.updateImportsOnFileMove.enabled" = "always";
           "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -132,6 +150,23 @@ in
           "[mdx]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
           "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
           "rewrap.autoWrap.enabled" = true;
+        } default_user_settings;
+      };
+
+      ansible = {
+        extensions =
+          with pkgs.vscode-extensions;
+          [
+            redhat.ansible
+            redhat.vscode-yaml
+            samuelcolvin.jinjahtml
+            esbenp.prettier-vscode
+          ]
+          ++ default_extensions;
+
+        userSettings = lib.mergeAttrs {
+          "yaml.customTags" = [ "!vault" ];
+          "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
         } default_user_settings;
       };
 
