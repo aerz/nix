@@ -14,6 +14,7 @@
   system.defaults.dock = {
     autohide = true;
     show-recents = false;
+    expose-group-apps = true;
     persistent-apps = [
       "/Applications/Brave Browser.app"
       "/System/Applications/Mail.app"
