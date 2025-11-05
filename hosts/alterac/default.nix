@@ -74,6 +74,8 @@
     hyperfine
     rclone
     yt-dlp
+    # misc
+    exiftool
     # dev
     broot
     delta
