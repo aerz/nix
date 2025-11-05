@@ -85,6 +85,18 @@
           end
         '';
       };
+      man = {
+        description = "Man command with fzf";
+        body = ''
+          if test (count $argv) -gt 0
+            command man $argv
+            return
+          end
+
+          set -l page (command man -k . | fzf | awk '{print $1}')
+          test -n "$page"; and command man $page
+        '';
+      };
     };
 
     shellAbbrs = {
