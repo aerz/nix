@@ -6,8 +6,8 @@
     enableFishIntegration = true;
   };
 
-  home.file = {
-    ".local/share/navi/cheats/docker.cheat".source = ./docker.cheat;
-    ".local/share/navi/cheats/shell.cheat".source = ./shell.cheat;
+  xdg.dataFile."navi/cheats" = {
+    source = ./cheats;
+    recursive = true;
   };
 }
