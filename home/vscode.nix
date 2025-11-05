@@ -14,6 +14,7 @@ let
     "workbench.activityBar.location" = "hidden";
     "workbench.editor.showTabs" = "none";
     "workbench.statusBar.visible" = false;
+    "workbench.editor.empty.hint" = "hidden";
 
     "git.confirmSync" = false;
 
