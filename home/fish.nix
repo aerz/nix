@@ -116,4 +116,10 @@
       sshsum = "ssh-keygen -l -f";
     };
   };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    MANPAGER = "nvim +Man!";
+    MANWIDTH = "80";
+  };
 }
