@@ -72,65 +72,6 @@
       set -g fish_color_selection         $foreground --bold --background=$comment
     '';
 
-    functions = {
-      C = {
-        description = "Copy stdin into clipboard";
-        body = "pbcopy";
-      };
-      print-term-colors = {
-        description = "Show all terminal colors (0-255)";
-        body = ''
-          for i in (seq 0 255)
-            echo (tput setaf $i)"This is color 󱓻 $i"(tput sgr0)
-          end
-        '';
-      };
-      man = {
-        description = "Man command with fzf";
-        body = ''
-          if test (count $argv) -gt 0
-            command man $argv
-            return
-          end
-
-          set -l page (command man -k . | fzf | awk '{print $1}')
-          test -n "$page"; and command man $page
-        '';
-      };
-      yt-navidrome = {
-        description = "Grab local copy from youtube with metadata for navidrome";
-        body = ''
-          set -l meta_args
-          argparse 'album=' 'artist=' -- $argv || return
-
-          if test (count $argv) -eq 0
-            echo "error: at least one url required" >&2
-            return 1
-          end
-          if set -q _flag_album
-            set -a meta_args "-metadata album='$_flag_album[1]'"
-          end
-          if set -q _flag_artist
-            set -a meta_args "-metadata artist='$_flag_artist[1]'"
-          end
-
-          command yt-dlp \
-            --extract-audio \
-            --add-metadata \
-            --embed-thumbnail \
-            --parse-metadata 'playlist_index:%(track_number)s' \
-            --convert-thumbnails jpg \
-            --postprocessor-args "ffmpeg: -c:v mjpeg -vf crop=\"'if(gt(ih,iw),iw,ih)':'if(gt(iw,ih),ih,iw)'\"" \
-            --postprocessor-args "Metadata:$meta_args" \
-            --retries infinite \
-            --extractor-retries infinite \
-            --force-overwrite \
-            --output "%(playlist_index|)s%(playlist_index&. |)s%(title)s [%(id)s].%(ext)s" \
-            $argv
-        '';
-      };
-    };
-
     shellAbbrs = {
       bench-fish = "hyperfine --warmup 5 'fish -i -c exit'";
       c = "clear";
@@ -165,5 +106,10 @@
     EDITOR = "nvim";
     MANPAGER = "nvim +Man!";
     MANWIDTH = "80";
+  };
+
+  home.file.".config/fish/functions" = {
+    source = ./functions;
+    recursive = true;
   };
 }

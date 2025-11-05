@@ -12,7 +12,7 @@
     ./navi
     ./git.nix
     ./prompts/oh-my-posh
-    ./fish.nix
+    ./fish
     ./zsh
   ];
 

@@ -78,6 +78,7 @@ in
             vscodevim.vim
             tamasfe.even-better-toml
             yanivmo.navi-cheatsheet-language
+            bmalehorn.vscode-fish
           ]
           ++ default_extensions;
 
