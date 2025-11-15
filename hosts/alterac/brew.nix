@@ -17,7 +17,10 @@
     ];
 
     casks = [
+      "betterdisplay"
       "brave-browser"
+      "helium-browser"
+      "jordanbaird-ice"
       "telegram-desktop"
       "localsend"
       "iina"
@@ -33,6 +36,7 @@
       "kitty"
       "numi"
       "raycast"
+      "sanesidebuttons"
       "shottr"
       "syncthing-app"
     ];
