@@ -16,7 +16,7 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     # NOTE: python 3.14 migration issues, homebrew-core pinned temporary
     # https://github.com/Homebrew/homebrew-core/issues/248654
-    homebrew-core.url = "github:homebrew/homebrew-core/f9d29b9579916906c00ac692549cade0b1725c16";
+    homebrew-core.url = "github:homebrew/homebrew-core/5ceb14f301c4796a38018c6e7b7b062a9c3933c9";
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;

@@ -55,6 +55,16 @@
     };
   };
 
+  # NOTE: fish build test aare failing
+  # https://github.com/NixOS/nixpkgs/issues/461406
+  nixpkgs.overlays = [
+    (final: prev: {
+      fish = prev.fish.overrideAttrs (oldAttrs: {
+        doCheck = false;
+      });
+    })
+  ];
+
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # core utils
@@ -98,5 +108,7 @@
   environment.variables = {
     EDITOR = "nvim";
     HOMEBREW_NO_ANALYTICS = "1";
+    # TODO: remove when nix-homebrew pin v5
+    HOMEBREW_DOWNLOAD_CONCURRENCY = "auto";
   };
 }
