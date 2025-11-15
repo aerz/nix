@@ -93,6 +93,7 @@
     just
     gh
     lazygit
+    jujutsu
     zellij
     # nix
     nixfmt-rfc-style
