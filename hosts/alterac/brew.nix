@@ -10,6 +10,7 @@
     };
 
     brews = [
+      "bitwarden-cli"
       "git"
       "mas"
       "tw93/tap/mole"
@@ -31,6 +32,7 @@
       "keyboardcleantool"
       "kitty"
       "numi"
+      "raycast"
       "shottr"
       "syncthing-app"
     ];

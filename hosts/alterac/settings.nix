@@ -44,7 +44,6 @@
     };
 
     keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToControl = true;
   };
 
   system.defaults.CustomUserPreferences = {
