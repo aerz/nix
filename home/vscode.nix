@@ -132,6 +132,7 @@ in
           [
             astro-build.astro-vscode
             bradlc.vscode-tailwindcss
+            naumovs.color-highlight
             dnut.rewrap-revived
             esbenp.prettier-vscode
             ms-vscode.live-server
