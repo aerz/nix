@@ -24,10 +24,11 @@ let
     tab_bar_style = "fade";
     tab_fade = 0;
     tab_bar_margin_width = 0;
-    tab_bar_margin_height = "10 0";
+    tab_bar_margin_height = "5 0";
 
     # macos
-    macos_show_window_title_in = "window";
+    macos_show_window_title_in = "none";
+    hide_window_decorations = "titlebar-only";
     macos_thicken_font = 0.75;
     macos_colorspace = "displayp3";
     macos_option_as_alt = "left";
@@ -119,8 +120,8 @@ let
     inactive_tab_foreground = "#969896";
     inactive_tab_background = "#161719";
     # https://github.com/kovidgoyal/kitty/discussions/3984#discussioncomment-1300900
-    tab_title_template = "{fmt.bg.default}{fmt.fg._303030}{fmt.fg.default}{fmt.bg._303030}{fmt.fg._c6c6c6} {title} {fmt.fg.default}{fmt.bg.default}{fmt.fg._303030}{fmt.fg.default}";
-    active_tab_title_template = "{fmt.bg.default}{fmt.fg._b294bb}{fmt.fg.default}{fmt.bg._b294bb}{fmt.fg._1d1f21} {title} {fmt.fg.default}{fmt.bg.default}{fmt.fg._b294bb}{fmt.fg.default}";
+    tab_title_template = "{fmt.bg.default}{fmt.fg._5a5b5a} {title} {fmt.fg.default}";
+    active_tab_title_template = "{fmt.bg.default}{fmt.fg._c6c6c6} {title} {fmt.fg.default}";
 
     # URL underline color when hovering with mouse
     url_color = "#81a2be";
