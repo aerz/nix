@@ -41,9 +41,11 @@
       InitialKeyRepeat = 15; # 120, 94, 68, 35, 25, 15
       "com.apple.mouse.tapBehavior" = 1;
       ApplePressAndHoldEnabled = false;
+      "com.apple.keyboard.fnState" = true;
     };
-
+    defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
     keyboard.enableKeyMapping = true;
+    keyboard.remapCapsLockToControl = true;
   };
 
   system.defaults.CustomUserPreferences = {
