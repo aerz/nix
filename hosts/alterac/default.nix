@@ -45,6 +45,7 @@
   nix-homebrew = {
     enable = true;
     autoMigrate = true;
+    mutableTaps = true;
     enableRosetta = true;
     user = "aerz";
 
