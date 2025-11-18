@@ -11,8 +11,14 @@
   system.defaults.loginwindow.GuestEnabled = false;
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  system.defaults.menuExtraClock = {
+    Show24Hour = true;
+  };
+
   system.defaults.dock = {
     autohide = true;
+    autohide-time-modifier = 0.25;
+    autohide-delay = 0.0;
     show-recents = false;
     expose-group-apps = true;
     persistent-apps = [
@@ -30,6 +36,7 @@
   system.defaults.finder = {
     ShowPathbar = true;
     FXPreferredViewStyle = "Nlsv";
+    FXEnableExtensionChangeWarning = false;
     AppleShowAllExtensions = true;
     AppleShowAllFiles = true;
     NewWindowTarget = "Home";
