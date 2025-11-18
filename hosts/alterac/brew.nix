@@ -20,6 +20,7 @@
       "betterdisplay"
       "brave-browser"
       "helium-browser"
+      "hyperkey"
       "jordanbaird-ice"
       "telegram-desktop"
       "localsend"

@@ -45,7 +45,6 @@
     };
     defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
     keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToControl = true;
   };
 
   system.defaults.CustomUserPreferences = {
