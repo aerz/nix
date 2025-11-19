@@ -17,6 +17,5 @@ update:
   sudo nix flake update
 
 gc:
-  nix-collect-garbage -d
-  nix-collect-garbage --delete-older-than 7d
-  nix-store --gc
+  sudo nix-collect-garbage -d
+  sudo nix store optimise --verbose

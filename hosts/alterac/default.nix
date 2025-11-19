@@ -19,12 +19,12 @@
         homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
       }
     )
+    inputs.determinate.darwinModules.default
   ];
 
-  nix = {
-    gc.automatic = true;
-    optimise.automatic = true;
-    settings.experimental-features = "nix-command flakes";
+  nix.enable = false; # let determinate nix handle nix configuration
+  determinate-nix.customSettings = {
+    eval-cores = 2;
   };
 
   programs.nix-index-database.comma.enable = true;

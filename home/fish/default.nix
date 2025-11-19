@@ -69,10 +69,14 @@
     MANWIDTH = "80";
   };
 
-  xdg.configFile."fish/conf.d/01-doom-tomorrow-theme.fish" = {
-    source = ./conf.d/01-doom-tomorrow-theme.fish;
+  xdg.configFile."fish/conf.d" = {
+    source = ./conf.d;
+    recursive = true;
   };
-
+  xdg.configFile."fish/completions" = {
+    source = ./completions;
+    recursive = true;
+  };
   xdg.configFile."fish/functions" = {
     source = ./functions;
     recursive = true;

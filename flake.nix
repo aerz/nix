@@ -7,6 +7,8 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    determinate.url = "github:DeterminateSystems/determinate/v3.13.1";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -14,9 +16,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # NOTE: python 3.14 migration issues, homebrew-core pinned temporary
-    # https://github.com/Homebrew/homebrew-core/issues/248654
-    homebrew-core.url = "github:homebrew/homebrew-core/e35d0a7e024f907e8ea255a3b347feecae086610";
+    homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
