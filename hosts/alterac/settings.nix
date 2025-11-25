@@ -64,5 +64,11 @@
     "com.apple.TextEdit" = {
       "RichText" = 0;
     };
+    "com.aerz.Mid" = {
+      "button" = 3;
+      "speed" = 3;
+      "toggle" = 0;
+      "keys" = [ ];
+    };
   };
 }
