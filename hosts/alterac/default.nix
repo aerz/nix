@@ -52,7 +52,7 @@
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "tw93/tap" = inputs.homebrew-tw93;
+      "tw93/homebrew-tap" = inputs.homebrew-tw93;
     };
   };
 
