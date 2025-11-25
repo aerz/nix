@@ -42,6 +42,8 @@
     NewWindowTarget = "Home";
   };
 
+  system.defaults.NSGlobalDomain.AppleShowScrollBars = "WhenScrolling";
+
   system = {
     defaults.NSGlobalDomain = {
       KeyRepeat = 2; # 120, 90, 60, 30, 12, 6, 2

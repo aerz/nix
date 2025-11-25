@@ -49,6 +49,8 @@ let
     "editor.lineNumbers" = "relative";
     "editor.linkedEditing" = true;
     "editor.cursorBlinking" = "smooth";
+    "editor.scrollbar.verticalScrollbarSize" = 7;
+    "editor.scrollbar.horizontalScrollbarSize" = 7;
 
     "extensions.showRecommendationsOnlyOnDemand" = true;
     "extensions.ignoreRecommendations" = true;
