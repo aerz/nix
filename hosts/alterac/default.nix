@@ -84,6 +84,7 @@
     tlrc
     hyperfine
     rclone
+    ffmpeg
     yt-dlp
     # misc
     exiftool
@@ -94,6 +95,7 @@
     just
     gh
     lazygit
+    lnav
     jujutsu
     zellij
     # nix
