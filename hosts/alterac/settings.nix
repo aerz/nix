@@ -71,4 +71,6 @@
       "keys" = [ ];
     };
   };
+
+  aerz.power-management.enable = true;
 }

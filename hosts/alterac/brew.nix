@@ -18,6 +18,7 @@
 
     casks = [
       "betterdisplay"
+      "bluesnooze"
       "brave-browser"
       "helium-browser"
       "hyperkey"

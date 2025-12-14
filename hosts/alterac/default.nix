@@ -10,16 +10,7 @@
   imports = [
     ./brew.nix
     ./settings.nix
-    inputs.home-manager.darwinModules.home-manager
-    inputs.nix-index-database.darwinModules.nix-index
-    inputs.nix-homebrew.darwinModules.nix-homebrew
-    (
-      { config, ... }:
-      {
-        homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
-      }
-    )
-    inputs.determinate.darwinModules.default
+    ../../modules/darwin/power-management.nix
   ];
 
   nix.enable = false; # let determinate nix handle nix configuration

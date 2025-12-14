@@ -36,6 +36,16 @@
       darwinConfigurations."alterac" = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs self; };
         modules = [
+          inputs.home-manager.darwinModules.home-manager
+          inputs.nix-index-database.darwinModules.nix-index
+          inputs.nix-homebrew.darwinModules.nix-homebrew
+          (
+            { config, ... }:
+            {
+              homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+            }
+          )
+          inputs.determinate.darwinModules.default
           ./hosts/alterac
         ];
       };
