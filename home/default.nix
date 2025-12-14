@@ -6,6 +6,7 @@
   imports = [
     ./kitty.nix
     ./vscode.nix
+    ./raycast
     ./fzf.nix
     ./bat.nix
     ./zoxide.nix
@@ -15,6 +16,8 @@
     ./fish
     ./zsh
   ];
+
+  raycast.enable = false;
 
   xdg.enable = true;
 }
