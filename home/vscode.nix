@@ -72,8 +72,8 @@ let
     mktplcRef = {
       name = "symbols";
       publisher = "miguelsolorio";
-      version = "0.0.24";
-      hash = "sha256-yEE6G2e/a2/DcKq1+Vtv0YIAtWZG5LyXfZ6cbheRV1g=";
+      version = "0.0.25";
+      hash = "sha256-nhymeLPfgGKyg3krHqRYs2iWNINF6IFBtTAp5HcwMs8=";
     };
   };
   yanivmo.navi-cheatsheet-language = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
