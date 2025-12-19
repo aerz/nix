@@ -27,13 +27,10 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
-      nix-darwin,
-      nix-homebrew,
       ...
     }:
     {
-      darwinConfigurations."alterac" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."alterac" = inputs.nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs self; };
         modules = [
           inputs.home-manager.darwinModules.home-manager
