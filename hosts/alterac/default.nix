@@ -47,16 +47,6 @@
     };
   };
 
-  # NOTE: fish build test aare failing
-  # https://github.com/NixOS/nixpkgs/issues/461406
-  nixpkgs.overlays = [
-    (final: prev: {
-      fish = prev.fish.overrideAttrs (oldAttrs: {
-        doCheck = false;
-      });
-    })
-  ];
-
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # core utils
