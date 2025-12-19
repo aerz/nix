@@ -73,4 +73,12 @@
   };
 
   aerz.power-management.enable = true;
+
+  networking.applicationFirewall = {
+    enable = true;
+    allowSigned = false;
+    allowSignedApp = false;
+    enableStealthMode = false;
+    blockAllIncoming = false;
+  };
 }
