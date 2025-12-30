@@ -12,6 +12,7 @@
     ./zoxide.nix
     ./navi
     ./git.nix
+    ./tmux.nix
     ./prompts/oh-my-posh
     ./fish
     ./zsh

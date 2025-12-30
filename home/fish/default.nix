@@ -56,6 +56,10 @@
       vim = "nvim";
       vimdiff = "nvim -d";
 
+      t = "tmux new-session -A -s main";
+      tl = "tmux list-sessions";
+      tn = "tmux new -s";
+
       rsync = "rsync -vrPlu";
       ffmpeg = "ffmpeg -hide_banner";
 
