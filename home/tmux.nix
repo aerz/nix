@@ -5,70 +5,65 @@
   ...
 }:
 let
-  tmux_doom_tomorrow_night_theme = ''
-    # doom-tomorrow-night theme for tmux
-    # Color palette from doom-tomorrow-night:
-    #   #1d1f21 Background
-    #   #161719 Background Alt
-    #   #3f4040 Base4 (borders, inactive elements)
-    #   #5c5e5e Base5
-    #   #969896 Base7 (comments)
-    #   #c5c8c6 Foreground
-    #   #cc6666 Red (variables)
-    #   #de935f Orange (constants, numbers)
-    #   #f0c674 Yellow (types)
-    #   #b5bd68 Green (strings)
-    #   #8abeb7 Cyan
-    #   #81a2be Blue (functions, highlights)
-    #   #b294bb Violet (keywords)
-    #   #c9b4cf Magenta
-    #   #5a5b5a Grey (comments)
+  tmux_doom_tomorrow_night_theme =
+    let
+      bg = "#1d1f21";
+      bg_alt = "#161719";
+      fg = "#c5c8c6";
+      base4 = "#3f4040";
+      base5 = "#5c5e5e";
+      base7 = "#969896";
+      red = "#cc6666";
+      orange = "#de935f";
+      yellow = "#f0c674";
+      green = "#b5bd68";
+      cyan = "#8abeb7";
+      blue = "#81a2be";
+      violet = "#b294bb";
+      magenta = "#c9b4cf";
+      gray = "#5a5b5a";
+    in
+    ''
+      ## Set status bar
+      set -g status-style bg="${bg}",fg="${fg}"
+      setw -g window-status-current-style bg="${bg}",fg="${blue}",bold
 
-    ## Set status bar
-    set -g status-style bg="#1d1f21",fg="#c5c8c6"
-    setw -g window-status-current-style bg="#1d1f21",fg="#81a2be",bold
+      ## Pane border and colors
+      set -g pane-active-border-style bg=default,fg="${base7}"
+      set -g pane-border-style bg=default,fg="${base4}"
 
-    ## Pane border and colors
-    set -g pane-active-border-style bg=default,fg="#969896"
-    set -g pane-border-style bg=default,fg="#3f4040"
+      ## Message style (command prompt)
+      set -g message-style bg="${cyan}",fg="${bg}",bold
+      set -g message-command-style bg="${cyan}",fg="${bg}"
 
-    ## Clock mode
-    set -g clock-mode-colour "#81a2be"
-    set -g clock-mode-style 24
+      ## Copy mode style
+      set -g mode-style bg="${fg}",fg="${bg_alt}"
 
-    ## Message style (command prompt)
-    set -g message-style bg="#8abeb7",fg="#1d1f21",bold
-    set -g message-command-style bg="#8abeb7",fg="#1d1f21"
+      ## Status bar - left side (empty)
+      set -g status-left ""
 
-    ## Copy mode style
-    set -g mode-style bg="#3f4040",fg="#de935f"
+      ## Status bar - right side
+      set -g status-right-length 100
+      set -g status-right '#[fg=${gray},]#[nobold]#W  #[fg=${fg},bg=${bg},bold]#{?client_prefix,#[fg=${violet}],}#S'
 
-    ## Status bar - left side
-    set -g status-left-length 100
-    set -g status-left '#[fg=#b294bb,bg=#1d1f21,bold] #S #[fg=#81a2be]#{?client_prefix,#[fg=#de935f],} '
+      ## Window status format (inactive windows)
+      set-window-option -g window-status-style bg="${bg}",fg="${base7}",none
+      set-window-option -g window-status-format '#[fg=${gray},bg=${bg}]#I #[fg=${base7},bg=${bg}]#{b:pane_current_path}#{?window_flags,#{window_flags}, }'
 
-    ## Status bar - right side
-    set -g status-right-length 100
-    set -g status-right '#[fg=#969896,bg=#1d1f21] %H:%M #[fg=#81a2be]|#[fg=#969896] %Y.%m.%d '
+      ## Window status format (active window)
+      set-window-option -g window-status-current-style bg="${bg}",fg="${blue}",bold
+      set-window-option -g window-status-current-format '#[fg=${violet},bg=${bg},bold]#I #[fg=${fg},bg=${bg}]#{b:pane_current_path}#{?window_flags,#{window_flags}, }'
 
-    ## Window status format (inactive windows)
-    set-window-option -g window-status-style bg="#1d1f21",fg="#969896",none
-    set-window-option -g window-status-format '#[fg=#5a5b5a,bg=#1d1f21] #I #[fg=#969896,bg=#1d1f21] #W#{?window_flags,#{window_flags}, } '
+      ## Window status activity
+      setw -g window-status-activity-style fg="${orange}",bg="${bg}",none
 
-    ## Window status format (active window)
-    set-window-option -g window-status-current-style bg="#1d1f21",fg="#81a2be",bold
-    set-window-option -g window-status-current-format '#[fg=#b294bb,bg=#1d1f21,bold] #I #[fg=#c5c8c6,bg=#1d1f21] #W#{?window_flags,#{window_flags}, } '
+      ## Window status bell
+      setw -g window-status-bell-style fg="${red}",bg="${bg}",bold
 
-    ## Window status activity
-    setw -g window-status-activity-style fg="#de935f",bg="#1d1f21",none
-
-    ## Window status bell
-    setw -g window-status-bell-style fg="#cc6666",bg="#1d1f21",bold
-
-    ## Status position
-    set -g status-position bottom
-    set -g status-justify left
-  '';
+      ## Status position
+      set -g status-position bottom
+      set -g status-justify left
+    '';
 in
 {
   programs.tmux = {
@@ -124,6 +119,7 @@ in
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      unbind -T copy-mode-vi MouseDragEnd1Pane
 
       ${tmux_doom_tomorrow_night_theme}
     '';
