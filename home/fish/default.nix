@@ -31,47 +31,13 @@
 
     interactiveShellInit = ''
       set fish_greeting
+      fish_config theme choose doom-tomorrow-night
     '';
 
     shellAbbrs = {
       bench-fish = "hyperfine --warmup 5 'fish -i -c exit'";
       c = "clear";
     };
-
-    functions = {
-      t = {
-        description = "Create or attach tmux session";
-        body = ''
-          if test (count $argv) -gt 0
-            tmux new-session -A -s $argv[1]
-          else
-            tmux new-session -A -s (basename $PWD)
-          end
-        '';
-      };
-      ts = {
-        description = "Switch between tmux sessions";
-        body = ''
-          tmux switch-client -t $argv[1]
-        '';
-      };
-      tl = {
-        description = "List tmux sessions";
-        body = ''
-          tmux list-sessions
-        '';
-      };
-      tk = {
-        description = "Kill tmux session";
-        body = ''
-          tmux kill-session -t $argv[1]
-        '';
-      };
-    };
-
-    completions = lib.genAttrs [ "t" "ts" "tk" ] (cmd: ''
-      complete -c ${cmd} -xa "(tmux list-sessions -F '#{session_name}' 2>/dev/null)"
-    '');
 
     shellAliases = {
       ".." = "cd ..";
@@ -104,8 +70,8 @@
     MANWIDTH = "80";
   };
 
-  xdg.configFile."fish/conf.d" = {
-    source = ./conf.d;
+  xdg.configFile."fish/themes" = {
+    source = ./themes;
     recursive = true;
   };
   xdg.configFile."fish/completions" = {

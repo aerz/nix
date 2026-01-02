@@ -1,0 +1,53 @@
+# name: 'Doom Tomorrow Night'
+# url: https://github.com/doomemacs/themes/blob/master/themes/doom-tomorrow-night-theme.el
+# docs: https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
+#
+# background: #1d1f21
+# foreground: #c5c8c6
+# comment: #5a5b5a
+# red: #cc6666
+# orange: #de935f
+# yellow: #f0c674
+# green: #b5bd68
+# aqua: #8abeb7
+# blue: #81a2be
+# violet: #b294bb
+# magenta: #c9b4cf
+
+[dark]
+# preferred_background: 1d1f21
+
+# syntax highlighting
+fish_color_normal c5c8c6
+fish_color_command b294bb
+fish_color_keyword 81a2be
+fish_color_param c5c8c6
+fish_color_option c5c8c6
+fish_color_quote b5bd68
+fish_color_redirection 8abeb7
+fish_color_end b294bb
+fish_color_comment 5a5b5a
+fish_color_error cc6666 --bold
+fish_color_escape de935f
+fish_color_operator c5c8c6
+fish_color_autosuggestion 5a5b5a
+
+# selection and search
+fish_color_selection c5c8c6 --bold --background=5a5b5a
+fish_color_search_match 1d1f21 --background=f0c674
+fish_color_cancel cc6666 --reverse
+
+# paths and validation
+fish_color_valid_path --underline
+fish_color_match 81a2be --bold
+
+# pager (completion menu)
+fish_pager_color_progress 1d1f21 --background=b294bb
+fish_pager_color_background --background=1d1f21
+fish_pager_color_prefix b294bb --bold
+fish_pager_color_completion c5c8c6
+fish_pager_color_description 757878
+fish_pager_color_selected_background --background=3f4040
+fish_pager_color_selected_prefix e9d2f0 --bold
+fish_pager_color_selected_completion c5c8c6 --bold
+fish_pager_color_selected_description e9d2f0
