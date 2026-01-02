@@ -1,4 +1,4 @@
-function yt-navidrome -d "Grab local copy from youtube with metadata for navidrome"
+function ytnavi -d "Fetch YouTube music with full metadata for Navidrome library"
     set -l meta_args
     argparse 'album=' 'artist=' -- $argv || return
 

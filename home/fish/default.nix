@@ -53,13 +53,10 @@
       mv = "mv -vi";
       rm = "rm -vI";
       duh = "du -sh";
-
       vim = "nvim";
       vimdiff = "nvim -d";
-
       rsync = "rsync -vrPlu";
       ffmpeg = "ffmpeg -hide_banner";
-
       sshsum = "ssh-keygen -l -f";
     };
   };
