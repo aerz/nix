@@ -165,6 +165,8 @@ in
             redhat.vscode-yaml
             samuelcolvin.jinjahtml
             esbenp.prettier-vscode
+            mkhl.direnv
+            jnoortheen.nix-ide
           ]
           ++ default_extensions;
 
