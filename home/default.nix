@@ -11,6 +11,7 @@
     ./bat.nix
     ./zoxide.nix
     ./navi
+    ./dev.nix
     ./git.nix
     ./tmux.nix
     ./prompts/oh-my-posh
