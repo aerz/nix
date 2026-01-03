@@ -182,6 +182,8 @@ in
         userSettings = lib.mergeAttrs {
           "yaml.customTags" = [ "!vault" ];
           "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "ansible.lightspeed.enabled" = false;
+          "ansible.lightspeed.suggestions.enabled" = false;
         } default_user_settings;
       };
 
