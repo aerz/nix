@@ -92,6 +92,14 @@ let
       hash = "sha256-au71N3gVDMKnTX9TXzGt9q4b3OM7s8gMHXBnIVZ/1CE=";
     };
   };
+  vorg.vorg = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "vorg";
+      publisher = "vorg";
+      version = "0.0.7";
+      hash = "sha256-5hJIJShMasGNWuP9YxtGvton26uI3+zmXssnbqfBF1A=";
+    };
+  };
 
   default_extensions = with pkgs.vscode-extensions; [
     github.github-vscode-theme
@@ -167,6 +175,7 @@ in
             esbenp.prettier-vscode
             mkhl.direnv
             jnoortheen.nix-ide
+            vorg.vorg
           ]
           ++ default_extensions;
 
