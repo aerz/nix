@@ -160,6 +160,7 @@ in
         extensions =
           with pkgs.vscode-extensions;
           [
+            ms-python.python
             redhat.ansible
             redhat.vscode-yaml
             samuelcolvin.jinjahtml
