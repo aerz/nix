@@ -11,6 +11,7 @@
     ./brew.nix
     ./settings.nix
     ../../modules/darwin/power-management.nix
+    ../../modules/overlays.nix
   ];
 
   nix.enable = false; # let determinate nix handle nix configuration

@@ -9,7 +9,7 @@ let
     "workbench.layoutControl.enabled" = false;
     "workbench.navigationControl.enabled" = false;
     "workbench.preferredLightColorTheme" = "GitHub Light";
-    "workbench.preferredDarkColorTheme" = "GitHub Dark Default";
+    "workbench.preferredDarkColorTheme" = "GitHub Dark";
     "workbench.iconTheme" = "symbols";
     "symbols.files.associations" = {
       "justfile" = "robot";
@@ -49,8 +49,10 @@ let
     "editor.lineNumbers" = "relative";
     "editor.linkedEditing" = true;
     "editor.cursorBlinking" = "smooth";
+    "editor.bracketPairColorization.enabled" = true;
     "editor.scrollbar.verticalScrollbarSize" = 7;
     "editor.scrollbar.horizontalScrollbarSize" = 7;
+    "breadcrumbs.enabled" = false;
 
     "extensions.showRecommendationsOnlyOnDemand" = true;
     "extensions.ignoreRecommendations" = true;
@@ -58,47 +60,6 @@ let
 
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
-  };
-
-  chadalen.vscode-jetbrains-icon-theme = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      name = "vscode-jetbrains-icon-theme";
-      publisher = "chadalen";
-      version = "2.36.0";
-      hash = "sha256-p5hqytkF5Hg2d9N+XwZ5DfG2GEfoSPYXX0FCeUUR2Yc=";
-    };
-  };
-  miguelsolorio.symbols = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      name = "symbols";
-      publisher = "miguelsolorio";
-      version = "0.0.25";
-      hash = "sha256-nhymeLPfgGKyg3krHqRYs2iWNINF6IFBtTAp5HcwMs8=";
-    };
-  };
-  yanivmo.navi-cheatsheet-language = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      name = "navi-cheatsheet-language";
-      publisher = "yanivmo";
-      version = "1.0.1";
-      hash = "sha256-xnFnX3sa5kblw+kIoJ5CkrZUHDKaxxjzdn361eY0dKE=";
-    };
-  };
-  dnut.rewrap-revived = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      name = "rewrap-revived";
-      publisher = "dnut";
-      version = "17.9.0";
-      hash = "sha256-au71N3gVDMKnTX9TXzGt9q4b3OM7s8gMHXBnIVZ/1CE=";
-    };
-  };
-  vorg.vorg = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      name = "vorg";
-      publisher = "vorg";
-      version = "0.0.7";
-      hash = "sha256-5hJIJShMasGNWuP9YxtGvton26uI3+zmXssnbqfBF1A=";
-    };
   };
 
   default_extensions = with pkgs.vscode-extensions; [
@@ -186,7 +147,6 @@ in
           "ansible.lightspeed.suggestions.enabled" = false;
         } default_user_settings;
       };
-
     };
   };
 }
