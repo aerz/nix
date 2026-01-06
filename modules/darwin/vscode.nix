@@ -199,10 +199,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.rsync
-      pkgs.jq
-    ];
 
     home.activation.installVSCodeExtensionsShared = mkIf (allExtensions != [ ]) (
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
