@@ -1,3 +1,29 @@
+# VS Code Mutable Configuration Module
+#
+# This module provides a fully mutable alternative to Home Manager's official
+# programs.vscode module, designed for users who need VS Code to function with
+# full write access to settings and extensions.
+#
+# Key differences from official module:
+# - Extensions are synced to allow write access
+# - Settings files are copied from nix-store
+# - Recommended for darwin systems and discouraged for others
+#
+# Motivation:
+# - Allow user settings changes without switch
+# - Extensions with write permissions to their own files
+# - Extension state management
+#
+# References:
+# - https://github.com/nix-community/home-manager/blob/master/modules/programs/vscode/default.nix
+# - https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/applications/editors/vscode/extensions/vscode-utils.nix
+# - https://github.com/NixOS/nixpkgs/blob/fb7944c166a3b630f177938e478f0378e64ce108/pkgs/applications/editors/vscode/extensions/vscode-utils.nix#L161
+# - https://nixos.wiki/wiki/Visual_Studio_Code
+# - https://github.com/nix-community/home-manager/issues/7188
+#   vscode-fhs solves certain problems but pkg is not available for darwin
+# - https://github.com/nix-community/home-manager/issues/7880
+#   mutableExtensionsDir is available but is not flexible
+#
 {
   config,
   lib,
@@ -75,7 +101,6 @@ let
     }
   );
 
-  # https://github.com/NixOS/nixpkgs/blob/fb7944c166a3b630f177938e478f0378e64ce108/pkgs/applications/editors/vscode/extensions/vscode-utils.nix#L161
   toExtensionsJson =
     extensions:
     let
