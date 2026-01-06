@@ -218,30 +218,22 @@ in
 
         run mkdir -p "$(dirname "$file")"
 
-        if [[ ! -f "$file" ]]; then
-          echo '{}' > "$file"
-        fi
+        [[ -f "$file" ]] || echo '{}' > "$file"
 
         for profile in "''${profiles[@]}"; do
-          verboseEcho "Checking profile: $profile"
+          verboseEcho "Ensuring profile exists: $profile"
 
-          profile_exists=$(${pkgs.jq}/bin/jq --arg name "$profile" \
-            '.userDataProfiles // [] | any(.name == $name)' "$file")
-
-          if [[ "$profile_exists" != "true" ]]; then
-            verboseEcho "Adding profile: $profile"
-
-            if ${pkgs.jq}/bin/jq --arg name "$profile" \
-              '.userDataProfiles = (.userDataProfiles // []) + [{name: $name, location: $name}]' \
-              "$file" > "$file.tmp"; then
-              run mv "$file.tmp" "$file"
-            else
-              rm -f "$file.tmp"
-              echo "ERROR: Failed to update storage.json" >&2
-              exit 1
-            fi
+          if ${pkgs.jq}/bin/jq --arg name "$profile" \
+            '.userDataProfiles //= [] |
+             if (.userDataProfiles | map(.name) | index($name)) then .
+             else .userDataProfiles += [{name: $name, location: $name}]
+             end' \
+            "$file" > "$file.tmp"; then
+            run mv "$file.tmp" "$file"
           else
-            verboseEcho "Profile $profile already exists, skipping"
+            rm -f "$file.tmp"
+            echo "ERROR: Failed to update profile '$profile'" >&2
+            exit 1
           fi
         done
 
