@@ -80,7 +80,10 @@ let
             }
           '';
           description = ''
-            Configuration written to this profile's settings.json.
+            VS Code settings written to this profile's settings.json.
+
+            Settings are copied to the appropriate location on activation. Changes made
+            through VS Code's UI will persist until the next `home-manager switch`.
           '';
         };
 
@@ -94,7 +97,16 @@ let
             ]
           '';
           description = ''
-            List of VSCode extension packages for this profile.
+            List of VS Code extension packages for this profile.
+
+            Extensions are synced from the Nix store to `~/.vscode/extensions/` with write
+            permissions. This allows extensions to modify their own files as needed.
+
+            **Warning:** Extensions not listed here will be removed on activation due to
+            `rsync --delete`. Manual extension installations via VS Code will not persist.
+
+            Extensions are shared across all profiles - listing an extension in multiple
+            profiles does not install multiple copies.
           '';
         };
       };
@@ -182,7 +194,7 @@ let
 in
 {
   options.aerz.vscode = {
-    enable = mkEnableOption "Visual Studio Code";
+    enable = mkEnableOption "Visual Studio Code with mutable configuration";
 
     profiles = mkOption {
       type = types.attrsOf profileType;
@@ -211,7 +223,17 @@ in
         }
       '';
       description = ''
-        VSCode profiles configuration.
+        VS Code profile configurations. Each profile has independent settings and extensions.
+
+        The 'default' profile is VS Code's main profile. Additional profiles can be created
+        for different workflows (e.g., work, personal, language-specific).
+
+        **Important:** This module uses a mutable approach - files are copied (not symlinked)
+        to allow VS Code full write access. Manual changes made in VS Code's UI are preserved
+        but may conflict with your configuration on the next activation.
+
+        Settings and extensions are written on each `home-manager switch`. Extensions not
+        in your configuration will be removed due to `rsync --delete`.
       '';
     };
   };
