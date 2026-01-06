@@ -94,7 +94,5 @@
   environment.variables = {
     EDITOR = "nvim";
     HOMEBREW_NO_ANALYTICS = "1";
-    # TODO: remove when nix-homebrew pin v5
-    HOMEBREW_DOWNLOAD_CONCURRENCY = "auto";
   };
 }
