@@ -75,48 +75,41 @@ let
     }
   );
 
+  # https://github.com/NixOS/nixpkgs/blob/fb7944c166a3b630f177938e478f0378e64ce108/pkgs/applications/editors/vscode/extensions/vscode-utils.nix#L161
   toLocalExtensionJson =
     extensions:
     let
-      extensionInfo = map (
-        ext:
-        let
-          extMeta = ext.passthru or { };
-          publisher = extMeta.publisher or (lib.head (lib.splitString "." ext.vscodeExtUniqueId));
-          name = extMeta.name or (lib.last (lib.splitString "." ext.vscodeExtUniqueId));
-          version = extMeta.version or ext.version;
-          extensionId = "${publisher}.${name}";
-          localPath = "${extensionsBaseDir}/${extensionId}";
-        in
-        {
-          identifier = {
-            id = ext.vscodeExtUniqueId;
-            uuid = "";
-          };
-          version = version;
-          location = {
-            "$mid" = 1;
-            fsPath = localPath;
-            external = "file://${localPath}";
-            path = localPath;
-            scheme = "file";
-          };
-          relativeLocation = extensionId;
-          metadata = {
-            id = "";
-            publisherId = "";
-            publisherDisplayName = publisher;
-            targetPlatform = "undefined";
-            isPreReleaseVersion = false;
-            preRelease = false;
-            installedTimestamp = 0;
-            isApplicationScoped = false;
-            updated = false;
-          };
-        }
-      ) extensions;
+      toExtensionJsonEntry = ext: rec {
+        identifier = {
+          id = ext.vscodeExtUniqueId;
+          uuid = "";
+        };
+
+        version = ext.version;
+
+        relativeLocation = ext.vscodeExtUniqueId;
+
+        location = {
+          "$mid" = 1;
+          fsPath = "${extensionsBaseDir}/${ext.vscodeExtUniqueId}";
+          path = location.fsPath;
+          scheme = "file";
+        };
+
+        metadata = {
+          id = "";
+          publisherId = "";
+          publisherDisplayName = ext.vscodeExtPublisher;
+          targetPlatform = "undefined";
+          isApplicationScoped = false;
+          updated = false;
+          isPreReleaseVersion = false;
+          installedTimestamp = 0;
+          preRelease = false;
+        };
+      };
     in
-    builtins.toJSON extensionInfo;
+    builtins.toJSON (map toExtensionJsonEntry extensions);
 
   allExtensions = lib.unique (
     lib.concatMap (profile: profile.extensions) (lib.attrValues cfg.profiles)
