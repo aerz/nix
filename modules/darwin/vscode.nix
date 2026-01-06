@@ -223,7 +223,7 @@ in
 
         verboseEcho "Managing VSCode profiles in storage.json"
 
-        mkdir -p "$(dirname "$file")"
+        run mkdir -p "$(dirname "$file")"
 
         if [[ ! -f "$file" ]]; then
           echo '{}' > "$file"
@@ -238,15 +238,21 @@ in
           if [[ "$profile_exists" != "true" ]]; then
             verboseEcho "Adding profile: $profile"
 
-            ${pkgs.jq}/bin/jq --arg name "$profile" \
+            if ${pkgs.jq}/bin/jq --arg name "$profile" \
               '.userDataProfiles = (.userDataProfiles // []) + [{name: $name, location: $name}]' \
-              "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+              "$file" > "$file.tmp"; then
+              run mv "$file.tmp" "$file"
+            else
+              rm -f "$file.tmp"
+              echo "ERROR: Failed to update storage.json" >&2
+              exit 1
+            fi
           else
             verboseEcho "Profile $profile already exists, skipping"
           fi
         done
 
-        chmod 644 "$file"
+        run chmod 644 "$file"
       ''
     );
 
