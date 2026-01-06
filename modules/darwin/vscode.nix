@@ -119,7 +119,7 @@ let
     builtins.toJSON extensionInfo;
 
   allExtensions = lib.unique (
-    flatten (mapAttrsToList (name: profile: profile.extensions) cfg.profiles)
+    lib.concatMap (profile: profile.extensions) (lib.attrValues cfg.profiles)
   );
 
   combinedAllExtensions = pkgs.buildEnv {
