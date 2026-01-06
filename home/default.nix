@@ -19,7 +19,5 @@
     ./zsh
   ];
 
-  raycast.enable = false;
-
   xdg.enable = true;
 }
