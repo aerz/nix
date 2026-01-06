@@ -267,11 +267,7 @@ in
           ) profileConfigs
         );
       in
-      mkIf (profileConfigs != { }) {
-        after = [ "writeBoundary" ];
-        before = [ ];
-        data = writeSettingsScripts;
-      };
+      mkIf (profileConfigs != { }) (lib.hm.dag.entryAfter [ "writeBoundary" ] writeSettingsScripts);
 
     home.activation.writeVSCodeProfileExtensionsJson =
       let
