@@ -76,7 +76,7 @@ let
   );
 
   # https://github.com/NixOS/nixpkgs/blob/fb7944c166a3b630f177938e478f0378e64ce108/pkgs/applications/editors/vscode/extensions/vscode-utils.nix#L161
-  toLocalExtensionJson =
+  toExtensionsJson =
     extensions:
     let
       toExtensionJsonEntry = ext: rec {
@@ -120,7 +120,7 @@ let
     paths = allExtensions;
   };
 
-  profileConfigs = mapAttrs' (
+  profileData = mapAttrs' (
     profileName: profileCfg:
     let
       isDefault = profileName == "default";
@@ -136,7 +136,7 @@ let
 
       extensionsJsonFile = pkgs.writeTextFile {
         name = "vscode-extensions-${profileName}.json";
-        text = toLocalExtensionJson profileCfg.extensions;
+        text = toExtensionsJson profileCfg.extensions;
       };
     in
     nameValuePair profileName {
@@ -153,7 +153,7 @@ let
     }
   ) cfg.profiles;
 
-  nonDefaultProfileNames = filter (name: name != "default") (attrNames cfg.profiles);
+  customProfileNames = filter (name: name != "default") (attrNames cfg.profiles);
 in
 {
   options.aerz.vscode = {
@@ -193,7 +193,7 @@ in
 
   config = mkIf cfg.enable {
 
-    home.activation.installVSCodeExtensionsShared = mkIf (allExtensions != [ ]) (
+    home.activation.installExtensions = mkIf (allExtensions != [ ]) (
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         EXTENSIONS_SOURCE="${combinedAllExtensions}/share/vscode/extensions/"
 
@@ -209,10 +209,10 @@ in
       ''
     );
 
-    home.activation.vscodeProfiles = mkIf (nonDefaultProfileNames != [ ]) (
+    home.activation.setupProfiles = mkIf (customProfileNames != [ ]) (
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         file="${storageJsonPath}"
-        profiles=(${concatStringsSep " " (map lib.escapeShellArg nonDefaultProfileNames)})
+        profiles=(${concatStringsSep " " (map lib.escapeShellArg customProfileNames)})
 
         verboseEcho "Managing VSCode profiles in storage.json"
 
@@ -241,7 +241,7 @@ in
       ''
     );
 
-    home.activation.writeVSCodeProfileSettings =
+    home.activation.writeProfileSettings =
       let
         writeSettingsScripts = concatStringsSep "\n" (
           mapAttrsToList (
@@ -251,12 +251,12 @@ in
               run mkdir -p "${profileData.settingsDir}"
               run install -m 0644 "${profileData.settingsFile}" "${profileData.settingsDir}/settings.json"
             ''
-          ) profileConfigs
+          ) profileData
         );
       in
-      mkIf (profileConfigs != { }) (lib.hm.dag.entryAfter [ "writeBoundary" ] writeSettingsScripts);
+      mkIf (profileData != { }) (lib.hm.dag.entryAfter [ "writeBoundary" ] writeSettingsScripts);
 
-    home.activation.writeVSCodeProfileExtensionsJson =
+    home.activation.writeExtensionsJson =
       let
         writeExtensionsJsonScripts = concatStringsSep "\n" (
           mapAttrsToList (
@@ -266,11 +266,11 @@ in
               run mkdir -p "$(dirname "${profileData.extensionsJsonPath}")"
               run install -m 0644 "${profileData.extensionsJsonFile}" "${profileData.extensionsJsonPath}"
             ''
-          ) profileConfigs
+          ) profileData
         );
       in
-      mkIf (profileConfigs != { }) (
-        lib.hm.dag.entryAfter [ "installVSCodeExtensionsShared" ] writeExtensionsJsonScripts
+      mkIf (profileData != { }) (
+        lib.hm.dag.entryAfter [ "installExtensions" ] writeExtensionsJsonScripts
       );
   };
 }
