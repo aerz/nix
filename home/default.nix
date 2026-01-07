@@ -6,6 +6,7 @@
   imports = [
     ./kitty.nix
     ./vscode.nix
+    ./calibre.nix
     ./raycast
     ./fzf.nix
     ./bat.nix
