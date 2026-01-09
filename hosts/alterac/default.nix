@@ -70,6 +70,7 @@
     yt-dlp
     # misc
     exiftool
+    defaultbrowser
     # dev
     broot
     delta
