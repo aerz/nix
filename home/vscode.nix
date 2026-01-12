@@ -125,7 +125,6 @@
     "emmet.triggerExpansionOnTab" = true;
 
     # extensions
-    "extensions.showRecommendationsOnlyOnDemand" = true;
     "extensions.ignoreRecommendations" = true;
     "extensions.autoUpdate" = false;
     "extensions.autoCheckUpdates" = false;
