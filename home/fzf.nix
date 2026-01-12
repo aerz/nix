@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs.fzf = rec {
     enable = true;
     enableZshIntegration = true;

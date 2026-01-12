@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   options = {
     raycast = {
       enable = lib.mkEnableOption {

@@ -3,12 +3,9 @@
   pkgs,
   lib,
   ...
-}:
-
-let
+}: let
   calibreDataDir = "/Volumes/U500/AppData/Calibre";
-in
-{
+in {
   # https://manual.calibre-ebook.com/customize.html
   home.file."Library/Preferences/calibre/macos-env.txt" = {
     text = ''
@@ -20,7 +17,7 @@ in
     recursive = true;
   };
 
-  home.activation.mkdirCalibreData = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.mkdirCalibreData = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ -d "/Volumes/U500" ]; then
       run mkdir -p "${calibreDataDir}/config"
       run mkdir -p "${calibreDataDir}/cache"

@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   # TODO: fix default fzf theme is not applied to fzf-tab
   # TODO: fix fzf-tab loads after fzf widget
   # TODO: fix zsh load times by using raw setup; current is slow
@@ -14,7 +13,7 @@
     syntaxHighlighting.enable = true;
     autosuggestion = {
       enable = true;
-      strategy = [ ];
+      strategy = [];
     };
 
     plugins = [

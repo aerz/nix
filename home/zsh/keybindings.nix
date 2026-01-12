@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs.zsh = {
     defaultKeymap = "emacs";
     initContent = ''

@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   default_user_settings = {
     # general
     "workbench.layoutControl.enabled" = false;
@@ -144,8 +143,7 @@ let
     miguelsolorio.symbols
     subframe7536.custom-ui-style
   ];
-in
-{
+in {
   imports = [
     ../modules/darwin/vscode.nix
   ];
@@ -191,19 +189,20 @@ in
       };
 
       astro = {
-        settings = lib.mergeAttrs {
-          "emmet.triggerExpansionOnTab" = true;
-          "emmet.includeLanguages"."javascript" = "javascriptreact";
-          "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "typescript.updateImportsOnFileMove.enabled" = "always";
-          "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "javascript.updateImportsOnFileMove.enabled" = "always";
-          "[mdx]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "rewrap.autoWrap.enabled" = true;
-        } default_user_settings;
-        extensions =
-          with pkgs.vscode-extensions;
+        settings =
+          lib.mergeAttrs {
+            "emmet.triggerExpansionOnTab" = true;
+            "emmet.includeLanguages"."javascript" = "javascriptreact";
+            "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "typescript.updateImportsOnFileMove.enabled" = "always";
+            "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "javascript.updateImportsOnFileMove.enabled" = "always";
+            "[mdx]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "rewrap.autoWrap.enabled" = true;
+          }
+          default_user_settings;
+        extensions = with pkgs.vscode-extensions;
           [
             astro-build.astro-vscode
             bradlc.vscode-tailwindcss
@@ -218,12 +217,13 @@ in
       };
 
       typescript = {
-        settings = lib.mergeAttrs {
-          "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "typescript.updateImportsOnFileMove.enabled" = "always";
-        } default_user_settings;
-        extensions =
-          with pkgs.vscode-extensions;
+        settings =
+          lib.mergeAttrs {
+            "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "typescript.updateImportsOnFileMove.enabled" = "always";
+          }
+          default_user_settings;
+        extensions = with pkgs.vscode-extensions;
           [
             esbenp.prettier-vscode
             usernamehw.errorlens
@@ -233,14 +233,15 @@ in
       };
 
       ansible = {
-        settings = lib.mergeAttrs {
-          "yaml.customTags" = [ "!vault" ];
-          "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "ansible.lightspeed.enabled" = false;
-          "ansible.lightspeed.suggestions.enabled" = false;
-        } default_user_settings;
-        extensions =
-          with pkgs.vscode-extensions;
+        settings =
+          lib.mergeAttrs {
+            "yaml.customTags" = ["!vault"];
+            "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "ansible.lightspeed.enabled" = false;
+            "ansible.lightspeed.suggestions.enabled" = false;
+          }
+          default_user_settings;
+        extensions = with pkgs.vscode-extensions;
           [
             ms-python.python
             redhat.ansible
@@ -266,8 +267,7 @@ in
       };
 
       nix = {
-        extensions =
-          with pkgs.vscode-extensions;
+        extensions = with pkgs.vscode-extensions;
           [
             nefrob.vscode-just-syntax
             jnoortheen.nix-ide
@@ -277,14 +277,15 @@ in
             bmalehorn.vscode-fish
           ]
           ++ default_extensions;
-        userSettings = lib.mergeAttrs {
-          "[nix]"."editor.tabSize" = 2;
-        } default_user_settings;
+        userSettings =
+          lib.mergeAttrs {
+            "[nix]"."editor.tabSize" = 2;
+          }
+          default_user_settings;
       };
 
       astro = {
-        extensions =
-          with pkgs.vscode-extensions;
+        extensions = with pkgs.vscode-extensions;
           [
             astro-build.astro-vscode
             bradlc.vscode-tailwindcss
@@ -296,37 +297,39 @@ in
             yoavbls.pretty-ts-errors
           ]
           ++ default_extensions;
-        userSettings = lib.mergeAttrs {
-          "emmet.triggerExpansionOnTab" = true;
-          "emmet.includeLanguages"."javascript" = "javascriptreact";
-          "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "typescript.updateImportsOnFileMove.enabled" = "always";
-          "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "javascript.updateImportsOnFileMove.enabled" = "always";
-          "[mdx]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "rewrap.autoWrap.enabled" = true;
-        } default_user_settings;
+        userSettings =
+          lib.mergeAttrs {
+            "emmet.triggerExpansionOnTab" = true;
+            "emmet.includeLanguages"."javascript" = "javascriptreact";
+            "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "typescript.updateImportsOnFileMove.enabled" = "always";
+            "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "javascript.updateImportsOnFileMove.enabled" = "always";
+            "[mdx]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "rewrap.autoWrap.enabled" = true;
+          }
+          default_user_settings;
       };
 
       typescript = {
-        extensions =
-          with pkgs.vscode-extensions;
+        extensions = with pkgs.vscode-extensions;
           [
             esbenp.prettier-vscode
             usernamehw.errorlens
             yoavbls.pretty-ts-errors
           ]
           ++ default_extensions;
-        userSettings = lib.mergeAttrs {
-          "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "typescript.updateImportsOnFileMove.enabled" = "always";
-        } default_user_settings;
+        userSettings =
+          lib.mergeAttrs {
+            "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "typescript.updateImportsOnFileMove.enabled" = "always";
+          }
+          default_user_settings;
       };
 
       ansible = {
-        extensions =
-          with pkgs.vscode-extensions;
+        extensions = with pkgs.vscode-extensions;
           [
             ms-python.python
             redhat.ansible
@@ -338,12 +341,14 @@ in
             vorg.vorg
           ]
           ++ default_extensions;
-        userSettings = lib.mergeAttrs {
-          "yaml.customTags" = [ "!vault" ];
-          "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-          "ansible.lightspeed.enabled" = false;
-          "ansible.lightspeed.suggestions.enabled" = false;
-        } default_user_settings;
+        userSettings =
+          lib.mergeAttrs {
+            "yaml.customTags" = ["!vault"];
+            "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "ansible.lightspeed.enabled" = false;
+            "ansible.lightspeed.suggestions.enabled" = false;
+          }
+          default_user_settings;
       };
     };
   };

@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   kitty_settings = {
     # window layout
     inactive_text_alpha = 0.7;
@@ -133,8 +132,7 @@ let
     # Bell border color
     bell_border_color = "#de935f";
   };
-in
-{
+in {
   programs.kitty = {
     enable = true;
     shellIntegration.enableZshIntegration = true;

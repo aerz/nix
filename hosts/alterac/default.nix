@@ -3,8 +3,7 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   imports = [
@@ -25,7 +24,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     users.aerz = {
-      imports = [ ../../home ];
+      imports = [../../home];
     };
   };
   users.users.aerz.home = "/Users/aerz";

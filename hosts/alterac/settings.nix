@@ -1,5 +1,8 @@
-{ self, pkgs, ... }:
 {
+  self,
+  pkgs,
+  ...
+}: {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 6;
@@ -68,7 +71,7 @@
       "button" = 3;
       "speed" = 3;
       "toggle" = 0;
-      "keys" = [ ];
+      "keys" = [];
     };
   };
 

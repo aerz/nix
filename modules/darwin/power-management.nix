@@ -1,11 +1,11 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.aerz.power-management;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.aerz.power-management;
+in {
   options.aerz.power-management = {
     enable = mkEnableOption "power management settings";
 

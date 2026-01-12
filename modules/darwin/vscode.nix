@@ -29,10 +29,9 @@
   lib,
   pkgs,
   ...
-}:
-
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkOption
     mkIf
@@ -53,10 +52,9 @@ let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 
   userDataDir =
-    if isDarwin then
-      "${config.home.homeDirectory}/Library/Application Support/Code/User"
-    else
-      "${config.xdg.configHome}/Code/User";
+    if isDarwin
+    then "${config.home.homeDirectory}/Library/Application Support/Code/User"
+    else "${config.xdg.configHome}/Code/User";
 
   globalStorageDir = "${userDataDir}/globalStorage";
   storageJsonPath = "${globalStorageDir}/storage.json";
@@ -64,15 +62,14 @@ let
 
   extensionsBaseDir = "${config.home.homeDirectory}/.vscode/extensions";
 
-  jsonFormat = pkgs.formats.json { };
+  jsonFormat = pkgs.formats.json {};
 
   profileType = types.submodule (
-    { name, ... }:
-    {
+    {name, ...}: {
       options = {
         settings = mkOption {
           type = jsonFormat.type;
-          default = { };
+          default = {};
           example = literalExpression ''
             {
               "editor.formatOnSave" = true;
@@ -89,7 +86,7 @@ let
 
         extensions = mkOption {
           type = types.listOf types.package;
-          default = [ ];
+          default = [];
           example = literalExpression ''
             with pkgs.vscode-extensions; [
               jnoortheen.nix-ide
@@ -113,39 +110,37 @@ let
     }
   );
 
-  toExtensionsJson =
-    extensions:
-    let
-      toExtensionJsonEntry = ext: rec {
-        identifier = {
-          id = ext.vscodeExtUniqueId;
-          uuid = "";
-        };
-
-        version = ext.version;
-
-        relativeLocation = ext.vscodeExtUniqueId;
-
-        location = {
-          "$mid" = 1;
-          fsPath = "${extensionsBaseDir}/${ext.vscodeExtUniqueId}";
-          path = location.fsPath;
-          scheme = "file";
-        };
-
-        metadata = {
-          id = "";
-          publisherId = "";
-          publisherDisplayName = ext.vscodeExtPublisher;
-          targetPlatform = "undefined";
-          isApplicationScoped = false;
-          updated = false;
-          isPreReleaseVersion = false;
-          installedTimestamp = 0;
-          preRelease = false;
-        };
+  toExtensionsJson = extensions: let
+    toExtensionJsonEntry = ext: rec {
+      identifier = {
+        id = ext.vscodeExtUniqueId;
+        uuid = "";
       };
-    in
+
+      version = ext.version;
+
+      relativeLocation = ext.vscodeExtUniqueId;
+
+      location = {
+        "$mid" = 1;
+        fsPath = "${extensionsBaseDir}/${ext.vscodeExtUniqueId}";
+        path = location.fsPath;
+        scheme = "file";
+      };
+
+      metadata = {
+        id = "";
+        publisherId = "";
+        publisherDisplayName = ext.vscodeExtPublisher;
+        targetPlatform = "undefined";
+        isApplicationScoped = false;
+        updated = false;
+        isPreReleaseVersion = false;
+        installedTimestamp = 0;
+        preRelease = false;
+      };
+    };
+  in
     builtins.toJSON (map toExtensionJsonEntry extensions);
 
   allExtensions = lib.unique (
@@ -157,48 +152,50 @@ let
     paths = allExtensions;
   };
 
-  profileData = mapAttrs' (
-    profileName: profileCfg:
-    let
-      isDefault = profileName == "default";
+  profileData =
+    mapAttrs' (
+      profileName: profileCfg: let
+        isDefault = profileName == "default";
 
-      settingsDir = if isDefault then userDataDir else "${profilesBaseDir}/${profileName}";
-      extensionsJsonPath =
-        if isDefault then
-          "${extensionsBaseDir}/extensions.json"
-        else
-          "${profilesBaseDir}/${profileName}/extensions.json";
+        settingsDir =
+          if isDefault
+          then userDataDir
+          else "${profilesBaseDir}/${profileName}";
+        extensionsJsonPath =
+          if isDefault
+          then "${extensionsBaseDir}/extensions.json"
+          else "${profilesBaseDir}/${profileName}/extensions.json";
 
-      settingsFile = jsonFormat.generate "vscode-settings-${profileName}.json" profileCfg.settings;
+        settingsFile = jsonFormat.generate "vscode-settings-${profileName}.json" profileCfg.settings;
 
-      extensionsJsonFile = pkgs.writeTextFile {
-        name = "vscode-extensions-${profileName}.json";
-        text = toExtensionsJson profileCfg.extensions;
-      };
-    in
-    nameValuePair profileName {
-      inherit
-        profileName
-        settingsDir
-        extensionsJsonPath
-        settingsFile
-        extensionsJsonFile
-        isDefault
-        ;
-      hasSettings = profileCfg.settings != { };
-      hasExtensions = profileCfg.extensions != [ ];
-    }
-  ) cfg.profiles;
+        extensionsJsonFile = pkgs.writeTextFile {
+          name = "vscode-extensions-${profileName}.json";
+          text = toExtensionsJson profileCfg.extensions;
+        };
+      in
+        nameValuePair profileName {
+          inherit
+            profileName
+            settingsDir
+            extensionsJsonPath
+            settingsFile
+            extensionsJsonFile
+            isDefault
+            ;
+          hasSettings = profileCfg.settings != {};
+          hasExtensions = profileCfg.extensions != [];
+        }
+    )
+    cfg.profiles;
 
   customProfileNames = filter (name: name != "default") (attrNames cfg.profiles);
-in
-{
+in {
   options.aerz.vscode = {
     enable = mkEnableOption "Visual Studio Code with mutable configuration";
 
     profiles = mkOption {
       type = types.attrsOf profileType;
-      default = { };
+      default = {};
       example = literalExpression ''
         {
           default = {
@@ -239,9 +236,8 @@ in
   };
 
   config = mkIf cfg.enable {
-
-    home.activation.installExtensions = mkIf (allExtensions != [ ]) (
-      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    home.activation.installExtensions = mkIf (allExtensions != []) (
+      lib.hm.dag.entryAfter ["writeBoundary"] ''
         EXTENSIONS_SOURCE="${combinedAllExtensions}/share/vscode/extensions/"
 
         run mkdir -p "${extensionsBaseDir}"
@@ -256,8 +252,8 @@ in
       ''
     );
 
-    home.activation.setupProfiles = mkIf (customProfileNames != [ ]) (
-      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    home.activation.setupProfiles = mkIf (customProfileNames != []) (
+      lib.hm.dag.entryAfter ["writeBoundary"] ''
         file="${storageJsonPath}"
         profiles=(${concatStringsSep " " (map lib.escapeShellArg customProfileNames)})
 
@@ -288,36 +284,36 @@ in
       ''
     );
 
-    home.activation.writeProfileSettings =
-      let
-        writeSettingsScripts = concatStringsSep "\n" (
-          mapAttrsToList (
-            profileName: profileData:
+    home.activation.writeProfileSettings = let
+      writeSettingsScripts = concatStringsSep "\n" (
+        mapAttrsToList (
+          profileName: profileData:
             lib.optionalString profileData.hasSettings ''
               verboseEcho "Writing settings.json for profile '${profileName}'"
               run mkdir -p "${profileData.settingsDir}"
               run install -m 0644 "${profileData.settingsFile}" "${profileData.settingsDir}/settings.json"
             ''
-          ) profileData
-        );
-      in
-      mkIf (profileData != { }) (lib.hm.dag.entryAfter [ "writeBoundary" ] writeSettingsScripts);
+        )
+        profileData
+      );
+    in
+      mkIf (profileData != {}) (lib.hm.dag.entryAfter ["writeBoundary"] writeSettingsScripts);
 
-    home.activation.writeExtensionsJson =
-      let
-        writeExtensionsJsonScripts = concatStringsSep "\n" (
-          mapAttrsToList (
-            profileName: profileData:
+    home.activation.writeExtensionsJson = let
+      writeExtensionsJsonScripts = concatStringsSep "\n" (
+        mapAttrsToList (
+          profileName: profileData:
             lib.optionalString profileData.hasExtensions ''
               verboseEcho "Writing extensions.json for profile '${profileName}'"
               run mkdir -p "$(dirname "${profileData.extensionsJsonPath}")"
               run install -m 0644 "${profileData.extensionsJsonFile}" "${profileData.extensionsJsonPath}"
             ''
-          ) profileData
-        );
-      in
-      mkIf (profileData != { }) (
-        lib.hm.dag.entryAfter [ "installExtensions" ] writeExtensionsJsonScripts
+        )
+        profileData
+      );
+    in
+      mkIf (profileData != {}) (
+        lib.hm.dag.entryAfter ["installExtensions"] writeExtensionsJsonScripts
       );
   };
 }
