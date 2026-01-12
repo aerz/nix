@@ -6,59 +6,135 @@
 }:
 let
   default_user_settings = {
+    # general
     "workbench.layoutControl.enabled" = false;
     "workbench.navigationControl.enabled" = false;
     "workbench.preferredLightColorTheme" = "GitHub Light";
     "workbench.preferredDarkColorTheme" = "GitHub Dark";
+    "window.autoDetectColorScheme" = true;
+    "window.zoomLevel" = 1;
+
+    # theme icons
     "workbench.iconTheme" = "symbols";
+    "symbols.hidesExplorerArrows" = true;
     "symbols.files.associations" = {
       "justfile" = "robot";
     };
+
+    # window
     "workbench.startupEditor" = "none";
+    "workbench.tips.enabled" = false;
     "workbench.activityBar.location" = "hidden";
-    "workbench.editor.showTabs" = "none";
     "workbench.statusBar.visible" = false;
     "workbench.editor.empty.hint" = "hidden";
+    "workbench.sideBar.location" = "right";
 
+    "workbench.editor.showTabs" = "single";
+    "window.customTitleBarVisibility" = "never";
+    "window.titleBarStyle" = "native";
+    "custom-ui-style.electron" = {
+      "titleBarStyle" = "hiddenInset";
+      "trafficLightPosition" = {
+        "x" = 20;
+        "y" = 12;
+      };
+    };
+    # use @command:custom-ui-style.reload to apply new changes
+    "custom-ui-style.stylesheet" = {
+      ".notification-toast" = "box-shadow: none !important";
+      ".quick-input-widget.show-file-icons" = "box-shadow: none !important";
+      ".quick-input-widget" = "top: 25vh !important";
+      ".quick-input-list .scrollbar" = "display: none";
+      ".monaco-action-bar.quick-input-inline-action-bar" = "display: none";
+      ".editor-widget.find-widget" = "box-shadow: none; border-radius: 4px";
+      ".monaco-workbench .part.editor > .content .editor-group-container > .title.title-border-bottom:after" = "display: none";
+      ".monaco-scrollable-element > .shadow.top" = "display: none";
+      ".sidebar .title-label" = "padding: 0 !important";
+      ".sidebar" = "border: none !important";
+      ".monaco-workbench .monaco-list:not(.element-focused):focus:before" = "outline: none !important";
+      ".monaco-list-row.focused" = "outline: none !important";
+      ".monaco-editor .scroll-decoration" = "display: none";
+      ".title-actions" = "display: none !important";
+      ".title.show-file-icons .label-container .monaco-icon-label.file-icon" = "justify-content: center; padding: 0 !important";
+      ".title .monaco-icon-label:after" = "margin-right: 0";
+      ".title .monaco-icon-label.file-icon" = "margin: 0 60px";
+      ".monaco-workbench .part.editor > .content .editor-group-container > .title > .label-container > .title-label" = "padding-left: 60px";
+    };
+    "custom-ui-style.font.sansSerif" = "'JetBrainsMono Nerd Font'";
+
+    # scm
     "git.confirmSync" = false;
     "git.autofetch" = false;
 
-    "window.zoomLevel" = 1;
-    "window.autoDetectColorScheme" = true;
-    "chat.commandCenter.enabled" = false;
-
-    "diffEditor.ignoreTrimWhitespace" = false;
-
-    "files.trimTrailingWhitespace" = true;
-    "files.trimFinalNewlines" = true;
-    "files.insertFinalNewline" = true;
-
+    # file explorer
     "explorer.confirmDelete" = false;
     "explorer.confirmDragAndDrop" = false;
+    "workbench.tree.renderIndentGuides" = "none";
+    "explorer.decorations.badges" = false;
+    "git.decorations.enabled" = false;
 
+    # editor
+    "editor.lineHeight" = 1.6;
+    "editor.multiCursorModifier" = "ctrlCmd";
     "editor.fontLigatures" = true;
     "editor.formatOnSave" = true;
     "editor.insertSpaces" = true;
     "editor.tabSize" = 2;
-    "editor.rulers" = [
-      80
-      120
-    ];
-    "editor.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
+    "editor.detectIndentation" = false;
+    "editor.fontFamily" = "'JetBrainsMono Nerd Font'";
+    "editor.tokenColorCustomizations" = {
+      "textMateRules" = [
+        {
+          "scope" = "comment";
+          "settings" = {
+            "fontStyle" = "italic";
+          };
+        }
+      ];
+    };
+    "editor.links" = false;
+    "editor.stickyScroll.enabled" = false;
     "editor.minimap.enabled" = false;
+    "editor.parameterHints.enabled" = false;
+    "editor.lightbulb.enabled" = "off";
+    "editor.hover.enabled" = false;
+    "scm.diffDecorations" = "none";
     "editor.lineNumbers" = "relative";
+    "editor.guides.indentation" = false;
+    "editor.renderWhitespace" = "none";
+    "editor.renderLineHighlight" = "none";
+    "editor.selectionHighlight" = false;
+    "editor.showFoldingControls" = "never";
     "editor.linkedEditing" = true;
     "editor.cursorBlinking" = "smooth";
     "editor.bracketPairColorization.enabled" = true;
     "editor.scrollbar.verticalScrollbarSize" = 7;
     "editor.scrollbar.horizontalScrollbarSize" = 7;
     "breadcrumbs.enabled" = false;
+    "diffEditor.ignoreTrimWhitespace" = false;
+    "files.trimTrailingWhitespace" = true;
+    "files.trimFinalNewlines" = true;
+    "files.insertFinalNewline" = true;
+    "editor.scrollbar.horizontal" = "hidden";
+    "editor.scrollbar.vertical" = "hidden";
+    "editor.quickSuggestions" = {
+      "other" = "off";
+    };
+    "editor.suggestOnTriggerCharacters" = false;
+    "editor.tabCompletion" = "on";
+    "editor.snippetSuggetions" = "top";
+    "emmet.triggerExpansionOnTab" = true;
 
+    # extensions
     "extensions.showRecommendationsOnlyOnDemand" = true;
     "extensions.ignoreRecommendations" = true;
     "extensions.autoUpdate" = false;
     "extensions.autoCheckUpdates" = false;
 
+    # github copilot
+    "chat.commandCenter.enabled" = false;
+
+    # misc
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
   };
@@ -66,6 +142,7 @@ let
   default_extensions = with pkgs.vscode-extensions; [
     github.github-vscode-theme
     miguelsolorio.symbols
+    subframe7536.custom-ui-style
   ];
 in
 {

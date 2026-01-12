@@ -85,5 +85,15 @@
         };
       };
     };
+    subframe7536 = (prev.vscode-extensions.subframe7536 or { }) // {
+      custom-ui-style = prev.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "custom-ui-style";
+          publisher = "subframe7536";
+          version = "0.6.6";
+          hash = "sha256-9hM0ZzTFgVqceYNx4cy30W/r4rpPnvcfHfCtHJXXfIA=";
+        };
+      };
+    };
   };
 })
