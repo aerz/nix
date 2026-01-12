@@ -83,11 +83,25 @@ in
       };
 
       nix = {
-        settings = lib.mergeAttrs {
-          "[nix]"."editor.tabSize" = 2;
-        } default_user_settings;
-        extensions =
-          with pkgs.vscode-extensions;
+        settings =
+          lib.mergeAttrs {
+            "[nix]" = {
+              "editor.defaultFormatter" = "jnoortheen.nix-ide";
+              "editor.semanticHighlighting.enabled" = true;
+              "editor.tabSize" = 2;
+            };
+            "nix.enableLanguageServer" = true;
+            "nix.serverPath" = "nil";
+            "nix.serverSettings" = {
+              "nil" = {
+                "formatting" = {
+                  "command" = ["alejandra"];
+                };
+              };
+            };
+          }
+          default_user_settings;
+        extensions = with pkgs.vscode-extensions;
           [
             nefrob.vscode-just-syntax
             jnoortheen.nix-ide

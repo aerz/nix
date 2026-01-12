@@ -82,7 +82,8 @@
     jujutsu
     zellij
     # nix
-    nixfmt-rfc-style
+    alejandra
+    nil
     nix-du
     nurl
     nix-prefetch-git
