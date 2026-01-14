@@ -21,6 +21,7 @@
       "brave-browser"
       "helium-browser"
       "hyperkey"
+      "imageoptim"
       "jordanbaird-ice"
       "telegram-desktop"
       "localsend"
