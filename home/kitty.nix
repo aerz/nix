@@ -28,7 +28,6 @@
     # macos
     macos_show_window_title_in = "none";
     hide_window_decorations = "titlebar-only";
-    macos_thicken_font = 0.75;
     macos_colorspace = "displayp3";
     macos_option_as_alt = "left";
     macos_titlebar_color = "background";
