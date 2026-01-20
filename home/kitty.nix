@@ -134,6 +134,7 @@
 in {
   programs.kitty = {
     enable = true;
+    package = null;
     shellIntegration.enableZshIntegration = true;
     shellIntegration.enableFishIntegration = true;
     font.name = "JetBrainsMono Nerd Font Mono";
