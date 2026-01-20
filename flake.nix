@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # https://github.com/NixOS/nixpkgs/pull/477062
+    nixpkgs-aerospace.url = "github:NixOS/nixpkgs/5a25452a414f1a25d12255261d30df8e80da2a19";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
