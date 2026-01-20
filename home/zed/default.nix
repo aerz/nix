@@ -20,8 +20,8 @@
     ];
     userSettings = {
       # theme
-      ui_font_size = 16;
-      buffer_font_size = 14;
+      ui_font_size = 16.5;
+      buffer_font_size = 15;
       ui_font_family = "JetBrainsMono Nerd Font";
       buffer_font_family = "JetBrainsMono Nerd Font";
       icon_theme = "Base Charmed Icons";
