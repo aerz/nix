@@ -1,3 +1,3 @@
-{...}: {
-  nixpkgs.overlays = import ../overlays;
+{inputs, ...}: {
+  nixpkgs.overlays = import ../overlays {inherit inputs;};
 }
