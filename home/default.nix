@@ -9,7 +9,7 @@
   imports = [
     ./kitty.nix
     ./vscode.nix
-    ./zed.nix
+    ./zed
     ./calibre.nix
     ./raycast
     ./fzf.nix
