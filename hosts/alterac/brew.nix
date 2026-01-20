@@ -41,6 +41,7 @@
       "sanesidebuttons"
       "shottr"
       "syncthing-app"
+      "zed"
     ];
     greedyCasks = true;
 
