@@ -14,7 +14,7 @@
   ];
 
   nix.enable = false; # let determinate nix handle nix configuration
-  determinate-nix.customSettings = {
+  determinateNix.customSettings = {
     eval-cores = 2;
   };
 
