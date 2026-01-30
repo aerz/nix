@@ -1,3 +1,3 @@
 inputs: final: prev: {
-  aerospace = inputs.nixpkgs-aerospace.legacyPackages.${prev.system}.aerospace;
+  aerospace = inputs.nixpkgs-aerospace.legacyPackages.${prev.stdenv.hostPlatform.system}.aerospace;
 }
