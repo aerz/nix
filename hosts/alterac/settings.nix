@@ -37,6 +37,7 @@
   };
 
   system.defaults.finder = {
+    FXRemoveOldTrashItems = true;
     ShowPathbar = true;
     FXPreferredViewStyle = "Nlsv";
     FXEnableExtensionChangeWarning = false;
