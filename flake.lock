@@ -317,22 +317,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-aerospace": {
-      "locked": {
-        "lastModified": 1767598328,
-        "narHash": "sha256-TjYkSXkpvu7/L7mw7jJ5xUZpq9jF6+YRTm9EI5lq6nU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5a25452a414f1a25d12255261d30df8e80da2a19",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5a25452a414f1a25d12255261d30df8e80da2a19",
-        "type": "github"
-      }
-    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -389,8 +373,7 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs_3",
-        "nixpkgs-aerospace": "nixpkgs-aerospace"
+        "nixpkgs": "nixpkgs_3"
       }
     }
   },

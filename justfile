@@ -4,18 +4,21 @@ hostname := `hostname | cut -d "." -f 1`
 
 [macos]
 build target_host=hostname flags="":
-  nix build ".#darwinConfigurations.{{target_host}}.system" {{flags}}
+    nix build ".#darwinConfigurations.{{ target_host }}.system" {{ flags }}
 
 [macos]
 trace target_host=hostname: (build target_host "--show-trace")
 
 [macos]
 switch:
-  sudo darwin-rebuild switch
+    sudo darwin-rebuild switch
 
 update:
-  sudo nix flake update
+    sudo nix flake update
+
+clean:
+    nix flake check --no-build
 
 gc:
-  sudo nix-collect-garbage -d
-  sudo nix store optimise --verbose
+    sudo nix-collect-garbage -d
+    sudo nix store optimise --verbose
