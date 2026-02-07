@@ -5,6 +5,7 @@
       "fish"
       "toml"
       "just"
+      "swift"
     ];
     userSettings = {
       # disable language features when no profile active
@@ -24,6 +25,9 @@
           };
           Fish = {
             formatter.external.command = "fish_indent";
+          };
+          Just = {
+            tab_size = 4;
           };
         };
         lsp = {

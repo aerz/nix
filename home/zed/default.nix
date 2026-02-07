@@ -77,7 +77,7 @@
       # ui
       inline_code_actions = false;
       global_lsp_settings.button = false;
-      features.edit_prediction_provider = "none";
+      edit_predictions.provider = "none";
       title_bar = {
         show_branch_name = false;
         show_user_picture = false;
