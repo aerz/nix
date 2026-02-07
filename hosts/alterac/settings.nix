@@ -23,7 +23,6 @@
     autohide-time-modifier = 0.25;
     autohide-delay = 0.0;
     show-recents = false;
-    expose-group-apps = true;
     persistent-apps = [
       "/Applications/Brave Browser.app"
       "/System/Applications/Mail.app"
@@ -34,6 +33,14 @@
     wvous-bl-corner = 1;
     wvous-tr-corner = 1;
     wvous-br-corner = 1;
+  };
+
+  # Aerospace
+  system.defaults = {
+    # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
+    dock.expose-group-apps = true;
+    # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-displays-have-separate-spaces
+    spaces.spans-displays = true;
   };
 
   system.defaults.finder = {

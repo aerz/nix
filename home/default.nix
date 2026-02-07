@@ -7,7 +7,7 @@
   home.stateVersion = "25.05";
 
   imports = [
-    ./aerospace.nix
+    ./aerospace
     ./kitty.nix
     ./vscode.nix
     ./zed
