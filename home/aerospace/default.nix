@@ -46,7 +46,7 @@
       mode.main.binding = {
         # layout
         alt-shift-f = "fullscreen";
-        alt-shift-c = "exec-and-forget ~/.config/aerospace/center-floating.swift";
+        alt-shift-c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift";
         alt-shift-slash = "layout tiles horizontal vertical";
         alt-shift-comma = "layout accordion horizontal vertical";
         # focus
@@ -83,12 +83,13 @@
         # mode
         alt-shift-semicolon = "mode service";
         alt-shift-r = "mode resize";
+        alt-shift-period = "mode floating";
       };
       mode.service.binding = {
         esc = ["reload-config" "mode main"];
         r = ["flatten-workspace-tree" "mode main"];
         f = ["layout floating tiling" "mode main"];
-        c = ["layout floating" "exec-and-forget ~/.config/aerospace/center-floating.swift" "mode main"];
+        c = ["layout floating" "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift" "mode main"];
         backspace = ["close-all-windows-but-current" "mode main"];
         alt-shift-h = ["join-with left" "mode main"];
         alt-shift-j = ["join-with down" "mode main"];
@@ -100,6 +101,15 @@
         minus = "resize smart -50";
         equal = "resize smart +50";
         shift-equal = "balance-sizes";
+      };
+      mode.floating.binding = {
+        esc = ["mode main"];
+        f = ["layout tiling" "mode main"];
+        c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift";
+        shift-h = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh -50 0";
+        shift-j = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 -50";
+        shift-k = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 50";
+        shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 50 0";
       };
       on-window-detected = [
         {
@@ -126,11 +136,18 @@
           "if".app-id = "com.tdesktop.Telegram";
           run = "layout floating";
         }
+        {
+          "if".app-id = "org.localsend.localsendApp";
+          run = "layout floating";
+        }
       ];
     };
   };
 
   xdg.configFile."aerospace/center-floating.swift" = {
     source = ./center-floating.swift;
+  };
+  xdg.configFile."aerospace/resize-floating.sh" = {
+    source = ./resize-floating.sh;
   };
 }
