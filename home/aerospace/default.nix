@@ -64,7 +64,8 @@ in {
       };
       mode.main.binding = {
         # layout
-        alt-shift-f = "fullscreen";
+        alt-shift-f = "layout floating tiling";
+        alt-shift-enter = "fullscreen";
         alt-shift-c = "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}";
         alt-shift-slash = "layout tiles horizontal vertical";
         alt-shift-comma = "layout accordion horizontal vertical";
@@ -125,41 +126,31 @@ in {
         esc = ["mode main"];
         f = ["layout tiling" "mode main"];
         c = "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}";
+        equal = "exec-and-forget open -g raycast://extensions/raycast/window-management/reasonable-size";
+        alt-l = ["exec-and-forget open -g raycast://extensions/raycast/window-management/last-third" "mode main"];
+        alt-h = ["exec-and-forget open -g raycast://extensions/raycast/window-management/first-third" "mode main"];
         shift-h = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} -50 0";
         shift-j = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 0 -50";
         shift-k = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 0 50";
         shift-l = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 50 0";
       };
-      on-window-detected = [
-        {
-          "if".app-id = "com.apple.finder";
-          run = "layout floating";
-        }
-        {
-          "if".app-id = "com.apple.ActivityMonitor";
-          run = "layout floating";
-        }
-        {
-          "if".app-id = "com.apple.AppStore";
-          run = "layout floating";
-        }
-        {
-          "if".app-id = "com.apple.keychainaccess";
-          run = "layout floating";
-        }
-        {
-          "if".app-id = "com.apple.weather";
-          run = "layout floating";
-        }
-        {
-          "if".app-id = "com.tdesktop.Telegram";
-          run = "layout floating";
-        }
-        {
-          "if".app-id = "org.localsend.localsendApp";
-          run = "layout floating";
-        }
-      ];
+      on-window-detected =
+        []
+        ++ (
+          lib.map (x: {
+            "if".app-id = x;
+            run = "layout floating";
+          }) [
+            "com.apple.finder"
+            "com.apple.ActivityMonitor"
+            "com.apple.AppStore"
+            "com.apple.keychainaccess"
+            "com.apple.weather"
+            "com.tdesktop.Telegram"
+            "org.localsend.localsendApp"
+            "cc.ffitch.shottr"
+          ]
+        );
     };
   };
 }
