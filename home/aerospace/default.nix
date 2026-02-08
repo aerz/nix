@@ -106,10 +106,10 @@
         esc = ["mode main"];
         f = ["layout tiling" "mode main"];
         c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift";
-        shift-h = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh -50 0";
-        shift-j = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 -50";
-        shift-k = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 50";
-        shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 50 0";
+        shift-h = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift -50 0";
+        shift-j = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift 0 -50";
+        shift-k = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift 0 50";
+        shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift 50 0";
       };
       on-window-detected = [
         {
@@ -147,7 +147,7 @@
   xdg.configFile."aerospace/center-floating.swift" = {
     source = ./scripts/center-floating.swift;
   };
-  xdg.configFile."aerospace/resize-floating.sh" = {
-    source = ./scripts/resize-floating.sh;
+  xdg.configFile."aerospace/resize-floating.swift" = {
+    source = ./scripts/resize-floating.swift;
   };
 }

@@ -1,9 +1,23 @@
 #!/usr/bin/swift
 
-// the script is inspired by comments from the community
-// https://github.com/nikitabobko/AeroSpace/discussions/633
-
 import AppKit
+
+struct ResizeDelta {
+  let width: CGFloat
+  let height: CGFloat
+
+  init?(_ args: [String]) {
+    guard args.count >= 2,
+      let width = Double(args[0]),
+      let height = Double(args[1])
+    else {
+      return nil
+    }
+
+    self.width = CGFloat(width)
+    self.height = CGFloat(height)
+  }
+}
 
 func frontmostWindow() -> AXUIElement? {
   guard let frontAppPID = NSWorkspace.shared.frontmostApplication?.processIdentifier else {
@@ -77,15 +91,13 @@ func setWindowPosition(_ window: AXUIElement, to position: CGPoint) -> Bool {
     == .success
 }
 
-func screen(for window: AXUIElement) -> NSScreen? {
-  guard let origin = copyAXPoint(from: window, attribute: kAXPositionAttribute as CFString),
-    let size = copyAXSize(from: window, attribute: kAXSizeAttribute as CFString)
-  else {
-    return nil
+func setWindowSize(_ window: AXUIElement, to size: CGSize) -> Bool {
+  var size = size
+  guard let sizeValue = AXValueCreate(.cgSize, &size) else {
+    return false
   }
 
-  let windowFrame = CGRect(origin: origin, size: size)
-  return NSScreen.screens.first { $0.frame.intersects(windowFrame) }
+  return AXUIElementSetAttributeValue(window, kAXSizeAttribute as CFString, sizeValue) == .success
 }
 
 func run() {
@@ -95,8 +107,8 @@ func run() {
   }
 
   let args = Array(CommandLine.arguments.dropFirst())
-  guard args.isEmpty else {
-    print("Usage: center-floating")
+  guard let delta = ResizeDelta(args) else {
+    print("Usage: resize-floating <deltaWidth> <deltaHeight>")
     return
   }
 
@@ -105,30 +117,39 @@ func run() {
     return
   }
 
-  guard let currentSize = copyAXSize(from: window, attribute: kAXSizeAttribute as CFString) else {
+  guard let position = copyAXPoint(from: window, attribute: kAXPositionAttribute as CFString),
+    let size = copyAXSize(from: window, attribute: kAXSizeAttribute as CFString)
+  else {
     print("Failed to read window position or size")
     return
   }
 
-  guard let screen = screen(for: window) ?? NSScreen.main else {
-    print("Failed to get the monitor for the window")
+  let newWidth = size.width + delta.width
+  let newHeight = size.height + delta.height
+
+  if newWidth <= 1 || newHeight <= 1 {
+    print("Requested size is too small")
     return
   }
 
-  let screenFrame = screen.visibleFrame
-  let newX = screenFrame.origin.x + (screenFrame.width - currentSize.width) / 2
-  let newY = screenFrame.origin.y + (screenFrame.height - currentSize.height) / 2
-  let newPosition = CGPoint(x: newX, y: newY)
+  let newPosition = CGPoint(
+    x: position.x - (delta.width / 2),
+    y: position.y - (delta.height / 2)
+  )
+  let newSize = CGSize(width: newWidth, height: newHeight)
 
-  if setWindowPosition(window, to: newPosition) {
+  let positionSet = setWindowPosition(window, to: newPosition)
+  let sizeSet = setWindowSize(window, to: newSize)
+
+  if positionSet && sizeSet {
     Process.launchedProcess(
       launchPath: "/usr/bin/open",
       arguments: [
-        "-g", "raycast://script-commands/toast?arguments=Floating%20window%20centered",
+        "-g", "raycast://script-commands/toast?arguments=Floating%20window%20resized",
       ]
     )
   } else {
-    print("Failed to set window position")
+    print("Failed to resize the window")
   }
 }
 
