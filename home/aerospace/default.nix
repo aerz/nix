@@ -145,9 +145,9 @@
   };
 
   xdg.configFile."aerospace/center-floating.swift" = {
-    source = ./center-floating.swift;
+    source = ./scripts/center-floating.swift;
   };
   xdg.configFile."aerospace/resize-floating.sh" = {
-    source = ./resize-floating.sh;
+    source = ./scripts/resize-floating.sh;
   };
 }
