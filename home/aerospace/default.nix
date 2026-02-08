@@ -3,7 +3,26 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  aerospace-scripts = pkgs.stdenv.mkDerivation {
+    pname = "aerospace-scripts";
+    version = "1.0.0";
+    src = builtins.path {
+      path = ./scripts;
+      name = "aerospace-scripts";
+    };
+    dontUnpack = true;
+    nativeBuildInputs = [pkgs.swift];
+    buildPhase = ''
+      swiftc -O "$src/center-floating.swift" -o center-floating
+      swiftc -O "$src/resize-floating.swift" -o resize-floating
+    '';
+    installPhase = ''
+      install -Dm755 center-floating "$out/bin/center-floating"
+      install -Dm755 resize-floating "$out/bin/resize-floating"
+    '';
+  };
+in {
   programs.aerospace = {
     enable = true;
     launchd.enable = true;
@@ -46,7 +65,7 @@
       mode.main.binding = {
         # layout
         alt-shift-f = "fullscreen";
-        alt-shift-c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift";
+        alt-shift-c = "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}";
         alt-shift-slash = "layout tiles horizontal vertical";
         alt-shift-comma = "layout accordion horizontal vertical";
         # focus
@@ -89,7 +108,7 @@
         esc = ["reload-config" "mode main"];
         r = ["flatten-workspace-tree" "mode main"];
         f = ["layout floating tiling" "mode main"];
-        c = ["layout floating" "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift" "mode main"];
+        c = ["layout floating" "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}" "mode main"];
         backspace = ["close-all-windows-but-current" "mode main"];
         alt-shift-h = ["join-with left" "mode main"];
         alt-shift-j = ["join-with down" "mode main"];
@@ -105,11 +124,11 @@
       mode.floating.binding = {
         esc = ["mode main"];
         f = ["layout tiling" "mode main"];
-        c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.swift";
-        shift-h = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift -50 0";
-        shift-j = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift 0 -50";
-        shift-k = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift 0 50";
-        shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.swift 50 0";
+        c = "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}";
+        shift-h = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} -50 0";
+        shift-j = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 0 -50";
+        shift-k = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 0 50";
+        shift-l = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 50 0";
       };
       on-window-detected = [
         {
@@ -142,12 +161,5 @@
         }
       ];
     };
-  };
-
-  xdg.configFile."aerospace/center-floating.swift" = {
-    source = ./scripts/center-floating.swift;
-  };
-  xdg.configFile."aerospace/resize-floating.swift" = {
-    source = ./scripts/resize-floating.swift;
   };
 }
