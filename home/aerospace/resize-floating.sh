@@ -18,4 +18,5 @@ tell application \"System Events\"
     activate
   end tell
 end tell
-"
+" && \
+open -g "raycast://script-commands/toast?arguments=Floating%20window%20resized"

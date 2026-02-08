@@ -116,6 +116,13 @@ func run() {
   if !setWindowPosition(window, to: newPosition) {
     print("Failed to set window position.")
   }
+
+  Process.launchedProcess(
+    launchPath: "/usr/bin/open",
+    arguments: [
+      "-g", "raycast://script-commands/toast?arguments=Floating%20window%20centered",
+    ]
+  )
 }
 
 run()
