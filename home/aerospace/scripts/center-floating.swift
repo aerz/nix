@@ -1,13 +1,16 @@
-#!/usr/bin/swift
-
 // the script is inspired by comments from the community
 // https://github.com/nikitabobko/AeroSpace/discussions/633
-
 import AppKit
+
+func writeError(_ message: String) {
+  if let data = (message + "\n").data(using: .utf8) {
+    FileHandle.standardError.write(data)
+  }
+}
 
 func frontmostWindow() -> AXUIElement? {
   guard let frontAppPID = NSWorkspace.shared.frontmostApplication?.processIdentifier else {
-    print("Failed to get the frontmost application")
+    writeError("Failed to get the frontmost application")
     return nil
   }
 
@@ -17,12 +20,12 @@ func frontmostWindow() -> AXUIElement? {
     appElement, kAXFocusedWindowAttribute as CFString, &focusedWindow)
 
   guard result == .success, let focusedWindow else {
-    print("Failed to get the focused window")
+    writeError("Failed to get the focused window")
     return nil
   }
 
   guard CFGetTypeID(focusedWindow) == AXUIElementGetTypeID() else {
-    print("Failed to get the focused window")
+    writeError("Failed to get the focused window")
     return nil
   }
 
@@ -90,29 +93,28 @@ func screen(for window: AXUIElement) -> NSScreen? {
 
 func run() {
   guard AXIsProcessTrusted() else {
-    print("Accessibility permission is required to control windows")
-    return
+    writeError("Accessibility permission is required to control windows")
+    exit(1)
   }
 
   let args = Array(CommandLine.arguments.dropFirst())
   guard args.isEmpty else {
-    print("Usage: center-floating")
-    return
+    writeError("Usage: center-floating")
+    exit(2)
   }
 
   guard let window = frontmostWindow() else {
-    print("No frontmost window found")
-    return
+    exit(1)
   }
 
   guard let currentSize = copyAXSize(from: window, attribute: kAXSizeAttribute as CFString) else {
-    print("Failed to read window position or size")
-    return
+    writeError("Failed to read window position or size")
+    exit(1)
   }
 
   guard let screen = screen(for: window) ?? NSScreen.main else {
-    print("Failed to get the monitor for the window")
-    return
+    writeError("Failed to get the monitor for the window")
+    exit(1)
   }
 
   let screenFrame = screen.visibleFrame
@@ -121,15 +123,11 @@ func run() {
   let newPosition = CGPoint(x: newX, y: newY)
 
   if setWindowPosition(window, to: newPosition) {
-    Process.launchedProcess(
-      launchPath: "/usr/bin/open",
-      arguments: [
-        "-g", "raycast://script-commands/toast?arguments=Floating%20window%20centered",
-      ]
-    )
-  } else {
-    print("Failed to set window position")
+    exit(0)
   }
+
+  writeError("Failed to set window position")
+  exit(1)
 }
 
 run()

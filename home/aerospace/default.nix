@@ -66,7 +66,7 @@ in {
         # layout
         alt-shift-f = "layout floating tiling";
         alt-shift-enter = "fullscreen";
-        alt-shift-c = "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}";
+        alt-shift-c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.sh";
         alt-shift-slash = "layout tiles horizontal vertical";
         alt-shift-comma = "layout accordion horizontal vertical";
         # focus
@@ -109,7 +109,7 @@ in {
         esc = ["reload-config" "mode main"];
         r = ["flatten-workspace-tree" "mode main"];
         f = ["layout floating tiling" "mode main"];
-        c = ["layout floating" "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}" "mode main"];
+        c = ["layout floating" "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.sh" "mode main"];
         backspace = ["close-all-windows-but-current" "mode main"];
         alt-shift-h = ["join-with left" "mode main"];
         alt-shift-j = ["join-with down" "mode main"];
@@ -125,14 +125,14 @@ in {
       mode.floating.binding = {
         esc = ["mode main"];
         f = ["layout tiling" "mode main"];
-        c = "exec-and-forget ${lib.getExe' aerospace-scripts "center-floating"}";
+        c = "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.sh";
         equal = "exec-and-forget open -g raycast://extensions/raycast/window-management/reasonable-size";
         alt-l = ["exec-and-forget open -g raycast://extensions/raycast/window-management/last-third" "mode main"];
         alt-h = ["exec-and-forget open -g raycast://extensions/raycast/window-management/first-third" "mode main"];
-        shift-h = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} -50 0";
-        shift-j = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 0 -50";
-        shift-k = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 0 50";
-        shift-l = "exec-and-forget ${lib.getExe' aerospace-scripts "resize-floating"} 50 0";
+        shift-h = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh -50 0";
+        shift-j = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 -50";
+        shift-k = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 50";
+        shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 50 0";
       };
       on-window-detected =
         []
@@ -152,5 +152,23 @@ in {
           ]
         );
     };
+  };
+  xdg.configFile."aerospace/center-floating.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+
+      ${lib.getExe' aerospace-scripts "center-floating"} && \
+        open -g raycast://script-commands/toast?arguments=Floating%20window%20centered
+    '';
+    executable = true;
+  };
+  xdg.configFile."aerospace/resize-floating.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+
+      ${lib.getExe' aerospace-scripts "resize-floating"} "$1" "$2" && \
+        open -g raycast://script-commands/toast?arguments=Floating%20window%20resized
+    '';
+    executable = true;
   };
 }

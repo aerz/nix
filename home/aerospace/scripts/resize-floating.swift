@@ -1,5 +1,3 @@
-#!/usr/bin/swift
-
 import AppKit
 
 struct ResizeDelta {
@@ -19,9 +17,15 @@ struct ResizeDelta {
   }
 }
 
+func writeError(_ message: String) {
+  if let data = (message + "\n").data(using: .utf8) {
+    FileHandle.standardError.write(data)
+  }
+}
+
 func frontmostWindow() -> AXUIElement? {
   guard let frontAppPID = NSWorkspace.shared.frontmostApplication?.processIdentifier else {
-    print("Failed to get the frontmost application")
+    writeError("Failed to get the frontmost application")
     return nil
   }
 
@@ -31,12 +35,12 @@ func frontmostWindow() -> AXUIElement? {
     appElement, kAXFocusedWindowAttribute as CFString, &focusedWindow)
 
   guard result == .success, let focusedWindow else {
-    print("Failed to get the focused window")
+    writeError("Failed to get the focused window")
     return nil
   }
 
   guard CFGetTypeID(focusedWindow) == AXUIElementGetTypeID() else {
-    print("Failed to get the focused window")
+    writeError("Failed to get the focused window")
     return nil
   }
 
@@ -102,34 +106,33 @@ func setWindowSize(_ window: AXUIElement, to size: CGSize) -> Bool {
 
 func run() {
   guard AXIsProcessTrusted() else {
-    print("Accessibility permission is required to control windows")
-    return
+    writeError("Accessibility permission is required to control windows")
+    exit(1)
   }
 
   let args = Array(CommandLine.arguments.dropFirst())
   guard let delta = ResizeDelta(args) else {
-    print("Usage: resize-floating <deltaWidth> <deltaHeight>")
-    return
+    writeError("Usage: resize-floating <deltaWidth> <deltaHeight>")
+    exit(2)
   }
 
   guard let window = frontmostWindow() else {
-    print("No frontmost window found")
-    return
+    exit(1)
   }
 
   guard let position = copyAXPoint(from: window, attribute: kAXPositionAttribute as CFString),
     let size = copyAXSize(from: window, attribute: kAXSizeAttribute as CFString)
   else {
-    print("Failed to read window position or size")
-    return
+    writeError("Failed to read window position or size")
+    exit(1)
   }
 
   let newWidth = size.width + delta.width
   let newHeight = size.height + delta.height
 
   if newWidth <= 1 || newHeight <= 1 {
-    print("Requested size is too small")
-    return
+    writeError("Requested size is too small")
+    exit(1)
   }
 
   let newPosition = CGPoint(
@@ -142,15 +145,11 @@ func run() {
   let sizeSet = setWindowSize(window, to: newSize)
 
   if positionSet && sizeSet {
-    Process.launchedProcess(
-      launchPath: "/usr/bin/open",
-      arguments: [
-        "-g", "raycast://script-commands/toast?arguments=Floating%20window%20resized",
-      ]
-    )
-  } else {
-    print("Failed to resize the window")
+    exit(0)
   }
+
+  writeError("Failed to resize the window")
+  exit(1)
 }
 
 run()
