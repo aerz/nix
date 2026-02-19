@@ -31,7 +31,7 @@ in {
       start-at-login = false;
       enable-normalization-flatten-containers = true;
       enable-normalization-opposite-orientation-for-nested-containers = true;
-      accordion-padding = 30;
+      accordion-padding = 20;
       default-root-container-layout = "tiles";
       default-root-container-orientation = "auto";
       on-focused-monitor-changed = ["move-mouse monitor-lazy-center"];
@@ -63,6 +63,7 @@ in {
         outer.right = 0;
       };
       mode.main.binding = {
+        #alt-shift-s = "exec-and-forget open -g shottr://grab/area"
         # layout
         alt-shift-f = "layout floating tiling";
         alt-shift-enter = "fullscreen";
@@ -70,15 +71,15 @@ in {
         alt-shift-slash = "layout tiles horizontal vertical";
         alt-shift-comma = "layout accordion horizontal vertical";
         # focus
-        alt-shift-h = "focus left";
-        alt-shift-j = "focus down";
-        alt-shift-k = "focus up";
-        alt-shift-l = "focus right";
+        alt-shift-h = "focus --boundaries all-monitors-outer-frame left";
+        alt-shift-j = "focus --boundaries all-monitors-outer-frame down";
+        alt-shift-k = "focus --boundaries all-monitors-outer-frame up";
+        alt-shift-l = "focus --boundaries all-monitors-outer-frame right";
         # move
-        alt-ctrl-h = "move left";
-        alt-ctrl-j = "move down";
-        alt-ctrl-k = "move up";
-        alt-ctrl-l = "move right";
+        alt-ctrl-h = "move --boundaries all-monitors-outer-frame left";
+        alt-ctrl-j = "move --boundaries all-monitors-outer-frame down";
+        alt-ctrl-k = "move --boundaries all-monitors-outer-frame up";
+        alt-ctrl-l = "move --boundaries all-monitors-outer-frame right";
         # workspace
         alt-ctrl-1 = "workspace 1";
         alt-ctrl-2 = "workspace 2";
@@ -89,14 +90,14 @@ in {
         alt-ctrl-9 = "workspace 9";
         alt-ctrl-0 = "workspace 0";
         # move node to workspace
-        alt-shift-1 = "move-node-to-workspace 1";
-        alt-shift-2 = "move-node-to-workspace 2";
-        alt-shift-3 = "move-node-to-workspace 3";
-        alt-shift-4 = "move-node-to-workspace 4";
-        alt-shift-5 = "move-node-to-workspace 5";
-        alt-shift-6 = "move-node-to-workspace 6";
-        alt-shift-9 = "move-node-to-workspace 9";
-        alt-shift-0 = "move-node-to-workspace 0";
+        alt-shift-1 = "move-node-to-workspace --focus-follows-window 1";
+        alt-shift-2 = "move-node-to-workspace --focus-follows-window 2";
+        alt-shift-3 = "move-node-to-workspace --focus-follows-window 3";
+        alt-shift-4 = "move-node-to-workspace --focus-follows-window 4";
+        alt-shift-5 = "move-node-to-workspace --focus-follows-window 5";
+        alt-shift-6 = "move-node-to-workspace --focus-follows-window 6";
+        alt-shift-9 = "move-node-to-workspace --focus-follows-window 9";
+        alt-shift-0 = "move-node-to-workspace --focus-follows-window 0";
         # workspace
         alt-tab = "workspace-back-and-forth";
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
@@ -142,6 +143,7 @@ in {
             run = "layout floating";
           }) [
             "com.apple.finder"
+            "com.apple.DiskUtility"
             "com.apple.ActivityMonitor"
             "com.apple.AppStore"
             "com.apple.keychainaccess"
@@ -149,6 +151,8 @@ in {
             "com.tdesktop.Telegram"
             "org.localsend.localsendApp"
             "cc.ffitch.shottr"
+            "net.pornel.ImageOptim"
+            "com.aone.keka"
           ]
         );
     };

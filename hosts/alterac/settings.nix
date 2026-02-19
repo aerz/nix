@@ -41,6 +41,8 @@
     dock.expose-group-apps = true;
     # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-displays-have-separate-spaces
     spaces.spans-displays = true;
+    NSGlobalDomain.NSWindowShouldDragOnGesture = true;
+    NSGlobalDomain.NSAutomaticWindowAnimationsEnabled = false;
   };
 
   system.defaults.finder = {
