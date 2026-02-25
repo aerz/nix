@@ -35,14 +35,17 @@
     wvous-br-corner = 1;
   };
 
-  # Aerospace
   system.defaults = {
-    # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
     dock.expose-group-apps = true;
-    # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-displays-have-separate-spaces
-    spaces.spans-displays = true;
+    spaces.spans-displays = false;
     NSGlobalDomain.NSWindowShouldDragOnGesture = true;
     NSGlobalDomain.NSAutomaticWindowAnimationsEnabled = false;
+    WindowManager = {
+      EnableTilingByEdgeDrag = false;
+      EnableTopTilingByEdgeDrag = false;
+      EnableTilingOptionAccelerator = false;
+      EnableTiledWindowMargins = false;
+    };
   };
 
   system.defaults.finder = {

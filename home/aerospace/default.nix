@@ -24,7 +24,7 @@
   };
 in {
   programs.aerospace = {
-    enable = true;
+    enable = false;
     launchd.enable = true;
     settings = {
       config-version = 2;
