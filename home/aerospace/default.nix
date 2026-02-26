@@ -24,7 +24,7 @@
   };
 in {
   programs.aerospace = {
-    enable = false;
+    enable = true;
     launchd.enable = true;
     settings = {
       config-version = 2;
@@ -136,23 +136,110 @@ in {
         shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 50 0";
       };
       on-window-detected =
-        []
+        [
+          {
+            "if".app-id = "com.apple.systempreferences";
+            run = [
+              "layout floating"
+              "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.sh"
+            ];
+          }
+          {
+            "if".app-id = "org.keepassxc.keepassxc";
+            run = [
+              "layout floating"
+              "exec-and-forget ${config.xdg.configHome}/aerospace/center-floating.sh"
+            ];
+          }
+          {
+            "if".app-id = "com.alienator88.Pearcleaner";
+            run = [
+              "layout floating"
+              "exec-and-forget open -g raycast://extensions/raycast/window-management/almost-maximize"
+            ];
+          }
+          {
+            "if" = {
+              app-id = "com.tdesktop.Telegram";
+              window-title-regex-substring = "Telegram";
+            };
+            run = [
+              "layout floating"
+              "exec-and-forget open -g raycast://extensions/raycast/window-management/last-third"
+            ];
+          }
+          {
+            "if".app-id = "com.apple.Preview";
+            run = [
+              "layout floating"
+              "mode floating"
+            ];
+          }
+          {
+            "if".app-id = "net.imput.helium";
+            run = "move-node-to-workspace 1";
+          }
+          {
+            "if".app-id = "com.brave.Browser";
+            run = "move-node-to-workspace 1";
+          }
+          {
+            "if".app-id = "dev.zed.Zed";
+            run = "move-node-to-workspace 2";
+          }
+          {
+            "if".app-id = "net.kovidgoyal.kitty";
+            run = "move-node-to-workspace 2";
+          }
+          {
+            "if".app-id = "com.microsoft.VSCode";
+            run = "move-node-to-workspace 2";
+          }
+          {
+            "if".app-id = "com.apple.mail";
+            run = "move-node-to-workspace 4";
+          }
+          {
+            "if".app-id = "com.TickTick.task.mac";
+            run = "move-node-to-workspace 4";
+          }
+          {
+            "if".app-id = "com.apple.Maps";
+            run = "move-node-to-workspace 4";
+          }
+          {
+            "if".app-id = "Octarine";
+            run = "move-node-to-workspace 3";
+          }
+          {
+            "if".app-id = "md.obsidian";
+            run = "move-node-to-workspace 3";
+          }
+          {
+            "if".app-id = "com.spotify.client";
+            run = "move-node-to-workspace 6";
+          }
+        ]
         ++ (
           lib.map (x: {
             "if".app-id = x;
             run = "layout floating";
           }) [
-            "com.apple.finder"
-            "com.apple.DiskUtility"
+            "cc.ffitch.shottr"
+            "com.aone.keka"
             "com.apple.ActivityMonitor"
             "com.apple.AppStore"
+            "com.apple.clock"
+            "com.apple.DiskUtility"
+            "com.apple.finder"
+            "com.apple.iCal"
             "com.apple.keychainaccess"
+            "com.apple.Photos"
             "com.apple.weather"
-            "com.tdesktop.Telegram"
-            "org.localsend.localsendApp"
-            "cc.ffitch.shottr"
+            "com.colliderli.iina"
             "net.pornel.ImageOptim"
-            "com.aone.keka"
+            "org.localsend.localsendApp"
+            "pro.betterdisplay.BetterDisplay"
           ]
         );
     };
