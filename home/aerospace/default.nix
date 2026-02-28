@@ -136,7 +136,31 @@ in {
         shift-l = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 50 0";
       };
       on-window-detected =
-        [
+        (
+          lib.map (x: {
+            "if".app-id = x;
+            run = "layout floating";
+          }) [
+            "cc.ffitch.shottr"
+            "com.aone.keka"
+            "com.apple.ActivityMonitor"
+            "com.apple.AppStore"
+            "com.apple.clock"
+            "com.apple.DiskUtility"
+            "com.apple.finder"
+            "com.apple.FontBook"
+            "com.apple.iCal"
+            "com.apple.keychainaccess"
+            "com.apple.Photos"
+            "com.apple.weather"
+            "com.chabomakers.Antinote"
+            "com.colliderli.iina"
+            "net.pornel.ImageOptim"
+            "org.localsend.localsendApp"
+            "pro.betterdisplay.BetterDisplay"
+          ]
+        )
+        ++ [
           {
             "if".app-id = "com.apple.systempreferences";
             run = [
@@ -219,29 +243,7 @@ in {
             "if".app-id = "com.spotify.client";
             run = "move-node-to-workspace 6";
           }
-        ]
-        ++ (
-          lib.map (x: {
-            "if".app-id = x;
-            run = "layout floating";
-          }) [
-            "cc.ffitch.shottr"
-            "com.aone.keka"
-            "com.apple.ActivityMonitor"
-            "com.apple.AppStore"
-            "com.apple.clock"
-            "com.apple.DiskUtility"
-            "com.apple.finder"
-            "com.apple.iCal"
-            "com.apple.keychainaccess"
-            "com.apple.Photos"
-            "com.apple.weather"
-            "com.colliderli.iina"
-            "net.pornel.ImageOptim"
-            "org.localsend.localsendApp"
-            "pro.betterdisplay.BetterDisplay"
-          ]
-        );
+        ];
     };
   };
   xdg.configFile."aerospace/center-floating.sh" = {
