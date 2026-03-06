@@ -9,6 +9,7 @@
     };
 
     brews = [
+      "blueutil"
       "bitwarden-cli"
       "git"
       "mas"
