@@ -15,10 +15,12 @@
     nativeBuildInputs = [pkgs.swift];
     buildPhase = ''
       swiftc -O "$src/center-floating.swift" -o center-floating
+      swiftc -O "$src/move-floating.swift" -o move-floating
       swiftc -O "$src/resize-floating.swift" -o resize-floating
     '';
     installPhase = ''
       install -Dm755 center-floating "$out/bin/center-floating"
+      install -Dm755 move-floating "$out/bin/move-floating"
       install -Dm755 resize-floating "$out/bin/resize-floating"
     '';
   };
@@ -130,6 +132,10 @@ in {
         equal = "exec-and-forget open -g raycast://extensions/raycast/window-management/reasonable-size";
         alt-l = ["exec-and-forget open -g raycast://extensions/raycast/window-management/last-third" "mode main"];
         alt-h = ["exec-and-forget open -g raycast://extensions/raycast/window-management/first-third" "mode main"];
+        h = "exec-and-forget ${config.xdg.configHome}/aerospace/move-floating.sh 0 -50";
+        j = "exec-and-forget ${config.xdg.configHome}/aerospace/move-floating.sh -50 0";
+        k = "exec-and-forget ${config.xdg.configHome}/aerospace/move-floating.sh 50 0";
+        l = "exec-and-forget ${config.xdg.configHome}/aerospace/move-floating.sh 0 50";
         shift-h = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh -50 0";
         shift-j = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 -50";
         shift-k = "exec-and-forget ${config.xdg.configHome}/aerospace/resize-floating.sh 0 50";
@@ -252,6 +258,15 @@ in {
 
       ${lib.getExe' aerospace-scripts "center-floating"} && \
         open -g raycast://script-commands/toast?arguments=Floating%20window%20centered
+    '';
+    executable = true;
+  };
+  xdg.configFile."aerospace/move-floating.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+
+      ${lib.getExe' aerospace-scripts "move-floating"} "$1" "$2" && \
+        open -g raycast://script-commands/toast?arguments=Floating%20window%20moved
     '';
     executable = true;
   };
