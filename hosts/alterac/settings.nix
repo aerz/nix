@@ -25,6 +25,8 @@
     show-recents = false;
     persistent-apps = [
       "/Applications/Brave Browser.app"
+      "/Applications/Helium.app"
+      "/System/Applications/Calendar.app"
       "/System/Applications/Mail.app"
       "/Applications/TickTick.app"
       "/Applications/kitty.app"
