@@ -151,6 +151,7 @@ in {
             "com.aone.keka"
             "com.apple.ActivityMonitor"
             "com.apple.AppStore"
+            "com.apple.Automator"
             "com.apple.clock"
             "com.apple.DiskUtility"
             "com.apple.finder"
