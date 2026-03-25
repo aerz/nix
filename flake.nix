@@ -7,7 +7,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    determinate.url = "github:DeterminateSystems/determinate/v3.17.0";
+    determinate.url = "github:DeterminateSystems/determinate/v3.17.1";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
