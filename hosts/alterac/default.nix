@@ -54,6 +54,7 @@
     lla
     fd
     ripgrep
+    sd
     # extra utils
     btop
     dua
