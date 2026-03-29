@@ -150,7 +150,7 @@
           max_severity = "error";
         };
       };
-      inlay_hints.enabled = true;
+      inlay_hints.enabled = false;
       sticky_scroll.enabled = true;
 
       # direnv
