@@ -42,6 +42,7 @@
       ".." = "cd ..";
       g = "git";
       grep = "grep --color=auto";
+      sg = "ast-grep";
       ls = "eza --icons=always --color=always --group-directories-first";
       find = "fd";
       l = "ls -lgh";
