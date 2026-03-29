@@ -50,6 +50,7 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # core utils
+    ast-grep
     eza
     lla
     fd
