@@ -56,6 +56,7 @@
     fd
     ripgrep
     sd
+    tree
     # extra utils
     btop
     dua
@@ -69,6 +70,7 @@
     rclone
     ffmpeg
     yt-dlp
+    yq
     # misc
     exiftool
     defaultbrowser
