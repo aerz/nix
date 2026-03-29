@@ -13,6 +13,7 @@
       "bitwarden-cli"
       "git"
       "mas"
+      "rtk"
       "tw93/tap/mole"
     ];
 
