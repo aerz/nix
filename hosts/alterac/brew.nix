@@ -12,7 +12,6 @@
       "blueutil"
       "bitwarden-cli"
       "git"
-      "mas"
       "rtk"
       "tw93/tap/mole"
     ];
@@ -47,12 +46,5 @@
       "zed"
     ];
     greedyCasks = true;
-
-    masApps = {
-      "TickTick" = 966085870;
-      "Tailscale" = 1475387142;
-      "Pandan" = 1569600264;
-      "Numbers" = 361304891;
-    };
   };
 }
