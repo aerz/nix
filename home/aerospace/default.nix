@@ -159,12 +159,14 @@ in {
             "com.apple.iCal"
             "com.apple.keychainaccess"
             "com.apple.Photos"
+            "com.apple.Preview"
             "com.apple.weather"
             "com.chabomakers.Antinote"
             "com.colliderli.iina"
             "net.pornel.ImageOptim"
             "org.localsend.localsendApp"
             "pro.betterdisplay.BetterDisplay"
+            "com.jordanbaird.Ice"
           ]
         )
         ++ [
@@ -197,13 +199,6 @@ in {
             run = [
               "layout floating"
               "exec-and-forget open -g raycast://extensions/raycast/window-management/last-third"
-            ];
-          }
-          {
-            "if".app-id = "com.apple.Preview";
-            run = [
-              "layout floating"
-              "mode floating"
             ];
           }
           {
