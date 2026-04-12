@@ -20,8 +20,7 @@
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
-    # https://github.com/tw93/homebrew-tap/pull/4
-    homebrew-tw93.url = "github:tw93/homebrew-tap/ae5829f6d6541013df9cbaddfae2720fb0c01a27";
+    homebrew-tw93.url = "github:tw93/homebrew-tap";
     homebrew-tw93.flake = false;
     homebrew-anomalyco.url = "github:anomalyco/homebrew-tap";
     homebrew-anomalyco.flake = false;
