@@ -159,6 +159,22 @@
         "type": "github"
       }
     },
+    "homebrew-anomalyco": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775824021,
+        "narHash": "sha256-DQdNXSKO9u3c0VYJYir7N4e640avOVPA5fKlx+wvZ1o=",
+        "owner": "anomalyco",
+        "repo": "homebrew-tap",
+        "rev": "62ff99dba444b5a155d55120918fc2aa521a98f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anomalyco",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "homebrew-cask": {
       "flake": false,
       "locked": {
@@ -368,6 +384,7 @@
       "inputs": {
         "determinate": "determinate",
         "home-manager": "home-manager",
+        "homebrew-anomalyco": "homebrew-anomalyco",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "homebrew-tw93": "homebrew-tw93",

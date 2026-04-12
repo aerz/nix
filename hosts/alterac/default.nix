@@ -44,6 +44,7 @@
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
       "tw93/homebrew-tap" = inputs.homebrew-tw93;
+      "anomalyco/homebrew-tap" = inputs.homebrew-anomalyco;
     };
   };
 
