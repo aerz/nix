@@ -18,6 +18,7 @@
     ];
 
     casks = [
+      "codex"
       "antinote"
       "betterdisplay"
       "bluesnooze"
