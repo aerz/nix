@@ -52,18 +52,13 @@ in {
 
   config = mkIf (cfg != {}) {
     home.activation.installMasApps = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      set -euo pipefail
-
       export MAS_NO_AUTO_INDEX=1
       mas_apps_installed="$("${lib.getExe pkgs.mas}" list | "${lib.getExe pkgs.gawk}" '{print $1}')"
 
       ${concatStringsSep "\n" (mapAttrsToList (name: id: ''
           if ! printf '%s\n' "$mas_apps_installed" | "${lib.getExe pkgs.gnugrep}" -qx '${toString id}'; then
             echo ${escapeShellArg "Installing ${name} ${toString id}..."}
-            "${lib.getExe pkgs.mas}" get ${toString id} || {
-              echo ${escapeShellArg "mas install failed for ${name} (${toString id})"} >&2
-              exit 1
-            }
+            "${lib.getExe pkgs.mas}" get ${toString id}
           fi
         '')
         cfg)}
@@ -71,10 +66,7 @@ in {
       ${concatStringsSep "\n" (mapAttrsToList (name: id: ''
           if printf '%s\n' "$mas_apps_installed" | "${lib.getExe pkgs.gnugrep}" -qx '${toString id}'; then
             echo ${escapeShellArg "Upgrading ${name} ${toString id}..."}
-            "${lib.getExe pkgs.mas}" upgrade ${toString id} || {
-              echo ${escapeShellArg "mas upgrade failed for ${name} (${toString id})"} >&2
-              exit 1
-            }
+            "${lib.getExe pkgs.mas}" upgrade ${toString id}
           else
             echo ${escapeShellArg "App ${name} ${toString id} is not installed ... skipped"}
           fi
