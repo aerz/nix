@@ -12,6 +12,7 @@
       "blueutil"
       "bitwarden-cli"
       "git"
+      "pandoc"
       "rtk"
       "tw93/tap/mole"
       "anomalyco/tap/opencode"
