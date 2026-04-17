@@ -25,3 +25,6 @@ clean:
 gc:
     sudo nix-collect-garbage -d
     sudo nix store optimise --verbose
+
+repair:
+    sudo nix store verify --all --repair
