@@ -86,8 +86,8 @@ final: prev: {
             mktplcRef = {
               name = "vorg";
               publisher = "vorg";
-              version = "0.0.7";
-              hash = "sha256-5hJIJShMasGNWuP9YxtGvton26uI3+zmXssnbqfBF1A=";
+              version = "1.1.0";
+              hash = "sha256-3nLbKo17uLOKng9oWKvKlQLctamLDkmXNmRAT9UW4yk=";
             };
           };
         };
@@ -98,8 +98,8 @@ final: prev: {
             mktplcRef = {
               name = "vscode-jetbrains-icon-theme";
               publisher = "chadalen";
-              version = "2.36.0";
-              hash = "sha256-p5hqytkF5Hg2d9N+XwZ5DfG2GEfoSPYXX0FCeUUR2Yc=";
+              version = "2.40.0";
+              hash = "sha256-xTnIkYtmHmytpE7uLNGIZizDpdOG4RSMBikOJK8F47k=";
             };
           };
         };
@@ -110,8 +110,8 @@ final: prev: {
             mktplcRef = {
               name = "custom-ui-style";
               publisher = "subframe7536";
-              version = "0.6.6";
-              hash = "sha256-9hM0ZzTFgVqceYNx4cy30W/r4rpPnvcfHfCtHJXXfIA=";
+              version = "0.6.9";
+              hash = "sha256-Q7/SkAUGR7iH3DJf4Z8uAK/qNt27Lpi2F2WiojevcRk=";
             };
           };
         };
