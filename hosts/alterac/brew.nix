@@ -2,8 +2,11 @@
   homebrew = {
     enable = true;
 
+    global.autoUpdate = false;
+    greedyCasks = true;
+
     onActivation = {
-      autoUpdate = true;
+      # autoUpdate = true; # managed by nix-homebrew
       cleanup = "zap";
       upgrade = true;
     };
@@ -48,6 +51,5 @@
       "syncthing-app"
       "zed"
     ];
-    greedyCasks = true;
   };
 }
