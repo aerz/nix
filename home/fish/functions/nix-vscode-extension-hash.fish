@@ -1,4 +1,21 @@
 function nix-vscode-extension-hash -d "Generate sha256 hash for nixpkgs vscode-utils.buildVscodeMarketplaceExtension"
+    function _curl_vscode_marketplace
+        # args: --id "publisher.name" --flag 512
+        argparse 'i/id=' 'f/flag=' -- $argv
+        or return 1
+
+        # https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
+        set -l body (jq -cn --arg id "$_flag_id" --arg flag "$_flag_flag" \
+                   '{filters:[{criteria:[{filterType:7,value:$id}],pageNumber:1,pageSize:1}],flags:$flag}')
+
+        curl -fsSL \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json;api-version=6.0-preview.1" \
+            --data "$body" \
+            "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
+    end
+
     argparse --max-args 1 --min-args 1 h/help 'v/version=' -- $argv
     or return
     if set -q _flag_help; or test (count $argv) -eq 0
@@ -30,23 +47,6 @@ Usage:
     set -l ver latest
     if set -q _flag_version
         set ver $_flag_version
-    end
-
-    function _curl_vscode_marketplace
-        # args: --id "publisher.name" --flag 512
-        argparse 'i/id=' 'f/flag=' -- $argv
-        or return 1
-
-        # https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
-        set -l body (jq -cn --arg id "$_flag_id" --arg flag "$_flag_flag" \
-                     '{filters:[{criteria:[{filterType:7,value:$id}],pageNumber:1,pageSize:1}],flags:$flag}')
-
-        curl -fsSL \
-            -X POST \
-            -H "Content-Type: application/json" \
-            -H "Accept: application/json;api-version=6.0-preview.1" \
-            --data "$body" \
-            "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
     end
 
     set -l published (_curl_vscode_marketplace --id "$publisher.$name" --flag 0 | \
