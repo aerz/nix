@@ -10,8 +10,8 @@ build target_host=hostname flags="":
 trace target_host=hostname: (build target_host "--show-trace")
 
 [macos]
-switch:
-    sudo darwin-rebuild switch
+switch: (build hostname)
+    sudo darwin-rebuild switch --flake ".#{{ hostname }}"
 
 update:
     sudo nix flake update

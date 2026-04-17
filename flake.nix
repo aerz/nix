@@ -16,14 +16,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    homebrew-core.url = "github:homebrew/homebrew-core";
-    homebrew-core.flake = false;
-    homebrew-cask.url = "github:homebrew/homebrew-cask";
-    homebrew-cask.flake = false;
-    homebrew-tw93.url = "github:tw93/homebrew-tap";
-    homebrew-tw93.flake = false;
-    homebrew-anomalyco.url = "github:anomalyco/homebrew-tap";
-    homebrew-anomalyco.flake = false;
   };
 
   outputs = inputs @ {self, ...}: {

@@ -36,15 +36,31 @@
   nix-homebrew = {
     enable = true;
     autoMigrate = true;
-    mutableTaps = true;
-    enableRosetta = true;
+    mutableTaps = false;
+    enableRosetta = false;
     user = "aerz";
 
+    # run the following command to add a tap
+    # nix-prefetch-github homebrew homebrew-core --nix
     taps = {
-      "homebrew/homebrew-core" = inputs.homebrew-core;
-      "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "tw93/homebrew-tap" = inputs.homebrew-tw93;
-      "anomalyco/homebrew-tap" = inputs.homebrew-anomalyco;
+      # homebrew-core and homebrew-cask are not pinned here
+      # since homebrew 4.0 formulas resolve via JSON API not local git clone
+      # pinning core re-enables legacy code path which overrides third-party
+      # taps on upgrade
+      # "homebrew/homebrew-core" = ...;
+      # "homebrew/homebrew-cask" = ...;
+      "tw93/homebrew-tap" = pkgs.fetchFromGitHub {
+        owner = "tw93";
+        repo = "homebrew-tap";
+        rev = "0adc601db156eb25901c16410d98383a13fbfd82";
+        hash = "sha256-IT/rzv/CVtOoYrEfTQXq5BET8obwfW5bLYoO2yhTadM=";
+      };
+      "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
+        owner = "anomalyco";
+        repo = "homebrew-tap";
+        rev = "7c338f62d34e0bea26d3e8ebee55535ee612c253";
+        hash = "sha256-RXqBoRogRSGAZs9saCc1Zk8NkmJiI9PmRTYR29AObnQ=";
+      };
     };
   };
 
@@ -92,6 +108,7 @@
     nurl
     update-nix-fetchgit
     nix-prefetch-git
+    nix-prefetch-github
   ];
 
   fonts.packages = with pkgs; [
