@@ -90,6 +90,7 @@
     nil
     nix-du
     nurl
+    update-nix-fetchgit
     nix-prefetch-git
   ];
 

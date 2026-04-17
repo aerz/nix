@@ -16,6 +16,9 @@ switch:
 update:
     sudo nix flake update
 
+update-sources:
+    fd .nix --exec update-nix-fetchgit
+
 clean:
     nix flake check --no-build
 
