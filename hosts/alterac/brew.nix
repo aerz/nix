@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   homebrew = {
     enable = true;
 
@@ -10,6 +10,8 @@
       cleanup = "zap";
       upgrade = true;
     };
+
+    taps = builtins.attrNames config.nix-homebrew.taps;
 
     brews = [
       "blueutil"
