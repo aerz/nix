@@ -32,21 +32,36 @@ Usage:
         set ext_version $_flag_version
     end
 
-    if [ "$ext_version" = latest ]
-        set -l body (jq -n --arg id "$ext_publisher.$ext_name" \
-            '{filters:[{criteria:[{filterType:7,value:$id}],pageNumber:1,pageSize:1}],flags:512}')
+    function _curl_vscode_marketplace
+        argparse 'i/id=' 'f/flag=' -- $argv
+        or return 1
 
-        set ext_version (
-            curl -fsSL \
-                -H "Content-Type: application/json" \
-                -H "Accept: application/json;api-version=6.0-preview.1" \
-                --data "$body" \
-                "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery" | \
-            jq -er '.results.[0].extensions[0].versions[0].version')
+        # https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
+        set -l body (jq -cn --arg id "$_flag_id" --arg flag "$_flag_flag" \
+                     '{filters:[{criteria:[{filterType:7,value:$id}],pageNumber:1,pageSize:1}],flags:$flag}')
+
+        curl -fsSL \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json;api-version=6.0-preview.1" \
+            --data "$body" \
+            "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
+    end
+
+    set -l ext_exist (_curl_vscode_marketplace --id "$ext_publisher.$ext_name" --flag 0 | \
+                      jq '.results[0].extensions | length > 0')
+    if [ "$ext_exist" = false ]
+        echo "error: '$ext_publisher.$ext_name' is not published in vscode marketplace" >&2
+        return 1
+    end
+
+    if [ "$ext_version" = latest ]
+        set ext_version (_curl_vscode_marketplace --id "$ext_publisher.$ext_name" --flag 512 | \
+                         jq -er '.results.[0].extensions[0].versions[0].version')
     end
 
     set -l hash (nix-prefetch-url --type sha256 \
-        "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$ext_publisher/vsextensions/$ext_name/$ext_version/vspackage")
+                 "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$ext_publisher/vsextensions/$ext_name/$ext_version/vspackage")
     set hash (echo $hash | tail -1)
     set -l hash64 (nix-hash --type sha256 --to-base64 "$hash")
 
