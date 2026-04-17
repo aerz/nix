@@ -56,5 +56,5 @@ mktplcRef = {
     publisher = \"$ext_publisher\";
     version = \"$ext_version\";
     hash = \"sha256-$hash64\";
-}"
+};"
 end
