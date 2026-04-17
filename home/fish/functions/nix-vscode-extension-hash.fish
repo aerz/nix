@@ -12,27 +12,28 @@ Usage:
         return 0
     end
 
-    set -l ext_id $argv[1]
-    if test -z $ext_id
+    set -l id $argv[1]
+    if test -z $id
         echo "error: missing extension id argument" >&2
         return 1
     end
 
-    set -l ext_id_parts (string split -m1 -n '.' $ext_id)
-    if test (count $ext_id_parts) -ne 2
-        echo "error: expected identifier with format 'publisher.name', got: '$ext_id'" >&2
+    set -l id_parts (string split -m1 -n '.' $id)
+    if test (count $id_parts) -ne 2
+        echo "error: expected identifier with format 'publisher.name', got: '$id'" >&2
         return 1
     end
 
-    set -l ext_publisher $ext_id_parts[1]
-    set -l ext_name $ext_id_parts[2]
+    set -l publisher $id_parts[1]
+    set -l name $id_parts[2]
 
-    set -l ext_version latest
+    set -l ver latest
     if set -q _flag_version
-        set ext_version $_flag_version
+        set ver $_flag_version
     end
 
     function _curl_vscode_marketplace
+        # args: --id "publisher.name" --flag 512
         argparse 'i/id=' 'f/flag=' -- $argv
         or return 1
 
@@ -48,28 +49,28 @@ Usage:
             "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
     end
 
-    set -l ext_exist (_curl_vscode_marketplace --id "$ext_publisher.$ext_name" --flag 0 | \
+    set -l published (_curl_vscode_marketplace --id "$publisher.$name" --flag 0 | \
                       jq '.results[0].extensions | length > 0')
-    if [ "$ext_exist" = false ]
-        echo "error: '$ext_publisher.$ext_name' is not published in vscode marketplace" >&2
+    if [ "$published" = false ]
+        echo "error: '$publisher.$name' is not published in vscode marketplace" >&2
         return 1
     end
 
-    if [ "$ext_version" = latest ]
-        set ext_version (_curl_vscode_marketplace --id "$ext_publisher.$ext_name" --flag 512 | \
+    if [ "$ver" = latest ]
+        set ver (_curl_vscode_marketplace --id "$publisher.$name" --flag 512 | \
                          jq -er '.results.[0].extensions[0].versions[0].version')
     end
 
     set -l hash (nix-prefetch-url --type sha256 \
-                 "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$ext_publisher/vsextensions/$ext_name/$ext_version/vspackage")
+                 "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$ver/vspackage")
     set hash (echo $hash | tail -1)
     set -l hash64 (nix-hash --type sha256 --to-base64 "$hash")
 
     echo "\
 mktplcRef = {
-    name = \"$ext_name\";
-    publisher = \"$ext_publisher\";
-    version = \"$ext_version\";
+    name = \"$name\";
+    publisher = \"$publisher\";
+    version = \"$ver\";
     hash = \"sha256-$hash64\";
 };"
 end
