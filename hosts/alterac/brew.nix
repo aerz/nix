@@ -41,7 +41,7 @@
     greedyCasks = true;
 
     onActivation = {
-      # autoUpdate = true; # managed by nix-homebrew
+      autoUpdate = true;
       cleanup = "zap";
       upgrade = true;
     };
