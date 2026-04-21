@@ -115,5 +115,17 @@ final: prev: {
             };
           };
         };
+      ms-python =
+        (prev.vscode-extensions.ms-python or {})
+        // {
+          vscode-python-envs = prev.vscode-utils.buildVscodeMarketplaceExtension {
+            mktplcRef = {
+              name = "vscode-python-envs";
+              publisher = "ms-python";
+              version = "1.29.2026041601";
+              hash = "sha256-2Yq++FJsZtFDY8YjFrYQwKTMCN2UtmNmzYR2JPAaUMQ=";
+            };
+          };
+        };
     };
 }

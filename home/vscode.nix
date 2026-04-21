@@ -242,6 +242,7 @@ in {
           default_user_settings;
         extensions = with pkgs.vscode-extensions;
           [
+            ms-python.vscode-python-envs
             ms-python.python
             redhat.ansible
             redhat.vscode-yaml
