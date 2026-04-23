@@ -1,11 +1,15 @@
+#
 # references
+#
 # https://github.com/NixOS/nixpkgs/blob/80e2deac6ae165f12c5c963eb793372c2e0193d2/pkgs/applications/editors/vscode/extensions/mktplcExtRefToFetchArgs.nix
 # https://github.com/NixOS/nixpkgs/blob/80e2deac6ae165f12c5c963eb793372c2e0193d2/pkgs/applications/editors/vscode/extensions/vscode-utils.nix
+# https://github.com/nix-community/nix4vscode/tree/master/crates/code_api
+# https://github.com/microsoft/vscode/blob/d187d50a482ff80dcf74c35affb09dda1a7cd2fe/src/vs/platform/extensions/common/extensions.ts
 # https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
 #
-function nix-vscode-extension-hash -d "Generate sha256 hash for nixpkgs vscode-utils.buildVscodeMarketplaceExtension"
+function nix-vscode-extension-hash -d "Generate the mktplcRef attrset to override a VSCode Marketplace extension in nixpkgs"
+
     function _curl_vscode_marketplace
-        # args: --id "publisher.name" --flag 512
         argparse 'i/id=' 'f/flag=' -- $argv
         or return 1
 
@@ -20,98 +24,209 @@ function nix-vscode-extension-hash -d "Generate sha256 hash for nixpkgs vscode-u
             "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
     end
 
-    argparse --max-args 1 h/help 'v/version=' 'a/arch=' -- $argv
-    or return
+    function _platform -a requested
+        set -l supported linux-arm64 linux-x64 darwin-arm64
+
+        if test -n "$requested"
+            if not contains -- $requested $supported
+                echo "error: unsupported platform '$requested'" >&2
+                return 1
+            end
+            echo $requested
+        else
+            set -l os (string lower (uname -s))
+            set -l arch (uname -m)
+            switch "$os-$arch"
+                case linux-aarch64 linux-arm64
+                    echo linux-arm64
+                case linux-x86_64
+                    echo linux-x64
+                case darwin-arm64
+                    echo darwin-arm64
+                case '*'
+                    echo "error: unsupported platform '$os-$arch'" >&2
+                    return 1
+            end
+        end
+    end
+
+    # query vscode marketplace for an extension and prints a tab-separated line details: version\ttargeted\tarch
+    # args: --id --target-platform [--version <ver>] [--pre-release]
+    function _query_extension
+        argparse 'i/id=' 't/target-platform=' 'v/version=' p/pre-release -- $argv
+        or return 1
+
+        if set -q _flag_version
+            set -l extensions_json (_curl_vscode_marketplace --id "$_flag_id" --flag 1)
+            or begin
+                echo "error: '$_flag_id' not found in the marketplace" >&2
+                return 1
+            end
+
+            set -l versions_json (echo $extensions_json | jq -cer '.results[0].extensions[0].versions')
+            or begin
+                echo "error: '$_flag_id' not found in the marketplace" >&2
+                return 1
+            end
+
+            set -l exists (echo $versions_json | jq -r --arg v "$_flag_version" 'any(.[]; .version == $v)')
+            if test "$exists" != true
+                echo "error: version '$_flag_version' not found for '$_flag_id'" >&2
+                return 1
+            end
+
+            set -l target ""
+            set -l targeted (printf '%s\n' $versions_json | jq -r \
+                --arg v "$_flag_version" \
+                'any(.[]; .version == $v and (.targetPlatform // "") != "")')
+            if test "$targeted" = true
+                set target (_platform $_flag_target_platform)
+                or return 1
+            end
+
+            printf '%s\n' $versions_json | jq -er \
+                --arg v "$_flag_version" \
+                --arg target $target '
+                . as $all
+                | [$all[] | select(.version == $v)] as $entries
+                | if ($entries | length) == 0 then error("version not found")
+                  elif ($target != "" and ($entries | any(.[]; (.targetPlatform // "") == $target)))
+                    then [$entries[0].version, "true", $target]
+                  elif ($entries | any(.[]; (.targetPlatform // "") == ""))
+                    then [$entries[0].version, "false", ""]
+                  else error("no matching entry")
+                  end
+                | @tsv
+            '
+            or begin
+                echo "error: no matching version found for '$_flag_id'" >&2
+                return 1
+            end
+
+        else
+            set -l extensions_json (_curl_vscode_marketplace --id "$_flag_id" --flag 65536)
+            or begin
+                echo "error: '$_flag_id' not found in the marketplace" >&2
+                return 1
+            end
+
+            set -l versions_json (echo $extensions_json | jq -cer '.results[0].extensions[0].versions')
+            or begin
+                echo "error: '$_flag_id' not found in the marketplace" >&2
+                return 1
+            end
+
+            set -l target ""
+            set -l targeted (printf '%s\n' $versions_json | jq -r \
+                'any(.[]; (.targetPlatform // "") != "")')
+            if test "$targeted" = true
+                set target (_platform $_flag_target_platform)
+                or return 1
+            end
+
+            set -l prerelease (set -q _flag_pre_release; and echo true; or echo false)
+
+            printf '%s\n' $versions_json | jq -er \
+                --arg target $target \
+                --argjson prerelease $prerelease '
+                def is_prerelease:
+                    (.flags // "") | if type == "array"
+                        then any(.[]; ascii_downcase == "prerelease")
+                        else ascii_downcase | contains("prerelease") end;
+                def unique_versions:
+                    reduce .[] as $v ([]; if any(.[]; . == $v.version) then . else . + [$v.version] end);
+                . as $all
+                | [ unique_versions[] as $v
+                    | [$all[] | select(.version == $v)] as $entries
+                    | select(($entries[0] | is_prerelease) == $prerelease)
+                    | if ($target != "" and ($entries | any(.[]; (.targetPlatform // "") == $target)))
+                        then [$entries[0].version, "true", $target]
+                      elif ($entries | any(.[]; (.targetPlatform // "") == ""))
+                        then [$entries[0].version, "false", ""]
+                      else empty
+                      end
+                  ][0]
+                | select(. != null) | @tsv
+            '
+            or begin
+                echo "error: no matching version found for '$_flag_id'" >&2
+                return 1
+            end
+        end
+    end
+
+    argparse --max-args 1 h/help 'v/version=' 't/target-platform=' p/pre-release -- $argv
+    or return 1
+
     if set -q _flag_help; or test (count $argv) -eq 0
         echo "\
-Generate valid hash for build vscode extension with nix.
+Generate the mktplcRef attrset needed to override vscode-utils.buildVscodeMarketplaceExtension
+for a specific extension in nixpkgs.
 
 Usage:
-    nix-vscode-extension-hash <publisher.name>
-    nix-vscode-extension-hash <publisher.name> [-v <version>] [-a <platform-arch>]
-    nix-vscode-extension-hash -h | --help"
+  nix-vscode-extension-hash <publisher.name>
+  nix-vscode-extension-hash <publisher.name> [-v <version>] [-t <platform>]
+  nix-vscode-extension-hash <publisher.name> [-p] [-t <platform>]
+  nix-vscode-extension-hash (-h | --help)
+
+Options:
+  -v --version=<version>       Specific extension version to fetch. Defaults to latest.
+  -t --target-platform=<platform>
+                               Target platform for architecture-specific extensions.
+                               Supported: linux-x64, linux-arm64, darwin-arm64.
+                               Auto-detected from the current system if omitted.
+  -p --pre-release             Fetch the latest pre-release version instead of stable.
+  -h --help                    Show this screen.
+
+Examples:
+  nix-vscode-extension-hash ms-python.python
+  nix-vscode-extension-hash ms-python.python -v 2024.1.0
+  nix-vscode-extension-hash ms-python.python -t linux-arm64
+  nix-vscode-extension-hash ms-python.python -p"
         return 0
     end
 
-    set -l id $argv[1]
-    if test -z $id
-        echo "error: missing extension id argument" >&2
-        return 1
-    end
-
-    set -l id_parts (string split -m1 -n '.' $id)
+    set -l id_parts (string split -m1 -n '.' $argv[1])
     if test (count $id_parts) -ne 2
-        echo "error: expected identifier with format 'publisher.name', got: '$id'" >&2
+        echo "error: expected 'publisher.name', got: '$argv[1]'" >&2
         return 1
     end
 
     set -l publisher $id_parts[1]
     set -l name $id_parts[2]
+    set -l ext_id "$publisher.$name"
 
-    set -l supported_archs linux-arm64 linux-x64 darwin-arm64
-    if not set -q _flag_arch; or test -z "$_flag_arch"
-        set -l os (string lower (uname -s))
-        set -l machine (uname -m)
+    set -l query_args --id "$ext_id" --target-platform "$_flag_target_platform"
+    set -q _flag_version; and set query_args $query_args --version "$_flag_version"
+    set -q _flag_pre_release; and set query_args $query_args --pre-release
 
-        switch "$os-$machine"
-            case linux-aarch64 linux-arm64
-                set _flag_arch linux-arm64
-            case linux-x86_64
-                set _flag_arch linux-x64
-            case darwin-arm64
-                set _flag_arch darwin-arm64
-            case '*'
-                echo "error: current platform '$os-$machine' is not supported" >&2
-                return 1
-        end
-    end
-    if not contains -- "$_flag_arch" $supported_archs
-        echo "error: selected platform '$_flag_arch' is not supported" >&2
-        return 1
-    end
-    set -l arch $_flag_arch
+    set -l ext_tsv (_query_extension $query_args)
+    or return 1
 
-    set -l ver latest
-    if set -q _flag_version
-        set ver $_flag_version
-    end
+    set -l ext (string split \t -- $ext_tsv)
+    set -l ver $ext[1]
+    set -l targeted $ext[2]
+    set -l arch $ext[3]
 
-    set -l published (_curl_vscode_marketplace --id "$publisher.$name" --flag 0 | \
-                      jq '.results[0].extensions | length > 0')
-    if [ "$published" = false ]
-        echo "error: '$publisher.$name' is not published in vscode marketplace" >&2
+    set -l url "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$ver/vspackage"
+    test "$targeted" = true; and set url "$url?targetPlatform=$arch"
+
+    set -l hash (nix-prefetch-url --type sha256 "$url" | tail -1)
+    or begin
+        echo "error: failed to fetch package for '$ext_id@$ver'" >&2
         return 1
     end
 
-    if [ "$ver" = latest ]
-      if not set ver (_curl_vscode_marketplace --id "$publisher.$name" --flag 65536 | \
-          jq -er --arg arch "$arch" '
-            .results[0].extensions[0].versions
-            | map(select(
-                (.targetPlatform // "") == $arch
-                and ((.flags // "") | contains("prerelease") | not)
-              ))
-            | .[0].version
-          ')
-          echo "error: there is no version published for your platform '$arch'" >&2
-          return 1
-      end
-    end
-
-    if not set -l hash (nix-prefetch-url --type sha256 \
-        "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$ver/vspackage?targetPlatform=$arch")
-        echo "error: version '$ver' is not published for platform '$arch'" >&2
-        return 1
-    end
-    set hash (echo $hash | tail -1)
     set -l hash64 (nix-hash --type sha256 --to-base64 "$hash")
 
-    echo "\
+    set -l out "
 mktplcRef = {
-    name = \"$name\";
-    publisher = \"$publisher\";
-    version = \"$ver\";
-    arch = \"$arch\";
-    hash = \"sha256-$hash64\";
+  name      = \"$name\";
+  publisher = \"$publisher\";
+  version   = \"$ver\";"
+    test "$targeted" = true; and set out "$out
+  arch      = \"$arch\";"
+    echo "$out
+  hash      = \"sha256-$hash64\";
 };"
 end
