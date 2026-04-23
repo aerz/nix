@@ -240,17 +240,17 @@ in {
             "ansible.lightspeed.suggestions.enabled" = false;
           }
           default_user_settings;
-        extensions = with pkgs.vscode-extensions;
-          [
-            ms-python.vscode-python-envs
-            ms-python.python
-            redhat.ansible
-            redhat.vscode-yaml
-            samuelcolvin.jinjahtml
-            esbenp.prettier-vscode
-            mkhl.direnv
-            jnoortheen.nix-ide
-            vorg.vorg
+        extensions =
+          pkgs.nix4vscode.forVscode [
+            "ms-python.vscode-python-envs"
+            "redhat.ansible"
+            "redhat.vscode-yaml"
+            "ms-python.python"
+            "samuelcolvin.jinjahtml"
+            "esbenp.prettier-vscode"
+            "mkhl.direnv"
+            "jnoortheen.nix-ide"
+            "vorg.vorg"
           ]
           ++ default_extensions;
       };
