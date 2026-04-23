@@ -1,10 +1,14 @@
+# references
+# https://github.com/NixOS/nixpkgs/blob/80e2deac6ae165f12c5c963eb793372c2e0193d2/pkgs/applications/editors/vscode/extensions/mktplcExtRefToFetchArgs.nix
+# https://github.com/NixOS/nixpkgs/blob/80e2deac6ae165f12c5c963eb793372c2e0193d2/pkgs/applications/editors/vscode/extensions/vscode-utils.nix
+# https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
+#
 function nix-vscode-extension-hash -d "Generate sha256 hash for nixpkgs vscode-utils.buildVscodeMarketplaceExtension"
     function _curl_vscode_marketplace
         # args: --id "publisher.name" --flag 512
         argparse 'i/id=' 'f/flag=' -- $argv
         or return 1
 
-        # https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
         set -l body (jq -cn --arg id "$_flag_id" --arg flag "$_flag_flag" \
                    '{filters:[{criteria:[{filterType:7,value:$id}],pageNumber:1,pageSize:1}],flags:$flag}')
 
