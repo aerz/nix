@@ -8,17 +8,18 @@
     # general
     "workbench.layoutControl.enabled" = false;
     "workbench.navigationControl.enabled" = false;
-    "workbench.preferredLightColorTheme" = "GitHub Light";
-    "workbench.preferredDarkColorTheme" = "GitHub Dark";
+    "workbench.preferredLightColorTheme" = "GitHub Light Default";
+    "workbench.preferredDarkColorTheme" = "GitHub Dark Default";
     "window.autoDetectColorScheme" = true;
     "window.zoomLevel" = 1;
 
     # theme icons
     "workbench.iconTheme" = "symbols";
     "symbols.hidesExplorerArrows" = true;
-    "symbols.files.associations" = {
-      "justfile" = "robot";
-    };
+    "catppuccin-icons.hidesExplorerArrows" = true;
+    # "symbols.files.associations" = {
+    #   "justfile" = "robot";
+    # };
 
     # window
     "workbench.startupEditor" = "none";
@@ -140,6 +141,7 @@
   default_extensions = with pkgs.vscode-extensions; [
     github.github-vscode-theme
     miguelsolorio.symbols
+    # catppuccin.catppuccin-vsc-icons
     subframe7536.custom-ui-style
   ];
 in {
