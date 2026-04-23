@@ -133,8 +133,14 @@ in {
             mktplcRef = {
               name = "vscode-python-envs";
               publisher = "ms-python";
-              version = "1.29.2026041601";
-              hash = "sha256-2Yq++FJsZtFDY8YjFrYQwKTMCN2UtmNmzYR2JPAaUMQ=";
+              version = "1.28.0";
+              arch = extensionHostPlatform;
+              hash =
+                {
+                  darwin-arm64 = "sha256-afb3gylPH0Jrn2/+p9E+WQ77y3woKjNs3lpxe2q3/FI=";
+                }.${
+                  extensionHostPlatform
+                };
             };
           };
         };
