@@ -16,7 +16,7 @@ function nix-vscode-extension-hash -d "Generate sha256 hash for nixpkgs vscode-u
             "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
     end
 
-    argparse --max-args 1 --min-args 1 h/help 'v/version=' -- $argv
+    argparse --max-args 1 h/help 'v/version=' 'a/arch=' -- $argv
     or return
     if set -q _flag_help; or test (count $argv) -eq 0
         echo "\
@@ -24,7 +24,7 @@ Generate valid hash for build vscode extension with nix.
 
 Usage:
     nix-vscode-extension-hash <publisher.name>
-    nix-vscode-extension-hash <publisher.name> [-v <version>]
+    nix-vscode-extension-hash <publisher.name> [-v <version>] [-a <platform-arch>]
     nix-vscode-extension-hash -h | --help"
         return 0
     end
@@ -44,6 +44,29 @@ Usage:
     set -l publisher $id_parts[1]
     set -l name $id_parts[2]
 
+    set -l supported_archs linux-arm64 linux-x64 darwin-arm64
+    if not set -q _flag_arch; or test -z "$_flag_arch"
+        set -l os (string lower (uname -s))
+        set -l machine (uname -m)
+
+        switch "$os-$machine"
+            case linux-aarch64 linux-arm64
+                set _flag_arch linux-arm64
+            case linux-x86_64
+                set _flag_arch linux-x64
+            case darwin-arm64
+                set _flag_arch darwin-arm64
+            case '*'
+                echo "error: current platform '$os-$machine' is not supported" >&2
+                return 1
+        end
+    end
+    if not contains -- "$_flag_arch" $supported_archs
+        echo "error: selected platform '$_flag_arch' is not supported" >&2
+        return 1
+    end
+    set -l arch $_flag_arch
+
     set -l ver latest
     if set -q _flag_version
         set ver $_flag_version
@@ -57,12 +80,25 @@ Usage:
     end
 
     if [ "$ver" = latest ]
-        set ver (_curl_vscode_marketplace --id "$publisher.$name" --flag 512 | \
-                         jq -er '.results.[0].extensions[0].versions[0].version')
+      if not set ver (_curl_vscode_marketplace --id "$publisher.$name" --flag 65536 | \
+          jq -er --arg arch "$arch" '
+            .results[0].extensions[0].versions
+            | map(select(
+                (.targetPlatform // "") == $arch
+                and ((.flags // "") | contains("prerelease") | not)
+              ))
+            | .[0].version
+          ')
+          echo "error: there is no version published for your platform '$arch'" >&2
+          return 1
+      end
     end
 
-    set -l hash (nix-prefetch-url --type sha256 \
-                 "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$ver/vspackage")
+    if not set -l hash (nix-prefetch-url --type sha256 \
+        "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$ver/vspackage?targetPlatform=$arch")
+        echo "error: version '$ver' is not published for platform '$arch'" >&2
+        return 1
+    end
     set hash (echo $hash | tail -1)
     set -l hash64 (nix-hash --type sha256 --to-base64 "$hash")
 
@@ -71,6 +107,7 @@ mktplcRef = {
     name = \"$name\";
     publisher = \"$publisher\";
     version = \"$ver\";
+    arch = \"$arch\";
     hash = \"sha256-$hash64\";
 };"
 end
