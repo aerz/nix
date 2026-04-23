@@ -19,17 +19,29 @@
       # taps on upgrade
       # "homebrew/homebrew-core" = ...;
       # "homebrew/homebrew-cask" = ...;
+      "homebrew/homebrew-core" = pkgs.fetchFromGitHub {
+        owner = "homebrew";
+        repo = "homebrew-core";
+        rev = "dffcea4fd1ae42c1ae68b3ef15ab19db0a812860";
+        hash = "sha256-PYJyYPRNZTEAxRi1Crp+rC/DmWU2d+KLLwj2/dZt+bA=";
+      };
+      "homebrew/homebrew-cask" = pkgs.fetchFromGitHub {
+        owner = "homebrew";
+        repo = "homebrew-cask";
+        rev = "9fb45dc031e8d0b51cc1099212d2db83029df353";
+        hash = "sha256-NjoWFCmosYFnoZpd8RszCnBHh3ICvVCFE08GWKONspA=";
+      };
       "tw93/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "tw93";
         repo = "homebrew-tap";
-        rev = "0adc601db156eb25901c16410d98383a13fbfd82";
-        hash = "sha256-IT/rzv/CVtOoYrEfTQXq5BET8obwfW5bLYoO2yhTadM=";
+        rev = "bf20a2fa72c7eda259d9e09b03fd674498caffa9";
+        hash = "sha256-dgx6mzM0IAIsqwDPOl1nB53qO5Ru41nhWEg7068OXso=";
       };
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "homebrew-tap";
-        rev = "7c338f62d34e0bea26d3e8ebee55535ee612c253";
-        hash = "sha256-RXqBoRogRSGAZs9saCc1Zk8NkmJiI9PmRTYR29AObnQ=";
+        rev = "e34f6e6201122bf1a774db83f92465ddfce9624c";
+        hash = "sha256-EnDwKzDHGRm2YWmmEZHg+xy8VD1csuYsvDEMnDV2zFY==";
       };
     };
   };
