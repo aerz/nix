@@ -1,4 +1,15 @@
-final: prev: {
+final: prev: let
+  extensionHostPlatform =
+    {
+      aarch64-darwin = "darwin-arm64";
+      x86_64-darwin = "darwin-x64";
+      x86_64-linux = "linux-x64";
+      aarch64-linux = "linux-arm64";
+    }.${
+      prev.stdenv.hostPlatform.system
+    }
+      or (throw "Unsupported system for Visual Studio Code marketplace extension: ${prev.stdenv.hostPlatform.system}");
+in {
   vscode-extensions =
     prev.vscode-extensions
     // {
