@@ -18,7 +18,10 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # nix-homebrew pinned; brew version can not handle depends_on :macos in casks
+    # https://github.com/zhaofengli/nix-homebrew/pull/133
+    # https://github.com/zhaofengli/nix-homebrew/issues/132
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew/8eb1c803b4f9cd8cb4db4b04fe692dfb915d09ba";
   };
 
   outputs = inputs @ {self, ...}: {

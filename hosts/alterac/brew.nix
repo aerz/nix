@@ -13,35 +13,29 @@
     # run the following command to add a tap
     # nix-prefetch-github homebrew homebrew-core --nix
     taps = {
-      # homebrew-core and homebrew-cask are not pinned here
-      # since homebrew 4.0 formulas resolve via JSON API not local git clone
-      # pinning core re-enables legacy code path which overrides third-party
-      # taps on upgrade
-      # "homebrew/homebrew-core" = ...;
-      # "homebrew/homebrew-cask" = ...;
       "homebrew/homebrew-core" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-core";
-        rev = "dffcea4fd1ae42c1ae68b3ef15ab19db0a812860";
-        hash = "sha256-PYJyYPRNZTEAxRi1Crp+rC/DmWU2d+KLLwj2/dZt+bA=";
+        rev = "6892f4f8818e3613cc7f1776923dcc25c63f678a";
+        hash = "sha256-QyJlhs03ijH+QRb23byeXfO2U1sxWJWlwZYa2FrAl5A=";
       };
       "homebrew/homebrew-cask" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-cask";
-        rev = "9fb45dc031e8d0b51cc1099212d2db83029df353";
-        hash = "sha256-NjoWFCmosYFnoZpd8RszCnBHh3ICvVCFE08GWKONspA=";
+        rev = "5e98f2ff70e6e39b5e84ab84cf1c2c0a7f2b2d55";
+        hash = "sha256-nPEX4C470ouFJEf12C6USZKEpD/PhkfzpazV37ZK+Ko=";
       };
       "tw93/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "tw93";
         repo = "homebrew-tap";
-        rev = "bf20a2fa72c7eda259d9e09b03fd674498caffa9";
-        hash = "sha256-dgx6mzM0IAIsqwDPOl1nB53qO5Ru41nhWEg7068OXso=";
+        rev = "85077949ce0923a6b5432747f4b501bdc142514a";
+        hash = "sha256-4phpHQOnIkzhIqgBs5ldNbXPOX8iGKQ45JOCSN2nSsE=";
       };
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "homebrew-tap";
-        rev = "e34f6e6201122bf1a774db83f92465ddfce9624c";
-        hash = "sha256-EnDwKzDHGRm2YWmmEZHg+xy8VD1csuYsvDEMnDV2zFY==";
+        rev = "4bfdf45e63480f498b3f984bf20b1edee85b25f4";
+        hash = "sha256-9qy9Kb4Pbtcu3aXx7haBUR57456GkeXXoWY3mlyX5WY=";
       };
     };
   };
