@@ -16,26 +16,26 @@
       "homebrew/homebrew-core" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-core";
-        rev = "e72a7c4ada26cbe59cd3a9bd342cca6ef783bdd8";
-        hash = "sha256-w5XI/QBY1tJzv+IU6aDxxdyfGLem9XpHUiVyd/NK5Ok=";
+        rev = "cbbe5ac8dab2250f40e66ba7d6ac1a8cdc42493a";
+        hash = "sha256-ekJBV7wJ1SDHqWgS2M1st+XNktpRrymZwoLd+mmLyt0=";
       };
       "homebrew/homebrew-cask" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-cask";
-        rev = "484be0bee33f91e96e0281ad677cde0919fa8415";
-        hash = "sha256-ZAnQBGuMcP/8R2y/L5U4v/Y1imZvQmSOtXSmvLMFFRQ=";
+        rev = "c91cc1b94b524251ac64d102f864d5454a401d34";
+        hash = "sha256-PbSbaFVdEAGGgaMBEiRbMtLHwsoXFgGRDXfrfhG/jgU=";
       };
       "tw93/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "tw93";
         repo = "homebrew-tap";
-        rev = "fcddd0251e9acaf94b962bf20126a5e953e7ccb5";
-        hash = "sha256-w6feUEiyHfjYFkOSZA2KT9uW0K7Rr2hf3XP3crPDtnE=";
+        rev = "e7cc9e9746bb28e220ef0a47d8b3efa681e5b64b";
+        hash = "sha256-vcIVLEucx8JER9zzgw35sstxHQfQA19Lzm36FdgFUn8=";
       };
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "homebrew-tap";
-        rev = "a55b2cb689c3d7643f7f4be911bd242317e883fa";
-        hash = "sha256-z7XMEgBsX4zcTO3krP1eVBkGsbe0+nGf0xNZtd+7ur0=";
+        rev = "721a63badc47ac6818ee61cb444e8f86e9cfef6a";
+        hash = "sha256-1yl7sPrlvGEVFrNu5VK8nGrGE0kog+Bw4Xk3VqbeCNk=";
       };
     };
   };
@@ -87,6 +87,7 @@
       "keepassxc"
       "keyboardcleantool"
       "kitty"
+      "lm-studio"
       "numi"
       "raycast"
       "sanesidebuttons"
