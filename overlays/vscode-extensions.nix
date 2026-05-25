@@ -34,8 +34,8 @@ in {
             mktplcRef = {
               name = "nix-ide";
               publisher = "jnoortheen";
-              version = "0.5.5";
-              hash = "sha256-epdEMPAkSo0IXsd+ozicI8bjPPquDKIzB3ONRUYWwn8=";
+              version = "0.5.9";
+              hash = "sha256-hPOcp6Yksgfu1+In21/gJ3MthV8JUV5WaRpYHvo5GGk=";
             };
           };
         };
@@ -121,8 +121,8 @@ in {
             mktplcRef = {
               name = "custom-ui-style";
               publisher = "subframe7536";
-              version = "0.6.9";
-              hash = "sha256-Q7/SkAUGR7iH3DJf4Z8uAK/qNt27Lpi2F2WiojevcRk=";
+              version = "0.7.0";
+              hash = "sha256-U2dU5F2Gea8NZLBqCSA7jNK8Yzw302wH6O8BmJ2zJr0=";
             };
           };
         };

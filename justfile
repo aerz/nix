@@ -17,7 +17,7 @@ update:
     sudo nix flake update
 
 update-sources:
-    fd .nix --exec update-nix-fetchgit
+    fd -e nix -x update-nix-fetchgit -v
 
 clean:
     nix flake check --no-build
