@@ -8,22 +8,31 @@
     enable = true;
 
     plugins = [
-      {
-        name = "fish-you-should-use";
-        src = pkgs.fetchFromGitHub {
-          owner = "paysonwallach";
-          repo = "fish-you-should-use";
-          rev = "a332823512c0b51e71516ebb8341db0528c87926";
-          hash = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
-        };
-      }
+      # {
+      #   name = "fish-you-should-use";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "paysonwallach";
+      #     repo = "fish-you-should-use";
+      #     rev = "a332823512c0b51e71516ebb8341db0528c87926";
+      #     sha256 = "15kvxbxjwzhv8sdqxhjxb0dibawcywqklybzfl3mh41i70aq6q9j";
+      #   };
+      # }
+      # {
+      #   name = "fish-async-prompt";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "acomagu";
+      #     repo = "fish-async-prompt";
+      #     rev = "b90e8a8c6d1634d8f04f1532b164b99530445159";
+      #     sha256 = "1s33z8fn9hjpv1bf0rsa40yh004hggk1q03ry3wgygsivpbvsr8x";
+      #   };
+      # }
       {
         name = "autopair.fish";
         src = pkgs.fetchFromGitHub {
           owner = "jorgebucaran";
           repo = "autopair.fish";
           rev = "4d1752ff5b39819ab58d7337c69220342e9de0e2";
-          hash = "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=";
+          sha256 = "0l2g922gwjd64ar41j7cp09vvvrs30ha55b85nidni4i4bbfvpda";
         };
       }
     ];
