@@ -63,6 +63,7 @@
       "bitwarden-cli"
       "git"
       "pandoc"
+      "pake"
       "rtk"
       "tw93/tap/mole"
       "anomalyco/tap/opencode"
