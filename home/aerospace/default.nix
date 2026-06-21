@@ -167,6 +167,7 @@ in {
             "org.localsend.localsendApp"
             "pro.betterdisplay.BetterDisplay"
             "com.jordanbaird.Ice"
+            "com.tw93.MoleApp"
           ]
         )
         ++ [
