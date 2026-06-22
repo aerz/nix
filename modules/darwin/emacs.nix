@@ -17,8 +17,11 @@
 
   homebrew.brews = [
     "emacs-plus@30"
+    "coreutils"     # gls for dired-mode
+    "zstd"          # undo-fu-session-compression
+
     # avoid zap cleanup failures with emacs-plus
-    "tree-sitter"
+    "tree-sitter@0.25"
     "libgccjit"
     "jpeg"
     "zlib"
