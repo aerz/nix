@@ -4,7 +4,7 @@
 
   imports = [
     ./aerospace
-    ./emacs
+    ./emacs.nix
     ./mas.nix
     ./kitty.nix
     ./vscode.nix
