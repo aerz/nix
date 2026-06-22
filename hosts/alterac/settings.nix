@@ -29,6 +29,7 @@
       "/System/Applications/Calendar.app"
       "/System/Applications/Mail.app"
       "/Applications/TickTick.app"
+      "/Applications/Emacs.app"
       "/Applications/kitty.app"
     ];
     wvous-tl-corner = 1;
