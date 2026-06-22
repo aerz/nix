@@ -4,6 +4,7 @@
   imports = [
     ./brew.nix
     ./settings.nix
+    ../../modules/darwin/emacs.nix
     ../../modules/darwin/power-management.nix
     ../../modules/overlays.nix
   ];
@@ -78,6 +79,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.geist-mono
+    nerd-fonts.symbols-only
     geist-font
     inter
   ];

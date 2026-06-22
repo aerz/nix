@@ -37,12 +37,6 @@
         rev = "7ff15f39f0849eeaf7e7822f225dc2a3310431f7";
         sha256 = "03yiw4s43vafn3a27p6imh8prxijw161qvjmxaa597cvsvnn3z89";
       };
-      "d12frosted/homebrew-emacs-plus" = pkgs.fetchFromGitHub {
-        owner = "d12frosted";
-        repo = "homebrew-emacs-plus";
-        rev = "343bf9d50af9027f15dbd2c89396b09f192cf00b";
-        sha256 = "19rbsaayagw6a0kzw8fxgx43f6havsv8fb9j2nbgpm11crhjgzdr";
-      };
     };
   };
 
@@ -81,7 +75,6 @@
       "betterdisplay"
       "bluesnooze"
       "brave-browser"
-      "emacs-plus-app"
       "helium-browser"
       "hyperkey"
       "imageoptim"
