@@ -9,8 +9,8 @@
       "d12frosted/homebrew-emacs-plus" = pkgs.fetchFromGitHub {
         owner = "d12frosted";
         repo = "homebrew-emacs-plus";
-        rev = "343bf9d50af9027f15dbd2c89396b09f192cf00b";
-        sha256 = "19rbsaayagw6a0kzw8fxgx43f6havsv8fb9j2nbgpm11crhjgzdr";
+        rev = "dbc974ef02d76f19ce0aadea8ea6416fe41eef2b";
+        sha256 = "0qrfxmsvi7k3pkwqk6s0j8gn3ryrl8w8qw69a86h669dakzz7f3x";
       };
     };
   };
