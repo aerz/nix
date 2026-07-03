@@ -6,17 +6,21 @@
 
     defaultCommand = "fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td -tf";
     # ctrl+t
-    fileWidgetCommand = defaultCommand;
-    fileWidgetOptions = [
-      "--bind=ctrl-/:toggle-preview"
-      "--preview='bat -n --color=always --line-range :500 {}'"
-    ];
+    fileWidget = {
+      command = defaultCommand;
+      options = [
+        "--bind=ctrl-/:toggle-preview"
+        "--preview='bat -n --color=always --line-range :500 {}'"
+      ];
+    };
     # alt+c
-    changeDirWidgetCommand = "fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td";
-    changeDirWidgetOptions = [
-      "--bind=ctrl-/:toggle-preview"
-      "--preview 'eza --tree --level=3 --group-directories-first --color=always -F {}'"
-    ];
+    changeDirWidget = {
+      command = "fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td";
+      options = [
+        "--bind=ctrl-/:toggle-preview"
+        "--preview 'eza --tree --level=3 --group-directories-first --color=always -F {}'"
+      ];
+    };
     # theme
     defaultOptions = [
       "--color=fg:-1,fg+:#dde4e0,bg:-1,bg+:#282a2e"
