@@ -39,6 +39,11 @@ in {
       on-focused-monitor-changed = ["move-mouse monitor-lazy-center"];
       automatically-unhide-macos-hidden-apps = false;
       persistent-workspaces = [
+        "B"
+        "E"
+        "G"
+        "N"
+        "T"
         "1"
         "2"
         "3"
@@ -51,6 +56,7 @@ in {
       workspace-to-monitor-force-assignment = {
         "9" = "secondary";
         "0" = "secondary";
+        "G" = "secondary";
       };
       on-mode-changed = [];
       key-mapping = {
@@ -83,6 +89,11 @@ in {
         alt-ctrl-k = "move --boundaries all-monitors-outer-frame up";
         alt-ctrl-l = "move --boundaries all-monitors-outer-frame right";
         # workspace
+        alt-ctrl-b = "workspace B";
+        alt-ctrl-e = "workspace E";
+        alt-ctrl-g = "workspace G";
+        alt-ctrl-t = "workspace T";
+        alt-ctrl-n = "workspace N";
         alt-ctrl-1 = "workspace 1";
         alt-ctrl-2 = "workspace 2";
         alt-ctrl-3 = "workspace 3";
@@ -195,27 +206,16 @@ in {
           {
             "if" = {
               app-id = "com.tdesktop.Telegram";
-              window-title-regex-substring = "Telegram";
+              # window-title-regex-substring = "Telegram";
             };
             run = [
+              "move-node-to-workspace G"
               "layout floating"
-              "exec-and-forget open -g raycast://extensions/raycast/window-management/last-third"
+              # "exec-and-forget open -g raycast://extensions/raycast/window-management/last-third"
             ];
           }
           {
-            "if".app-id = "net.imput.helium";
-            run = "move-node-to-workspace 1";
-          }
-          {
-            "if".app-id = "com.brave.Browser";
-            run = "move-node-to-workspace 1";
-          }
-          {
             "if".app-id = "dev.zed.Zed";
-            run = "move-node-to-workspace 2";
-          }
-          {
-            "if".app-id = "net.kovidgoyal.kitty";
             run = "move-node-to-workspace 2";
           }
           {
@@ -235,16 +235,32 @@ in {
             run = "move-node-to-workspace 4";
           }
           {
+            "if".app-id = "com.spotify.client";
+            run = "move-node-to-workspace 6";
+          }
+          {
+            "if".app-id = "net.imput.helium";
+            run = "move-node-to-workspace B";
+          }
+          {
+            "if".app-id = "com.brave.Browser";
+            run = "move-node-to-workspace B";
+          }
+          {
+            "if".app-id = "org.gnu.Emacs";
+            run = "move-node-to-workspace E";
+          }
+          {
             "if".app-id = "Octarine";
-            run = "move-node-to-workspace 3";
+            run = "move-node-to-workspace N";
           }
           {
             "if".app-id = "md.obsidian";
-            run = "move-node-to-workspace 3";
+            run = "move-node-to-workspace N";
           }
           {
-            "if".app-id = "com.spotify.client";
-            run = "move-node-to-workspace 6";
+            "if".app-id = "net.kovidgoyal.kitty";
+            run = "move-node-to-workspace T";
           }
         ];
     };
