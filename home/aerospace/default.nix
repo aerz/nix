@@ -243,6 +243,16 @@ in {
             run = "move-node-to-workspace B";
           }
           {
+            "if" = {
+              app-id = "com.brave.Browser";
+              window-title-regex-substring = "Bitwarden";
+            };
+            run = [
+              "layout floating"
+              "move-node-to-workspace B"
+            ];
+          }
+          {
             "if".app-id = "com.brave.Browser";
             run = "move-node-to-workspace B";
           }
