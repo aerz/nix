@@ -10,6 +10,13 @@
     enableRosetta = false;
     user = "aerz";
 
+    trust = {
+      formulae = [
+        "tw93/homebrew-tap/mole"
+        "anomalyco/homebrew-tap/opencode"
+      ];
+    };
+
     # run the following command to add a tap
     # nix-prefetch-github homebrew homebrew-core --nix
     taps = {
@@ -50,10 +57,7 @@
       autoUpdate = true;
       cleanup = "zap";
       upgrade = true;
-      extraEnv = {
-        # https://github.com/zhaofengli/nix-homebrew/issues/156
-        HOMEBREW_NO_REQUIRE_TAP_TRUST = "1";
-      };
+      extraEnv = {};
     };
 
     taps = builtins.attrNames config.nix-homebrew.taps;

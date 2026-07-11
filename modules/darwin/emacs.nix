@@ -5,6 +5,12 @@
   ...
 }: {
   nix-homebrew = {
+    trust = {
+      formulae = [
+        "d12frosted/homebrew-emacs-plus/emacs-plus@30"
+      ];
+    };
+
     taps = {
       "d12frosted/homebrew-emacs-plus" = pkgs.fetchFromGitHub {
         owner = "d12frosted";
