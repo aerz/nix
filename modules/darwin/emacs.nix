@@ -28,6 +28,7 @@
     "cmake" # vterm
 
     # avoid zap cleanup failures with emacs-plus
+    "libtiff"
     "tree-sitter@0.25"
     "libgccjit"
     "jpeg"
