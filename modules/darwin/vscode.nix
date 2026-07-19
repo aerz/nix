@@ -143,8 +143,11 @@
   in
     builtins.toJSON (map toExtensionJsonEntry extensions);
 
-  allExtensions = lib.unique (
-    lib.concatMap (profile: profile.extensions) (lib.attrValues cfg.profiles)
+  allExtensions = lib.attrValues (
+    lib.listToAttrs (
+      map (ext: lib.nameValuePair ext.vscodeExtUniqueId ext)
+        (lib.concatMap (profile: profile.extensions) (lib.attrValues cfg.profiles))
+    )
   );
 
   combinedAllExtensions = pkgs.buildEnv {
