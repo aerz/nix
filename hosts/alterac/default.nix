@@ -37,6 +37,7 @@
     lla
     fd
     ripgrep
+    nmap
     sd
     tree
     # extra utils
