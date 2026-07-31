@@ -55,6 +55,7 @@
     yt-dlp
     yq
     # misc
+    charm-freeze
     exiftool
     defaultbrowser
     # dev
