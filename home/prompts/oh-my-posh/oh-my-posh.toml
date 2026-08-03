@@ -1,4 +1,4 @@
-console_title_template = '{{.UserName}}@{{.HostName}} in {{.PWD}}'
+console_title_template = '{{ if gt (len .PWD) 30 }}{{ base (dir .PWD) }}/{{ base .PWD }}{{ else }}{{ .PWD }}{{ end }}'
 version = 3
 auto_upgrade = false
 upgrade_notice = false

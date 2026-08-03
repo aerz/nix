@@ -24,6 +24,7 @@
     tab_fade = 0;
     tab_bar_margin_width = 0;
     tab_bar_margin_height = "5 0";
+    tab_title_max_length = 30;
 
     # macos
     macos_show_window_title_in = "none";
