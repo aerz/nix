@@ -18,8 +18,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    # brew 6.0.14: homebrew-core moved to the new install-steps DSL (configure_clang_system/change_dylib_id)
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew/970c10029f469fe3a2b995da2a53ebfb0274add3";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs = inputs @ {self, ...}: {
