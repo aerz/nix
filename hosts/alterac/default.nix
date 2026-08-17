@@ -68,6 +68,9 @@
     lnav
     jujutsu
     zellij
+    # lang: go
+    go
+    golangci-lint
     # nix
     alejandra
     nil

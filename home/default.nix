@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home.username = "aerz";
   home.stateVersion = "25.05";
 
@@ -26,6 +30,15 @@
 
   home.packages = [
     pkgs.mas
+  ];
+
+  home.sessionVariables = {
+    GOPATH = "${config.xdg.dataHome}/go";
+    GOMODCACHE = "${config.xdg.cacheHome}/go/mod";
+  };
+
+  home.sessionPath = [
+    "${config.xdg.dataHome}/go/bin"
   ];
 
   xdg.enable = true;
