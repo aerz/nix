@@ -39,6 +39,7 @@
 
     interactiveShellInit = ''
       set fish_greeting
+      set -Ux LS_COLORS 'di=1;94:ln=36:ex=1;32:or=1;31:mi=1;31:pi=33:so=35:bd=93:cd=93:su=37;41:sg=30;43:tw=30;42:ow=30;43:st=37;44'
       fish_config theme choose doom-tomorrow-night
     '';
 
