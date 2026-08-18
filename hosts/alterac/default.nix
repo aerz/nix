@@ -51,6 +51,7 @@
     tlrc
     hyperfine
     rclone
+    rsync
     ffmpeg
     yt-dlp
     yq
