@@ -10,6 +10,11 @@
     enableRosetta = false;
     user = "aerz";
 
+    # propagate user config path into Homebrew activation environment
+    extraEnv = {
+      XDG_CONFIG_HOME = config.home-manager.users.aerz.xdg.configHome;
+    };
+
     trust = {
       formulae = [
         "tw93/homebrew-tap/mole"
