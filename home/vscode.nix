@@ -176,7 +176,8 @@ in {
             };
           }
           default_user_settings;
-        extensions = pkgs.nix4vscode.forVscode [
+        extensions =
+          pkgs.nix4vscode.forVscode [
             "nefrob.vscode-just-syntax"
             "jnoortheen.nix-ide"
             "vscodevim.vim"
@@ -201,7 +202,8 @@ in {
             "rewrap.autoWrap.enabled" = true;
           }
           default_user_settings;
-        extensions = pkgs.nix4vscode.forVscode [
+        extensions =
+          pkgs.nix4vscode.forVscode [
             "astro-build.astro-vscode"
             "bradlc.vscode-tailwindcss"
             "naumovs.color-highlight"
@@ -221,7 +223,8 @@ in {
             "typescript.updateImportsOnFileMove.enabled" = "always";
           }
           default_user_settings;
-        extensions = pkgs.nix4vscode.forVscode [
+        extensions =
+          pkgs.nix4vscode.forVscode [
             "esbenp.prettier-vscode"
             "usernamehw.errorlens"
             "yoavbls.pretty-ts-errors"

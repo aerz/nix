@@ -3,9 +3,9 @@ _final: prev: {
     pname = "mas";
     version = "6.0.1";
 
-    src =
-      let
-        sources = {
+    src = let
+      sources =
+        {
           aarch64-darwin = {
             arch = "arm64";
             hash = "sha256-BZ9UE8H28kjqiMNdLDUUyC9madR4rBV1mLUGyj6ol3Y=";
@@ -14,9 +14,11 @@ _final: prev: {
             arch = "x86_64";
             hash = "sha256-7+iDBr4GG5bdTuAlAmMQkEkIzVgLo2+DEdravClaLtQ=";
           };
-        }.${prev.stdenvNoCC.hostPlatform.system}
+        }.${
+          prev.stdenvNoCC.hostPlatform.system
+        }
           or (throw "Unsupported system: ${prev.stdenvNoCC.hostPlatform.system}");
-      in
+    in
       prev.fetchurl {
         url = "https://github.com/mas-cli/mas/releases/download/v${version}/mas-${version}-${sources.arch}.pkg";
         inherit (sources) hash;

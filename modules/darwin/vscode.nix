@@ -146,7 +146,7 @@
   allExtensions = lib.attrValues (
     lib.listToAttrs (
       map (ext: lib.nameValuePair ext.vscodeExtUniqueId ext)
-        (lib.concatMap (profile: profile.extensions) (lib.attrValues cfg.profiles))
+      (lib.concatMap (profile: profile.extensions) (lib.attrValues cfg.profiles))
     )
   );
 
