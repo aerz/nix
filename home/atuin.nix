@@ -1,4 +1,8 @@
-{...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
@@ -42,4 +46,10 @@
       ];
     };
   };
+
+  programs.fish.interactiveShellInit = lib.mkIf config.programs.atuin.enable ''
+    function fish_should_add_to_history
+      return 1
+    end
+  '';
 }
