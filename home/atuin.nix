@@ -49,7 +49,10 @@
 
   programs.fish.interactiveShellInit = lib.mkIf config.programs.atuin.enable ''
     function fish_should_add_to_history
-      return 1
+      string match -qr '^\s' -- $argv; and return 1
+      string match -qr '^ansible-vault encrypt_string' -- $argv; and return 1
+      string match -qr '^export [A-Z_]+_KEY=' -- $argv; and return 1
+      return 0
     end
   '';
 }
