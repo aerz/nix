@@ -40,6 +40,7 @@
     nmap
     sd
     tree
+
     # extra utils
     btop
     dua
@@ -55,10 +56,13 @@
     ffmpeg
     yt-dlp
     yq
+
     # misc
+    brave-search-cli
     charm-freeze
     exiftool
     defaultbrowser
+
     # dev
     broot
     delta
@@ -69,9 +73,11 @@
     lnav
     jujutsu
     zellij
+
     # lang: go
     go
     golangci-lint
+
     # nix
     alejandra
     nil
