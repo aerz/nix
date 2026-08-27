@@ -17,7 +17,6 @@
 
     trust = {
       formulae = [
-        "tw93/homebrew-tap/mole"
         "anomalyco/homebrew-tap/opencode"
       ];
     };
@@ -36,12 +35,6 @@
         repo = "homebrew-cask";
         rev = "b168102a57e7dae8ddc32b2b3dfb2fef340e13b1";
         sha256 = "1zdpdpvjqsfin9awk9zqxfbz4jhbk1qxq23zwn2y1a1vc3b5fi5g";
-      };
-      "tw93/homebrew-tap" = pkgs.fetchFromGitHub {
-        owner = "tw93";
-        repo = "homebrew-tap";
-        rev = "2c1daa33bde61008f29e771ac97d9113ae2e6bfb";
-        sha256 = "0qw0a4jzrf0a9vdiszp31kg8svl2a186k7cgbsl270y07cmdyhdj";
       };
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
@@ -74,7 +67,7 @@
       "pandoc"
       "pake"
       "rtk"
-      "tw93/tap/mole"
+      "mole"
       "anomalyco/tap/opencode"
     ];
 
