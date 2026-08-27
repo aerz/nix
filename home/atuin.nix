@@ -21,6 +21,10 @@
       update_check = false;
       workspaces = true;
 
+      history_filter = [
+        "^ansible-vault encrypt_string"
+      ];
+
       search.filters = [
         "workspace"
         "global"
