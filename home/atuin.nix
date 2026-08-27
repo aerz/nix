@@ -20,9 +20,11 @@
       auto_sync = false;
       update_check = false;
       workspaces = true;
+      secrets_filter = true;
 
       history_filter = [
         "^ansible-vault encrypt_string"
+        "^export [A-Z_]+_KEY="
       ];
 
       search.filters = [
