@@ -13,6 +13,10 @@ trace target_host=hostname: (build target_host "--show-trace")
 switch: (build hostname)
     sudo darwin-rebuild switch --flake ".#{{ hostname }}"
 
+[macos]
+rollback:
+    sudo darwin-rebuild switch --rollback --flake ".#{{ hostname }}"
+
 update:
     sudo nix flake update
 
