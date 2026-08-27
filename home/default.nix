@@ -16,6 +16,7 @@
     ./calibre.nix
     ./raycast
     ./fzf.nix
+    ./atuin.nix
     ./bat.nix
     ./zoxide.nix
     ./navi
