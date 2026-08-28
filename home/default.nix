@@ -9,7 +9,6 @@
   imports = [
     ./aerospace
     ./emacs.nix
-    ./mas.nix
     ./kitty.nix
     ./vscode.nix
     ./zed
