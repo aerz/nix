@@ -145,7 +145,7 @@
   ];
 in {
   imports = [
-    ../modules/darwin/vscode.nix
+    ../modules/home-manager/darwin/vscode.nix
   ];
 
   aerz.vscode = {

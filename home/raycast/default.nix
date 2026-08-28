@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../../modules/darwin/raycast.nix
+    ../../modules/home-manager/darwin/raycast.nix
   ];
 
   raycast.enable = false;
