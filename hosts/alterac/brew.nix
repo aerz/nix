@@ -107,7 +107,10 @@
       "TickTick" = 966085870;
       "Tailscale" = 1475387142;
       "Pandan" = 1569600264;
+      "Pages" = 361309726;
+      "NordVPN" = 905953485;
       "Numbers" = 361304891;
+      "Pixelmator Pro" = 1289583905;
     };
   };
 }
