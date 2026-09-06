@@ -9,6 +9,8 @@
     formula = "d12frosted/emacs-plus/${name}";
     output = "${config.homebrew.prefix}/opt/${name}";
   };
+
+  emacsBinary = "${emacs.output}/Emacs.app/Contents/MacOS/Emacs";
 in {
   nix-homebrew = {
     trust = {
@@ -49,8 +51,31 @@ in {
     symbola
   ];
 
-  # hook only runs on formula changes
+  # Rebuild Emacs if a Homebrew dependency changed its dynamic linkage.
   system.activationScripts.postActivation.text = lib.mkAfter ''
+    if [ -x "${emacsBinary}" ] &&
+       ! "${emacsBinary}" -Q --batch --version >/dev/null 2>&1; then
+      echo "Rebuilding ${emacs.name}: binary failed to load after Homebrew upgrade" >&2
+      if ! PATH="${config.homebrew.prefix}/bin:$PATH" \
+        /usr/bin/sudo --preserve-env=PATH \
+          --user="${config.nix-homebrew.user}" --set-home \
+        env brew reinstall --yes --build-from-source "${emacs.formula}"; then
+        echo "Re-running the post-install steps for ${emacs.name}" >&2
+        if ! PATH="${config.homebrew.prefix}/bin:$PATH" \
+          /usr/bin/sudo --preserve-env=PATH \
+            --user="${config.nix-homebrew.user}" --set-home \
+          env brew postinstall "${emacs.formula}"; then
+          echo "error: failed to rebuild ${emacs.name}" >&2
+          exit 1
+        fi
+      fi
+
+      if ! "${emacsBinary}" -Q --batch --version >/dev/null 2>&1; then
+        echo "error: ${emacs.name} still cannot load after rebuild" >&2
+        exit 1
+      fi
+    fi
+
     if [ ! -d "${emacs.output}/Emacs.app" ] || [ ! -d "${emacs.output}/Emacs Client.app" ]; then
       echo "Emacs Plus app bundle is missing: ${emacs.output}" >&2
       exit 1
