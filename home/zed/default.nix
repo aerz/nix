@@ -124,9 +124,8 @@
           GIT_EDITOR = "zed --wait";
         };
       };
+      agent.dock = "left";
       collaboration_panel.dock = "left";
-      notification_panel.dock = "left";
-      chat_panel.dock = "left";
 
       # editor
       remove_trailing_whitespace_on_save = true;

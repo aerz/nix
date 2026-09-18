@@ -15,7 +15,7 @@
           "!nixd"
         ];
       };
-      profiles.nix = {
+      profiles.nix.settings = {
         languages = {
           Nix = {
             language_servers = [
