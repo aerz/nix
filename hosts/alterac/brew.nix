@@ -80,7 +80,6 @@
       "helium-browser"
       "hyperkey"
       "imageoptim"
-      "jordanbaird-ice"
       "telegram-desktop"
       "localsend"
       "iina"
@@ -94,7 +93,6 @@
       "keepassxc"
       "keyboardcleantool"
       "kitty"
-      "lm-studio"
       "numi"
       "raycast"
       "sanesidebuttons"
@@ -108,6 +106,7 @@
       "Tailscale" = 1475387142;
       "Pandan" = 1569600264;
       "Pages" = 361309726;
+      "Vista" = 6760483098;
       "NordVPN" = 905953485;
       "Numbers" = 361304891;
       "Pixelmator Pro" = 1289583905;
