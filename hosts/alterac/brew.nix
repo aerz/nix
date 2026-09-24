@@ -18,6 +18,8 @@
     trust = {
       formulae = [
         "anomalyco/homebrew-tap/opencode"
+        # "abue-ammar/tinycast/tinycast"
+        "fif7y/tap/pelmet"
       ];
     };
 
@@ -36,6 +38,18 @@
         rev = "90466fe05258b49155bd4640014aa4a6404a8040";
         sha256 = "0h8h3qw2z0j3lr5ipc2xmjxlnjz73a15f6x50y7s3gpmnnkl88xz";
       };
+      "fif7y/homebrew-tap" = pkgs.fetchFromGitHub {
+        owner = "fif7y";
+        repo = "homebrew-tap";
+        rev = "70194f00ea4a1a5694b8c9d6c381c67fef5beb59";
+        sha256 = "0dp32y2ij42lpcdvbjw435gww2jjb6k4n270yglkk3i88grnqykm";
+      };
+      # "abue-ammar/homebrew-tinycast" = pkgs.fetchFromGitHub {
+      #   owner = "abue-ammar";
+      #   repo = "homebrew-tinycast";
+      #   rev = "77318c3a2350675256c28a2cf3f63f6c884c2c98";
+      #   sha256 = "03a8iamihmf5g1pn7qg1ahircn9saxlnajcs2jfx2pg4gimipsrr";
+      # };
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "homebrew-tap";
@@ -72,11 +86,13 @@
     ];
 
     casks = [
+      # "abue-ammar/tinycast/tinycast"
       "codex"
       "antinote"
       "betterdisplay"
       "bluesnooze"
       "brave-browser"
+      "fif7y/tap/pelmet"
       "helium-browser"
       "hyperkey"
       "imageoptim"
@@ -102,6 +118,7 @@
     ];
 
     masApps = {
+      "Gifski" = 1351639930;
       "TickTick" = 966085870;
       "Tailscale" = 1475387142;
       "Pandan" = 1569600264;

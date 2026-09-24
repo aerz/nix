@@ -169,6 +169,7 @@ in {
             "com.apple.FontBook"
             "com.apple.iCal"
             "com.apple.keychainaccess"
+            "com.tinycast.app"
             "com.apple.Photos"
             "com.apple.Preview"
             "com.apple.weather"
