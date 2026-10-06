@@ -83,6 +83,8 @@
       "rtk"
       "mole"
       "anomalyco/tap/opencode"
+      "xcode-build-server"
+      "xcodegen"
     ];
 
     casks = [
@@ -127,6 +129,7 @@
       "NordVPN" = 905953485;
       "Numbers" = 361304891;
       "Pixelmator Pro" = 1289583905;
+      "Xcode" = 497799835;
     };
   };
 }
