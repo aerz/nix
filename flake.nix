@@ -19,6 +19,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-homebrew.inputs.brew-src.url = "github:Homebrew/brew/8bf3b3669297a50a8323c0368657365c2e01fa41";
   };
 
   outputs = inputs @ {self, ...}: {
