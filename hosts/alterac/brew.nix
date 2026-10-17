@@ -18,8 +18,10 @@
     trust = {
       formulae = [
         "anomalyco/homebrew-tap/opencode"
+      ];
+      casks = [
         # "abue-ammar/tinycast/tinycast"
-        "fif7y/tap/pelmet"
+        "fif7y/tap/dimble"
       ];
     };
 
@@ -94,7 +96,7 @@
       "betterdisplay"
       "bluesnooze"
       "brave-browser"
-      "fif7y/tap/pelmet"
+      "fif7y/tap/dimble"
       "helium-browser"
       "hyperkey"
       "imageoptim"
