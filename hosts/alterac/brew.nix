@@ -17,7 +17,7 @@
 
     trust = {
       formulae = [
-        "anomalyco/homebrew-tap/opencode"
+        "anomalyco/tap/opencode-v2"
       ];
       casks = [
         # "abue-ammar/tinycast/tinycast"
@@ -84,7 +84,7 @@
       "pake"
       "rtk"
       "mole"
-      "anomalyco/tap/opencode"
+      "anomalyco/tap/opencode-v2"
       "xcode-build-server"
       "xcodegen"
     ];
