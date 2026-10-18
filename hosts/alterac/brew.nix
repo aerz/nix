@@ -116,6 +116,7 @@
       "numi"
       "raycast"
       "sanesidebuttons"
+      "shichizip-zs"
       "shottr"
       "syncthing-app"
       "zed"
