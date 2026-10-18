@@ -12,8 +12,7 @@
 # Documentation:
 # @raycast.description Launch apps for desktop mode
 
-open -a "Mid" && \
-open -a "SaneSideButtons" && \
+open -a "Kaygan" && \
 open -a "Bluesnooze" && \
 open -a "BetterDisplay"
 
