@@ -41,6 +41,7 @@ and Emacs Plus. Local overlays add or update VS Code extensions.
 | Component | Approach |
 | --- | --- |
 | [VS Code](docs/modules/vscode.md) | I keep [profiles](home/vscode.nix) in Nix and copy their files so VS Code can edit them. Rebuilds restore declared values and remove undeclared extensions, so I keep permanent changes in Nix. |
+| [Raycast](docs/modules/raycast.md) | A custom Home Manager module copies scripts on activation because Raycast does not read symbolic links. |
 | [AeroSpace](docs/modules/aerospace.md) | I use [Swift scripts](home/aerospace/scripts) to center, move, and resize floating windows because AeroSpace [does not prioritize those controls](https://github.com/nikitabobko/AeroSpace/discussions/633). Nix compiles them and binds them to a floating mode. They require Accessibility permission. |
 | [VS Code extensions](docs/modules/vscode.md#extension-sources) | When nixpkgs lacks an extension or the version I need, I use a local overlay. A [Fish helper](home/fish/functions/nix-vscode-extension-hash.fish) generates the version, platform, and hash fields from Marketplace metadata. The profiles also use [nix4vscode](https://github.com/nix-community/nix4vscode) to select extensions by identifier. |
 | [Emacs Plus](docs/modules/emacs.md) | Homebrew dependency updates can leave Emacs unable to load. The module tests the executable and attempts a rebuild from source if it fails, then copies the application bundles into `/Applications`. |

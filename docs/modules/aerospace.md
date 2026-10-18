@@ -46,8 +46,7 @@ Without Accessibility permission, the scripts report
 Grant access under System Settings → Privacy & Security → Accessibility
 for the application or executable that macOS identifies as the caller.
 
-The wrappers call a Raycast `toast` script command that is not included in
-this repository.
+The [Raycast module](raycast.md) copies the [`toast` script](../../home/raycast/scripts/toast.sh) that the wrappers call.
 Other bindings use Raycast for preset sizes and thirds. If you do not use
 Raycast, remove those bindings and toast calls. The Swift executables have
 no dependency on Raycast.
