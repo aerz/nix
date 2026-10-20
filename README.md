@@ -5,12 +5,6 @@ I use this repository as a common base for configuring my systems with Nix.
 shared user configuration. Each host adds its own system configuration, with
 [nix-darwin and nix-homebrew](docs/design.md#nix-macos-and-homebrew) for macOS.
 
-## Machines
-
-| Name | Platform | Role |
-| --- | --- | --- |
-| [alterac](hosts/alterac/) | macOS (`aarch64-darwin`) | Daily use and development. |
-
 ## Project Structure
 
 Each host selects its system modules and imports the user configuration from
@@ -22,7 +16,7 @@ configuration.
 ├── flake.nix
 ├── flake.lock
 ├── hosts/
-│   └── alterac/
+│   └── alterac/         # macOS (aarch64-darwin)
 ├── home/
 ├── modules/
 │   ├── darwin/
