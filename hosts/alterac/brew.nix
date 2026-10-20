@@ -21,6 +21,7 @@
       ];
       casks = [
         # "abue-ammar/tinycast/tinycast"
+        "aerz/tap/kaygan"
         "fif7y/tap/dimble"
       ];
     };
@@ -39,6 +40,12 @@
         repo = "homebrew-cask";
         rev = "d3728a455f65547787910dea0e3491b117c15099";
         sha256 = "1d68w7vw85srrg0xh603vk0qxw8285jyqckqlwdcazwnkq9avr2n";
+      };
+      "aerz/homebrew-tap" = pkgs.fetchFromGitHub {
+        owner = "aerz";
+        repo = "homebrew-tap";
+        rev = "f272f531a4a2992a0cfd2fa23ac89cc6ce1a1ee8";
+        sha256 = "1j11l7imc67gpdfzjqkhnzwp2qvagp3lz8a7q1p8kxwdic5ffrjr";
       };
       "fif7y/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "fif7y";
@@ -93,6 +100,7 @@
       # "abue-ammar/tinycast/tinycast"
       "codex"
       "antinote"
+      "aerz/tap/kaygan"
       "betterdisplay"
       "bluesnooze"
       "brave-browser"
