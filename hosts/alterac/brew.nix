@@ -32,14 +32,14 @@
       "homebrew/homebrew-core" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-core";
-        rev = "140bc06d05fc20b321b6746d426130c9c890d80d";
-        sha256 = "1xn1dydw3yjvmdank833lriqvg628wgn0r56fzbi7my12fnllsx4";
+        rev = "96c457277e52d9fa16e37873c7b7994fa64b57a8";
+        sha256 = "1ncmj6wchwd8mrmvl4ssdhy1piarqcypljcmj33s7dwas49h2grm";
       };
       "homebrew/homebrew-cask" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-cask";
-        rev = "35ead4cc213dc17bf7aca789b7593a4590be3f5f";
-        sha256 = "0bv40ngsgr2b2c14x3zn8lr97518sjh8npim855w02ypnis2bvx3";
+        rev = "0e72805bd48c36e84646c7785108331a4fe82abb";
+        sha256 = "19ahsylf7qy4m88igqr8s4816idkr8hb8651p064cv9p7f3wahgj";
       };
       "aerz/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "aerz";
@@ -62,8 +62,8 @@
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "homebrew-tap";
-        rev = "829902d45835c4501b5da4df091511c386c52661";
-        sha256 = "0gbgp9ynqf65hn7nh1d48inhb9sw698pi54nqaj0cv88fbanlayg";
+        rev = "c98ac2568118ea9d42ca4784d257d418e4ea21ea";
+        sha256 = "0gxg5pbbmdlf1lcp6df0pwk4g0r8jqyfs15ffbmw3zcb5kjjgyc5";
       };
     };
   };
