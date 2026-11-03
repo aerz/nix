@@ -2,7 +2,8 @@
   description = "Jacking into the Declarative Matrix";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # PR #582345
+    nixpkgs.url = "github:NixOS/nixpkgs/d7b99b98f19ca7a2fa3da0304049349b96e87183";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
