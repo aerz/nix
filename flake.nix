@@ -20,7 +20,8 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    nix-homebrew.inputs.brew-src.url = "github:Homebrew/brew/8bf3b3669297a50a8323c0368657365c2e01fa41";
+    # zap :not_required; keeps 8bf3b36 fix
+    nix-homebrew.inputs.brew-src.url = "github:Homebrew/brew/9d7fa14367f34baf702ee5f6b31bf2ae8aab7db2";
   };
 
   outputs = inputs @ {self, ...}: {
