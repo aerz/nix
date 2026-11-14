@@ -2,8 +2,7 @@
   description = "Jacking into the Declarative Matrix";
 
   inputs = {
-    # PR #582345
-    nixpkgs.url = "github:NixOS/nixpkgs/d7b99b98f19ca7a2fa3da0304049349b96e87183";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,8 +19,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # zap :not_required; keeps 8bf3b36 fix
-    nix-homebrew.inputs.brew-src.url = "github:Homebrew/brew/9d7fa14367f34baf702ee5f6b31bf2ae8aab7db2";
   };
 
   outputs = inputs @ {self, ...}: {
