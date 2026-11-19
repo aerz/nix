@@ -228,10 +228,6 @@ in {
             run = "move-node-to-workspace 4";
           }
           {
-            "if".app-id = "com.TickTick.task.mac";
-            run = "move-node-to-workspace 4";
-          }
-          {
             "if".app-id = "com.apple.Maps";
             run = "move-node-to-workspace 4";
           }
