@@ -38,6 +38,7 @@
   };
 
   home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
     "${config.xdg.dataHome}/go/bin"
   ];
 
