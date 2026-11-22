@@ -18,7 +18,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # can't update due to `undefined method 'manifest_sha256'`
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew/c93b514bc79d150afac6f425c7aad0dd79bd38e0";
   };
 
   outputs = inputs @ {self, ...}: {
