@@ -106,7 +106,6 @@
       "brave-browser"
       "fif7y/tap/dimble"
       "helium-browser"
-      "hyperkey"
       "imageoptim"
       "telegram-desktop"
       "localsend"
