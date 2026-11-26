@@ -159,6 +159,7 @@ in {
             run = "layout floating";
           }) [
             "cc.ffitch.shottr"
+            "com.aerz.Kaygan"
             "com.aone.keka"
             "com.apple.ActivityMonitor"
             "com.apple.AppStore"
