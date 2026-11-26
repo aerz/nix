@@ -32,26 +32,26 @@
       "homebrew/homebrew-core" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-core";
-        rev = "a94892bb1cf94912a843388df742cb236188ace2";
-        sha256 = "1czasfm593zhm230lm934acjb792xmhj7cf8qw5pxb9i36c2c1f6";
+        rev = "a05a5f423ceda196a7adc045b966afcf94d7d2d9";
+        sha256 = "1v8sdja9vbla20zx564y18s7nm9x7pp4c8x8li1gmzflqv5yl1mm";
       };
       "homebrew/homebrew-cask" = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "homebrew-cask";
-        rev = "0c6dce3e499deb37b57859e0944e742eddfcf869";
-        sha256 = "0r5mhx4jnwnsxg18hk5pz5w7wi899kdqgdqbk744gbqd3k6f2627";
+        rev = "a750e78d9308b59fd10bb0eef697a0c2154b7e27";
+        sha256 = "0wk1gxiq13a0qgp721i50syc1z90a05c0pcizvlw6dsj4szq3553";
       };
       "aerz/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "aerz";
         repo = "homebrew-tap";
-        rev = "f272f531a4a2992a0cfd2fa23ac89cc6ce1a1ee8";
-        sha256 = "1j11l7imc67gpdfzjqkhnzwp2qvagp3lz8a7q1p8kxwdic5ffrjr";
+        rev = "3e4824c12760129053cd797824587eda36e44c08";
+        sha256 = "1ffd7pnyvd9albn7lzwbjz1cxmhfil787szwdzxylcf83mxa894b";
       };
       "fif7y/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "fif7y";
         repo = "homebrew-tap";
-        rev = "4c200d4f961386f80f65eb0985a00621eed4eb7c";
-        sha256 = "0vf5k4br670frj85s5p2aj3nxw9favfyahvky4c8fvn5n1qfnfn7";
+        rev = "61013a83e9e91b10119f5d589a2cb8aabeaa05c5";
+        sha256 = "0zjgvhr75x2ijqpy4phg5vf6b72xw4209rpw2nqbll46wq9yyh6i";
       };
       # "abue-ammar/homebrew-tinycast" = pkgs.fetchFromGitHub {
       #   owner = "abue-ammar";
@@ -62,8 +62,8 @@
       "anomalyco/homebrew-tap" = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "homebrew-tap";
-        rev = "582e67321558cfab76f1813db3fbf96880659d12";
-        sha256 = "04152fw9iyfqvqd3qaaln6znpp5sbzlbbqcp1z9mjqgdsgypykgf";
+        rev = "50e25ffbb532b9b1ed37a3f0c6099a74048ddc39";
+        sha256 = "127l9bcqmicr696ym22gf7zaixmsm85n44mbr0kcr3pyplyzc5v1";
       };
     };
   };
